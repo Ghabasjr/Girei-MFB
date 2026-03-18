@@ -106,7 +106,7 @@ function POSMockup() {
   );
 }
 
-const mockups = {
+const mockups: Record<string, React.ReactNode> = {
   account: <AccountMockup />,
   loan: <LoanMockup />,
   savings: <SavingsMockup />,

@@ -14,7 +14,7 @@ const faqItems = [
 ];
 
 export default function FAQ() {
-  const [openIndex, setOpenIndex] = useState(0);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
   return (
     <section style={{ padding: "4rem 2rem", background: "#fff" }}>
