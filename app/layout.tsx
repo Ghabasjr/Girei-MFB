@@ -12,6 +12,9 @@ export const metadata: Metadata = {
       "Empowering individuals & businesses to bank smarter and live better.",
     type: "website",
   },
+  icons: {
+    icon: "/girei2.png",
+  }
 };
 
 export default function RootLayout({
