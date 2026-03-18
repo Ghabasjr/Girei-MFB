@@ -1,4 +1,6 @@
+"use client"
 import React from "react";
+import Link from "next/link";
 
 export default function AboutContent() {
     return (
@@ -67,16 +69,23 @@ export default function AboutContent() {
                     </div>
 
                     {/* ── RIGHT COL: dark green card with concave top-left notch ── */}
-                    <div style={{
-                        background: "#025236",
-                        borderRadius: 16,
-                        padding: "2.5rem 2rem",
-                        display: "flex",
-                        alignItems: "center",
-                        position: "relative",
-                        overflow: "hidden",
-                        /* Remove top-left radius to allow notch */
-                    }}>
+                    <Link
+                        href="/join"
+                        style={{
+                            textDecoration: "none",
+                            display: "block",
+                            background: "#025236",
+                            borderRadius: 16,
+                            padding: "2.5rem 2rem",
+                            // display: "flex",
+                            alignItems: "center",
+                            position: "relative",
+                            overflow: "hidden",
+                            transition: "transform 0.2s, box-shadow 0.2s",
+                        }}
+                        onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.12)"; }}
+                        onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "none"; }}
+                    >
                         {/* Concave top-left notch — white quarter circle */}
                         <div style={{
                             position: "absolute",
@@ -105,7 +114,20 @@ export default function AboutContent() {
                             and small businesses through accessible credit, savings
                             solutions, and community-focused banking initiatives.
                         </p>
-                    </div>
+
+                        {/* Small visual cue to indicate it's a link */}
+                        <div style={{
+                            position: "absolute",
+                            bottom: "1rem",
+                            right: "1.5rem",
+                            color: "#29B909",
+                            fontSize: "1rem",
+                            fontWeight: "bold",
+                            opacity: 0.8
+                        }}>
+                            →
+                        </div>
+                    </Link>
                 </div>
 
                 {/* ── Stats bar ── */}

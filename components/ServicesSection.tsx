@@ -116,12 +116,12 @@ const mockups: Record<string, React.ReactNode> = {
 };
 
 const services = [
-  { id: "account", title: "Account", btnText: "Open An Account", image: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?w=600&q=80", imagePos: "center top", description: "Take control of your finances with flexible and secure accounts built for both individuals and businesses. Whether it's savings, current, or fixed deposit accounts, managing your money has never been easier." },
-  { id: "loan", title: "Loan", btnText: "Apply For Loan", image: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=600&q=80", imagePos: "center center", description: "Get fast, dependable loans with repayment plans that fit your needs. Whether it's for personal use, business growth, or a specific project, our loan options are built to support you." },
-  { id: "savings", title: "Savings", btnText: "Start Savings", image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80", imagePos: "center center", description: "Our savings products are designed to encourage financial discipline, promote stability, and help individuals, families, and businesses achieve their short- and long-term financial goals securely." },
-  { id: "atm", title: "ATM Card", btnText: "Request ATM", image: "https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600&q=80", imagePos: "center center", description: "Access your funds anytime, anywhere with our secure and convenient ATM card, designed to make withdrawals, payments, and everyday transactions fast, easy, and reliable." },
-  { id: "mobile", title: "Mobile Banking", btnText: "See Features", image: "https://images.unsplash.com/photo-1601784551446-20c9e07cdbdb?w=600&q=80", imagePos: "center center", description: "Manage your finances conveniently with our secure mobile banking service, allowing you to transfer funds, check balances, pay bills, and perform transactions anytime, anywhere." },
-  { id: "pos", title: "POS Services", btnText: "Request POS", image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&q=80", imagePos: "center center", description: "Our POS services provide secure, fast, and convenient payment solutions for businesses, enabling seamless transactions and improving customer experience." },
+  { id: "account", title: "Account", btnText: "Open An Account", href: "/join", image: "/Rectangle 3271.png", imagePos: "center top", description: "Take control of your finances with flexible and secure accounts built for both individuals and businesses. Whether it's savings, current, or fixed deposit accounts, managing your money has never been easier." },
+  { id: "loan", title: "Loan", btnText: "Apply For Loan", href: "/loan", image: "/Rectangle 3273.png", imagePos: "center center", description: "Get fast, dependable loans with repayment plans that fit your needs. Whether it's for personal use, business growth, or a specific project, our loan options are built to support you." },
+  { id: "savings", title: "Savings", btnText: "Start Savings", href: "/join", image: "/Rectangle 3280.png", imagePos: "center center", description: "Our savings products are designed to encourage financial discipline, promote stability, and help individuals, families, and businesses achieve their short- and long-term financial goals securely." },
+  { id: "atm", title: "ATM Card", btnText: "Request ATM", href: "#", image: "/Rectangle 3203.png", imagePos: "center center", description: "Access your funds anytime, anywhere with our secure and convenient ATM card, designed to make withdrawals, payments, and everyday transactions fast, easy, and reliable." },
+  { id: "mobile", title: "Mobile Banking", btnText: "See Features", href: "#", image: "/Rectangle 3280.png", imagePos: "center center", description: "Manage your finances conveniently with our secure mobile banking service, allowing you to transfer funds, check balances, pay bills, and perform transactions anytime, anywhere." },
+  { id: "pos", title: "POS Services", btnText: "Request POS", href: "/aboutHero", image: "/Rectangle 3273.png", imagePos: "center center", description: "Our POS services provide secure, fast, and convenient payment solutions for businesses, enabling seamless transactions and improving customer experience." },
 ];
 
 function ServiceCard({ service }: any) {
@@ -173,10 +173,9 @@ function ServiceCard({ service }: any) {
           {service.description}
         </p>
 
-        {/* Footer row */}
         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
           {/* Filled green button */}
-          <a href="#" style={{
+          <a href={service.href || "#"} style={{
             flex: 1,
             display: "block",
             background: "#29B909",
