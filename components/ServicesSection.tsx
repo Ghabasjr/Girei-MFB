@@ -1,6 +1,102 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
+
+function ATMModal({ onClose }: { onClose: () => void }) {
+  return (
+    <div style={{
+      position: 'fixed',
+      inset: 0,
+      background: 'rgba(0,0,0,0.6)',
+      backdropFilter: 'blur(4px)',
+      display: 'flex',
+      alignItems: 'center',
+      justifyContent: 'center',
+      zIndex: 10000,
+      padding: '1.5rem'
+    }} onClick={onClose}>
+      <div style={{
+        background: '#fff',
+        padding: '2.5rem 2rem',
+        borderRadius: 24,
+        maxWidth: 420,
+        width: '100%',
+        position: 'relative',
+        boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
+        textAlign: 'center'
+      }} onClick={e => e.stopPropagation()}>
+        <button 
+          onClick={onClose}
+          style={{
+            position: 'absolute',
+            top: 20,
+            right: 20,
+            background: '#f3f4f6',
+            border: 'none',
+            width: 32,
+            height: 32,
+            borderRadius: '50%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            fontSize: '1.2rem',
+            cursor: 'pointer',
+            color: '#6b7280',
+            transition: 'background 0.2s'
+          }}
+          onMouseEnter={e => e.currentTarget.style.background = '#e5e7eb'}
+          onMouseLeave={e => e.currentTarget.style.background = '#f3f4f6'}
+        >
+          &times;
+        </button>
+        <div style={{
+          width: 70,
+          height: 70,
+          borderRadius: '20px',
+          background: '#ecfdf5',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          margin: '0 auto 1.5rem',
+          color: '#29B909',
+          fontSize: '2rem',
+          transform: 'rotate(-5deg)'
+        }}>
+          💳
+        </div>
+        <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#111827', marginBottom: '0.75rem' }}>
+          ATM Card Request
+        </h3>
+        <p style={{ fontSize: '0.95rem', color: '#4b5563', lineHeight: 1.6, marginBottom: '2rem' }}>
+          Kindly visit any <strong>Girei Microfinance Bank</strong> physical office to request and pick up your ATM card.
+          <br /><br />
+          <span style={{ color: '#9ca3af', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Location</span><br />
+          Giei Pont 2, 100, Adamawa State, Nigeria
+        </p>
+        <button 
+          onClick={onClose}
+          style={{
+            background: '#29B909',
+            color: '#fff',
+            border: 'none',
+            borderRadius: 14,
+            padding: '1rem 2rem',
+            fontSize: '1rem',
+            fontWeight: 700,
+            cursor: 'pointer',
+            width: '100%',
+            boxShadow: '0 10px 15px -3px rgba(41, 185, 9, 0.3)',
+            transition: 'transform 0.2s, background 0.2s'
+          }}
+          onMouseEnter={e => { e.currentTarget.style.background = '#229a07'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+          onMouseLeave={e => { e.currentTarget.style.background = '#29B909'; e.currentTarget.style.transform = 'translateY(0)'; }}
+        >
+          Understood
+        </button>
+      </div>
+    </div>
+  );
+}
 
 function AccountMockup() {
   return (
@@ -117,11 +213,18 @@ const services = [
   { id: "loan", title: "Loan", btnText: "Apply For Loan", href: "/loan", image: "/Rectangle 3273.png", imagePos: "center center", description: "Get fast, dependable loans with repayment plans that fit your needs. Whether it's for personal use, business growth, or a specific project, our loan options are built to support you." },
   { id: "savings", title: "Savings", btnText: "Start Savings", href: "/join", image: "/Rectangle 3280.png", imagePos: "center center", description: "Our savings products are designed to encourage financial discipline, promote stability, and help individuals, families, and businesses achieve their short- and long-term financial goals securely." },
   { id: "atm", title: "ATM Card", btnText: "Request ATM", href: "#", image: "/Rectangle 3203.png", imagePos: "center center", description: "Access your funds anytime, anywhere with our secure and convenient ATM card, designed to make withdrawals, payments, and everyday transactions fast, easy, and reliable." },
-  { id: "mobile", title: "Mobile Banking", btnText: "See Features", href: "#", image: "/Rectangle 3280.png", imagePos: "center center", description: "Manage your finances conveniently with our secure mobile banking service, allowing you to transfer funds, check balances, pay bills, and perform transactions anytime, anywhere." },
-  { id: "pos", title: "POS Services", btnText: "Request POS", href: "/aboutHero", image: "/Rectangle 3273.png", imagePos: "center center", description: "Our POS services provide secure, fast, and convenient payment solutions for businesses, enabling seamless transactions and improving customer experience." },
+  { id: "mobile", title: "Mobile Banking", btnText: "See Features", href: "/mobileBanking", image: "/Rectangle 3280.png", imagePos: "center center", description: "Manage your finances conveniently with our secure mobile banking service, allowing you to transfer funds, check balances, pay bills, and perform transactions anytime, anywhere." },
+  { id: "pos", title: "POS Services", btnText: "Request POS", href: "/pos", image: "/Rectangle 3273.png", imagePos: "center center", description: "Our POS services provide secure, fast, and convenient payment solutions for businesses, enabling seamless transactions and improving customer experience." },
 ];
 
-function ServiceCard({ service }: any) {
+function ServiceCard({ service, onOpenModal }: any) {
+  const handleClick = (e: React.MouseEvent) => {
+    if (service.id === 'atm') {
+      e.preventDefault();
+      onOpenModal();
+    }
+  };
+
   return (
     <div style={{
       background: "#fff",
@@ -169,19 +272,22 @@ function ServiceCard({ service }: any) {
         </p>
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-          <a href={service.href || "#"} style={{
-            flex: 1,
-            display: "block",
-            background: "#29B909",
-            color: "#fff",
-            fontWeight: 600,
-            fontSize: "0.72rem",
-            padding: "0.5rem 0",
-            borderRadius: "999px",
-            textDecoration: "none",
-            textAlign: "center",
-            transition: "background 0.2s",
-          }}
+          <a
+            href={service.href || "#"}
+            onClick={handleClick}
+            style={{
+              flex: 1,
+              display: "block",
+              background: "#29B909",
+              color: "#fff",
+              fontWeight: 600,
+              fontSize: "0.72rem",
+              padding: "0.5rem 0",
+              borderRadius: "999px",
+              textDecoration: "none",
+              textAlign: "center",
+              transition: "background 0.2s, transform 0.1s",
+            }}
             onMouseEnter={e => { e.currentTarget.style.background = "#22a006"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "#29B909"; }}
           >
@@ -210,6 +316,8 @@ function ServiceCard({ service }: any) {
 }
 
 export default function ServicesSection() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section id="services" style={{ padding: "4rem 1.5rem", background: "#fff" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
@@ -219,9 +327,17 @@ export default function ServicesSection() {
           </h2>
         </div>
         <div className="services-grid">
-          {services.map(s => <ServiceCard key={s.id} service={s} />)}
+          {services.map(s => (
+            <ServiceCard 
+              key={s.id} 
+              service={s} 
+              onOpenModal={() => setIsModalOpen(true)} 
+            />
+          ))}
         </div>
       </div>
+
+      {isModalOpen && <ATMModal onClose={() => setIsModalOpen(false)} />}
 
       <style>{`
         .services-grid {

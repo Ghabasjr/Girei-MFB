@@ -1,8 +1,8 @@
 // ─── Navigation ────────────────────────────────────────────────────────────
 export const navLinks = [
   { label: "About Us", href: "#about", icon: "carretdown" },
-  { label: "Products", href: "#products", icon: "carretdown" },
-  { label: "Media", href: "#media" },
+  { label: "Products", href: "/aboutHero", icon: "carretdown" },
+  { label: "Media", href: "/media" },
   { label: "Contact Us", href: "#contact" },
 ];
 
@@ -113,7 +113,7 @@ export const services: Service[] = [
     description:
       "Boost your business revenue with our reliable POS terminals. Accept card payments from customers seamlessly.",
     image: "/images/service-pos.jpg",
-    href: "#",
+    href: "/pos",
   },
 ];
 
