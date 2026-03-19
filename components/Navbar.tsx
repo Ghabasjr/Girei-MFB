@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { navLinks } from "@/lib/data";
+import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -47,7 +48,9 @@ export default function Navbar() {
               <a
                 href={link.href}
                 style={{
-                  // color: "var(--text-mid)",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "4px",
                   color: "white",
                   fontWeight: 500,
                   fontSize: "0.95rem",
@@ -58,6 +61,7 @@ export default function Navbar() {
                 onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "white")}
               >
                 {link.label}
+                {(link as any).icon !== undefined && <ChevronDown size={14} />}
               </a>
             </li>
           ))}
@@ -119,9 +123,10 @@ export default function Navbar() {
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "1rem" }}>
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} style={{ color: "white", fontWeight: 500, textDecoration: "none", fontSize: "1rem" }}
+                <a href={link.href} style={{ display: "flex", alignItems: "center", gap: "6px", color: "white", fontWeight: 500, textDecoration: "none", fontSize: "1rem" }}
                   onClick={() => setMenuOpen(false)}>
                   {link.label}
+                  {(link as any).icon !== undefined && <ChevronDown size={16} />}
                 </a>
               </li>
             ))}

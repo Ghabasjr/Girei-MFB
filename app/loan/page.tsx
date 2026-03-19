@@ -129,7 +129,7 @@ export default function Loan() {
 
             <LoanGrid />
             {/* ── Footer ── */}
-            <footer style={{
+            <footer id="contact" style={{
                 background: "#004C3F",
                 color: "rgba(255,255,255,0.75)",
                 paddingTop: "5rem",
@@ -206,7 +206,7 @@ export default function Loan() {
                                 {["Privacy", "Anti Money Laundering Policy", "Terms & Conditions", "Risk Management", "Downloadable Forms", "Help Center"].map((item, i) => (
                                     <li key={i} style={{ display: "flex", alignItems: "center", gap: 6 }}>
                                         <span style={{ width: 5, height: 5, borderRadius: "50%", background: "#fff", display: "inline-block", flexShrink: 0 }} />
-                                        <a href="#" style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.8rem", textDecoration: "none" }}>{item}</a>
+                                        <a href={item === "Privacy" ? "/privacy" : "#"} style={{ color: "rgba(255,255,255,0.7)", fontSize: "0.8rem", textDecoration: "none" }}>{item}</a>
                                     </li>
                                 ))}
                             </ul>

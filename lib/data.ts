@@ -1,7 +1,7 @@
 // ─── Navigation ────────────────────────────────────────────────────────────
 export const navLinks = [
-  { label: "About Us", href: "#about" },
-  { label: "Products", href: "#products" },
+  { label: "About Us", href: "#about", icon: "carretdown" },
+  { label: "Products", href: "#products", icon: "carretdown" },
   { label: "Media", href: "#media" },
   { label: "Contact Us", href: "#contact" },
 ];
