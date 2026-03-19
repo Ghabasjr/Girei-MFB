@@ -15,8 +15,7 @@ export default function Footer() {
               Bank News In Your Inbox
             </h3>
             <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.7, margin: 0 }}>
-              Yes, you can make use of the covenant mfb debit card for payments on spotify and other payment websites that accept verve cards.
-            </p>
+              Enter your email address to receive the latest bank news updates and important notifications directly in your inbox anytime easily.            </p>
           </div>
 
           {/* Right: email input + subscribe */}
