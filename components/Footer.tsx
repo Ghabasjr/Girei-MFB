@@ -79,7 +79,9 @@ export default function Footer() {
                 gap: 6,
                 marginBottom: "1rem",
               }}>
-                <Image src="/girei2.png" alt="Girei Microfinance Bank" width={100} height={100} />
+                <a href="/">
+                  <Image src="/girei2.png" alt="Girei Microfinance Bank" width={100} height={100} />
+                </a>
               </div>
 
               <p style={{ fontSize: "0.78rem", lineHeight: 1.8, color: "rgba(255,255,255,0.7)", marginBottom: "1.25rem", maxWidth: 200 }}>
