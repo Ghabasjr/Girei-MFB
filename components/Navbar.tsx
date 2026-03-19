@@ -69,7 +69,7 @@ export default function Navbar() {
 
         {/* CTA */}
         <div style={{ display: "flex", alignItems: "center", gap: "1rem" }} className="desktop-nav">
-          <a href="#" className="btn-primary" style={{ padding: "0.6rem 1.4rem", fontSize: "0.88rem" }}>
+          <a href="/join" className="btn-primary" style={{ padding: "0.6rem 1.4rem", fontSize: "0.88rem" }}>
             Open Account
           </a>
         </div>

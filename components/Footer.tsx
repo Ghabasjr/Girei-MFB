@@ -21,7 +21,9 @@ export default function Footer() {
 
           {/* Right: email input + subscribe */}
           <div className="newsletter-input-row">
-            <span style={{ color: "#9ca3af", fontSize: "0.9rem" }}>✉</span>
+            <span style={{ color: "#9ca3af", fontSize: "0.9rem" }}>
+              <MailIcon />
+            </span>
             <input
               type="email"
               placeholder="Enter your email"

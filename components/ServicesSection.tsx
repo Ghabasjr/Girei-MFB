@@ -159,7 +159,6 @@ function ServiceCard({ service }: any) {
       {/* ── Text content ── */}
       <div style={{
         padding: "1rem 1.1rem 1.4rem", flex: 1, display: "flex", flexDirection: "column",
-        clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%)",
         position: "relative",
       }}>
         <h3 style={{ fontWeight: 800, fontSize: "1rem", color: "#111827", marginBottom: "0.45rem" }}>
@@ -206,18 +205,6 @@ function ServiceCard({ service }: any) {
           </div>
         </div>
       </div>
-
-      {/* ── Concave quarter-circle cutout bottom-right ── */}
-      <div style={{
-        position: "absolute",
-        bottom: 0,
-        right: 0,
-        width: 36,
-        height: 36,
-        background: "#f0fdf4",
-        borderTopLeftRadius: "100%",
-        pointerEvents: "none",
-      }} />
     </div>
   );
 }

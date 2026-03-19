@@ -98,9 +98,9 @@ export default function AboutSection() {
               margin: 0,
             }}
           >
-            Empowering Individuals &amp; Businesses to
+            Empowering Individuals &amp; Businesses
             <br />
-            Bank Smarter and Live Better
+            To Bank Smarter and Live Better
           </h3>
 
           <p
@@ -125,19 +125,12 @@ export default function AboutSection() {
               { number: "1", suffix: "k+", label: "Loans Completed" },
               { number: "30", suffix: "+", label: "Years Of Banking" },
             ].map((stat, i) => (
-              <div key={i}>
-                <div
-                  style={{
-                    fontSize: "1.25rem",
-                    fontWeight: 900,
-                    lineHeight: 1,
-                    marginBottom: 3,
-                  }}
-                >
+              <div key={i} className="stat-item">
+                <div className="stat-value">
                   <span style={{ color: "#111827" }}>{stat.number}</span>
                   <span style={{ color: "#29B909" }}>{stat.suffix}</span>
                 </div>
-                <div style={{ fontSize: "0.65rem", color: "#6b7280", fontWeight: 500 }}>
+                <div className="stat-label">
                   {stat.label}
                 </div>
               </div>
@@ -172,6 +165,17 @@ export default function AboutSection() {
           align-items: flex-start;
           flex-wrap: wrap;
         }
+        .stat-value {
+          font-size: 1.25rem;
+          font-weight: 900;
+          line-height: 0.5;
+          margin-bottom: 3px;
+        }
+        .stat-label {
+          font-size: 0.65rem;
+          color: #6b7280;
+          font-weight: 500;
+        }
 
         @media (max-width: 700px) {
           .about-card {
@@ -187,7 +191,23 @@ export default function AboutSection() {
             padding: 1.4rem 1.2rem;
           }
           .about-stats-row {
-            gap: 1.5rem;
+            gap: 0.5rem;
+            flex-wrap: nowrap;
+            justify-content: space-between;
+          }
+          .stat-value {
+            font-size: 1rem;
+            margin-bottom: 8px;
+            line-height: 1;
+          }
+          .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+          }
+          .stat-label {
+            font-size: 0.55rem;
           }
         }
       `}</style>

@@ -107,28 +107,29 @@ function DoubleCRow() {
   );
 }
 
-function ArcColumn() {
-  return (
-    <div
-      className="arc-column"
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        gap: "14px",
-        padding: "1.5rem 0.75rem",
-        justifyContent: "center",
-      }}
-    >
-      {Array.from({ length: 7 }).map((_, i) => (
-        <DoubleCRow key={i} />
-      ))}
-    </div>
-  );
-}
+// function ArcColumn() {
+//   return (
+//     <div
+//       className="arc-column"
+//       style={{
+//         display: "flex",
+//         flexDirection: "column",
+//         gap: "14px",
+//         padding: "1.5rem 0.75rem",
+//         justifyContent: "center",
+//       }}
+//     >
+//       {Array.from({ length: 7 }).map((_, i) => (
+//         <DoubleCRow key={i} />
+//       ))}
+//     </div>
+//   );
+// }
 
 export default function WhoWeServe() {
   return (
     <section
+      className="whoweserve-wrapper"
       style={{
         background: "linear-gradient(to bottom, #025236 0%, #04B879 100%)",
         padding: "4rem 0",
@@ -138,9 +139,9 @@ export default function WhoWeServe() {
     >
       <div style={{ display: "flex", alignItems: "stretch" }}>
         {/* Left decorative double-C arcs */}
-        <div style={{ flexShrink: 0 }}>
+        {/* <div style={{ flexShrink: 0 }}>
           <ArcColumn />
-        </div>
+        </div> */}
 
         {/* Main content */}
         <div style={{ flex: 1, padding: "0 1rem" }}>
@@ -208,9 +209,9 @@ export default function WhoWeServe() {
         </div>
 
         {/* Right decorative double-C arcs */}
-        <div style={{ flexShrink: 0 }}>
+        {/* <div style={{ flexShrink: 0 }}>
           <ArcColumn />
-        </div>
+        </div> */}
       </div>
 
       <style>{`
@@ -235,6 +236,11 @@ export default function WhoWeServe() {
           }
           .arc-column {
             display: none;
+          }
+        }
+        @media (max-width: 768px) {
+          .whoweserve-wrapper {
+            display: none !important;
           }
         }
       `}</style>
