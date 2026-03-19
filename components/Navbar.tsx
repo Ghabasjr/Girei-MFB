@@ -21,7 +21,7 @@ export default function Navbar() {
     >
       <nav className="container-xl" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
         {/* Logo */}
-        <a href="#" style={{ display: "flex", alignItems: "center", gap: "0.5rem", textDecoration: "none" }}>
+        <a href="/" style={{ display: "flex", alignItems: "center", gap: "0.5rem", textDecoration: "none" }}>
           <Image
             src="/girei.png"
             alt="GIREI Logo"

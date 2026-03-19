@@ -1,4 +1,16 @@
+import { Metadata } from "next";
 import AccountsGrid from "@/components/AccountGrid";
+
+export const metadata: Metadata = {
+  title: "Join Us | GIREI Microfinance Bank",
+  description:
+    "Open an account with GIREI Microfinance Bank and experience secure, simple, and rewarding banking. Tailored personal and business accounts available.",
+  openGraph: {
+    title: "Join Us | GIREI Microfinance Bank",
+    description: "Open an account with GIREI Microfinance Bank and experience secure, simple, and rewarding banking.",
+  }
+};
+
 import Navbar from "@/components/Navbar";
 import { MapPin, PhoneIcon, MailIcon } from "lucide-react";
 import Image from "next/image";

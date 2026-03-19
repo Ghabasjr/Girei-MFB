@@ -1,4 +1,12 @@
+import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+
+export const metadata: Metadata = {
+  title: "Privacy Policy | GIREI Microfinance Bank",
+  description:
+    "Read the GIREI Microfinance Bank Privacy Policy to learn how we protect and securely manage your personal and financial information.",
+};
+
 import Footer from "@/components/Footer";
 
 export default function PrivacyPolicy() {

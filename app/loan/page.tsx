@@ -1,4 +1,16 @@
+import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
+
+export const metadata: Metadata = {
+  title: "Loans & Credit | GIREI Microfinance Bank",
+  description:
+    "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank. Apply for personal, business, or agricultural loans.",
+  openGraph: {
+    title: "Loans & Credit | GIREI Microfinance Bank",
+    description: "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank.",
+  }
+};
+
 import { MapPin, PhoneIcon, MailIcon } from "lucide-react";
 import Image from "next/image";
 import LoanGrid from "@/components/LoanGrid";
