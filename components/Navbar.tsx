@@ -93,7 +93,7 @@ export default function Navbar() {
                 width: 24,
                 height: 2,
                 borderRadius: 2,
-                background: menuOpen && i === 1 ? "transparent" : "var(--text-dark)",
+                background: menuOpen && i === 1 ? "transparent" : "white",
                 transform:
                   menuOpen && i === 0
                     ? "rotate(45deg) translate(5px, 5px)"

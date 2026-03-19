@@ -278,7 +278,7 @@ export default function LoanSection() {
 
   return (
     <>
-      <div style={{ background: "#f0f4f0", padding: "48px 32px", fontFamily: "sans-serif" }}>
+      <div style={{ background: "#f0f4f0", padding: "48px 1.5rem", fontFamily: "sans-serif" }}>
         {/* Header */}
         <div style={{ textAlign: "center", marginBottom: 36 }}>
           <div
@@ -297,7 +297,7 @@ export default function LoanSection() {
           </div>
           <h2
             style={{
-              fontSize: 28,
+              fontSize: "clamp(1.2rem, 3vw, 1.75rem)",
               fontWeight: 700,
               color: "#111827",
               lineHeight: 1.35,
@@ -305,21 +305,13 @@ export default function LoanSection() {
             }}
           >
             Join Girei Microfinance Bank and experience trusted
-            <br />
+            <br className="loan-heading-br" />
             community banking built for you.
           </h2>
         </div>
 
         {/* Cards Grid */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
-            gap: 20,
-            maxWidth: 960,
-            margin: "0 auto",
-          }}
-        >
+        <div className="loan-grid">
           {loans.map((loan, i) => (
             <LoanCard key={i} loan={loan} onOpenModal={setSelectedLoan} />
           ))}
@@ -327,6 +319,29 @@ export default function LoanSection() {
       </div>
 
       <LoanDetailModal loan={selectedLoan} onClose={() => setSelectedLoan(null)} />
+
+      <style>{`
+        .loan-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 20px;
+          max-width: 960px;
+          margin: 0 auto;
+        }
+        @media (max-width: 900px) {
+          .loan-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 560px) {
+          .loan-grid {
+            grid-template-columns: 1fr;
+          }
+          .loan-heading-br {
+            display: none;
+          }
+        }
+      `}</style>
     </>
   );
 }

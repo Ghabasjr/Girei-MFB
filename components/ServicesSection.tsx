@@ -1,5 +1,7 @@
 "use client";
 
+import React from "react";
+
 function AccountMockup() {
   return (
     <div style={{ background: "#fff", borderRadius: 10, padding: "10px 12px", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: 145, position: "relative", zIndex: 3 }}>
@@ -47,20 +49,15 @@ function SavingsMockup() {
 function ATMMockup() {
   return (
     <div style={{ background: "linear-gradient(135deg,#1a7a3a,#29B909)", borderRadius: 12, padding: "12px 14px", boxShadow: "0 8px 24px rgba(0,0,0,0.25)", width: 155, position: "relative", zIndex: 3 }}>
-      {/* top row */}
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#fff" }} />
           <span style={{ fontSize: "0.62rem", fontWeight: 800, color: "#fff" }}>GIREI</span>
         </div>
-        {/* wifi symbol */}
         <div style={{ fontSize: "0.7rem", color: "rgba(255,255,255,0.8)" }}>◉</div>
       </div>
-      {/* chip */}
       <div style={{ width: 22, height: 16, background: "rgba(255,255,255,0.35)", borderRadius: 3, marginBottom: 10 }} />
-      {/* card number */}
       <div style={{ fontSize: "0.55rem", fontWeight: 700, color: "#fff", letterSpacing: "0.12em", marginBottom: 10 }}>A.S. ABUBAKAR  12/00</div>
-      {/* mastercard circles */}
       <div style={{ display: "flex", justifyContent: "flex-end" }}>
         <div style={{ display: "flex" }}>
           <div style={{ width: 18, height: 18, borderRadius: "50%", background: "#ff5f00", opacity: 0.9 }} />
@@ -162,7 +159,6 @@ function ServiceCard({ service }: any) {
       {/* ── Text content ── */}
       <div style={{
         padding: "1rem 1.1rem 1.4rem", flex: 1, display: "flex", flexDirection: "column",
-        /* concave bottom-right corner via clip-path */
         clipPath: "polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%)",
         position: "relative",
       }}>
@@ -174,7 +170,6 @@ function ServiceCard({ service }: any) {
         </p>
 
         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-          {/* Filled green button */}
           <a href={service.href || "#"} style={{
             flex: 1,
             display: "block",
@@ -194,7 +189,6 @@ function ServiceCard({ service }: any) {
             {service.btnText}
           </a>
 
-          {/* Outlined circle with ✦ star — sits in the concave notch */}
           <div style={{
             width: 32, height: 32,
             borderRadius: "50%",
@@ -230,17 +224,35 @@ function ServiceCard({ service }: any) {
 
 export default function ServicesSection() {
   return (
-    <section id="services" style={{ padding: "4rem 2rem", background: "#fff" }}>
+    <section id="services" style={{ padding: "4rem 1.5rem", background: "#fff" }}>
       <div style={{ maxWidth: 1000, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-          <h2 style={{ fontSize: "1.6rem", fontWeight: 800, color: "#111827" }}>
+          <h2 style={{ fontSize: "clamp(1.3rem, 3vw, 1.6rem)", fontWeight: 800, color: "#111827" }}>
             Services Designed Around Your Needs
           </h2>
         </div>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: "1.25rem" }}>
+        <div className="services-grid">
           {services.map(s => <ServiceCard key={s.id} service={s} />)}
         </div>
       </div>
+
+      <style>{`
+        .services-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.25rem;
+        }
+        @media (max-width: 900px) {
+          .services-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 560px) {
+          .services-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </section>
   );
 }

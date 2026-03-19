@@ -350,15 +350,9 @@ export default function AccountsGrid() {
 
   return (
     <>
-      <section style={{ background: "#fff", padding: "2rem 2rem 3rem" }}>
+      <section style={{ background: "#fff", padding: "2rem 1.5rem 3rem" }}>
         <div style={{ maxWidth: 900, margin: "0 auto" }}>
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr",
-              gap: "1.25rem",
-            }}
-          >
+          <div className="accounts-grid">
             {accounts.map((account, i) => (
               <AccountCard
                 key={i}
@@ -374,6 +368,19 @@ export default function AccountsGrid() {
         account={selectedAccount}
         onClose={() => setSelectedAccount(null)}
       />
+
+      <style>{`
+        .accounts-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr;
+          gap: 1.25rem;
+        }
+        @media (max-width: 600px) {
+          .accounts-grid {
+            grid-template-columns: 1fr;
+          }
+        }
+      `}</style>
     </>
   );
 }

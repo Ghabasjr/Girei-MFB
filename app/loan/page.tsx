@@ -80,11 +80,7 @@ export default function Loan() {
                     </h2>
 
                     {/* 3 feature cards */}
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(3, 1fr)",
-                        gap: "1.25rem",
-                    }}>
+                    <div className="loan-why-choose-grid">
                         {[
                             {
                                 title: "CBN Licensed",
@@ -142,12 +138,7 @@ export default function Loan() {
                 <div style={{ margin: "0 auto", padding: "2rem 2rem" }}>
 
                     {/* Main grid: 4 columns */}
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "1.4fr 1fr 1.3fr 1.2fr",
-                        gap: "2.5rem",
-                        paddingBottom: "3rem",
-                    }}>
+                    <div className="loan-footer-grid">
 
                         {/* Col 1: Brand */}
                         <div>
@@ -256,6 +247,38 @@ export default function Loan() {
                     </div>
                 </div>
             </footer>
+
+            <style>{`
+                .loan-why-choose-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1.25rem;
+                }
+                .loan-footer-grid {
+                    display: grid;
+                    grid-template-columns: 1.4fr 1fr 1.3fr 1.2fr;
+                    gap: 2.5rem;
+                    padding-bottom: 3rem;
+                }
+                @media (max-width: 900px) {
+                    .loan-why-choose-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    .loan-footer-grid {
+                        grid-template-columns: 1fr 1fr;
+                        gap: 2rem;
+                    }
+                }
+                @media (max-width: 600px) {
+                    .loan-why-choose-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .loan-footer-grid {
+                        grid-template-columns: 1fr;
+                        gap: 1.75rem;
+                    }
+                }
+            `}</style>
         </>
     );
 }

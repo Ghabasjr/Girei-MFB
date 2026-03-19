@@ -1,20 +1,15 @@
-"use client"
+"use client";
+
 import React from "react";
 import Link from "next/link";
 
 export default function AboutContent() {
     return (
-        <section style={{ background: "#fff", padding: "3rem 2rem 2rem" }}>
+        <section style={{ background: "#fff", padding: "3rem 1.5rem 2rem" }}>
             <div style={{ maxWidth: 900, margin: "0 auto" }}>
 
                 {/* ── Two column row ── */}
-                <div style={{
-                    display: "grid",
-                    gridTemplateColumns: "1fr 1fr",
-                    gap: "1.5rem",
-                    marginBottom: "1.5rem",
-                    alignItems: "stretch",
-                }}>
+                <div className="vision-grid">
 
                     {/* ── LEFT COL: paragraph top + photo bottom ── */}
                     <div style={{ display: "flex", flexDirection: "column", gap: "1.25rem" }}>
@@ -38,7 +33,6 @@ export default function AboutContent() {
                             borderRadius: 14,
                             overflow: "hidden",
                             position: "relative",
-                            // minHeight: 190,
                             height: 240
                         }}>
                             <img
@@ -50,8 +44,6 @@ export default function AboutContent() {
                                     objectFit: "cover",
                                     objectPosition: "center 10%",
                                     display: "block",
-                                    // minHeight: 190,
-
                                 }}
                             />
                             {/* Concave bottom-right notch */}
@@ -77,7 +69,6 @@ export default function AboutContent() {
                             background: "#025236",
                             borderRadius: 16,
                             padding: "2.5rem 2rem",
-                            // display: "flex",
                             alignItems: "center",
                             position: "relative",
                             overflow: "hidden",
@@ -131,15 +122,7 @@ export default function AboutContent() {
                 </div>
 
                 {/* ── Stats bar ── */}
-                <div style={{
-                    border: "1.5px solid #29B909",
-                    borderRadius: "30px",
-                    padding: "1rem 3.5rem",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    background: "#fff",
-                }}>
+                <div className="vision-stats-bar">
                     {[
                         { number: "500", suffix: "+", label: "Customer", sublabel: "Served" },
                         { number: "1k", suffix: "+", label: "Loans", sublabel: "Completed" },
@@ -147,19 +130,18 @@ export default function AboutContent() {
                     ].map((stat, i) => (
                         <React.Fragment key={stat.number}>
                             {i > 0 && (
-                                <div key={`div-${i}`} style={{
+                                <div style={{
                                     width: 1,
                                     height: 40,
                                     background: "#e5e7eb",
                                     flexShrink: 0,
                                 }} />
                             )}
-                            <div key={stat.number} style={{
+                            <div style={{
                                 display: "flex",
                                 alignItems: "center",
                                 gap: "0.6rem",
                             }}>
-                                {/* Full number+suffix all green */}
                                 <div style={{
                                     fontSize: "2rem",
                                     fontWeight: 900,
@@ -169,7 +151,6 @@ export default function AboutContent() {
                                 }}>
                                     {stat.number}{stat.suffix}
                                 </div>
-                                {/* Label stacked */}
                                 <div style={{ lineHeight: 1.4 }}>
                                     <div style={{ fontSize: "0.7rem", color: "#6b7280", fontWeight: 500 }}>{stat.label}</div>
                                     <div style={{ fontSize: "0.7rem", color: "#6b7280", fontWeight: 500 }}>{stat.sublabel}</div>
@@ -180,6 +161,38 @@ export default function AboutContent() {
                 </div>
 
             </div>
+
+            <style>{`
+                .vision-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.5rem;
+                    margin-bottom: 1.5rem;
+                    align-items: stretch;
+                }
+                .vision-stats-bar {
+                    border: 1.5px solid #29B909;
+                    border-radius: 30px;
+                    padding: 1rem 3.5rem;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    background: #fff;
+                    flex-wrap: wrap;
+                    gap: 1rem;
+                }
+                @media (max-width: 700px) {
+                    .vision-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .vision-stats-bar {
+                        padding: 1rem 1.5rem;
+                        justify-content: center;
+                        border-radius: 16px;
+                        gap: 1.5rem;
+                    }
+                }
+            `}</style>
         </section>
     );
 }

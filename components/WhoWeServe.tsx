@@ -51,7 +51,7 @@ const cards = [
   {
     iconBg: "#FEE2E2",
     title: "Rural Communities",
-    desc: "200+ Daily Job Posting",
+    desc: "Banking closer to you",
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <rect x="2" y="2" width="8" height="8" rx="2" fill="#ef4444" />
@@ -64,7 +64,7 @@ const cards = [
   {
     iconBg: "#FEF9C3",
     title: "Groups & Cooperatives",
-    desc: "200+ Daily Job Posting",
+    desc: "Savings made together",
     icon: (
       <svg width="22" height="22" viewBox="0 0 22 22" fill="none">
         <rect x="2" y="2" width="8" height="8" rx="2" fill="#eab308" />
@@ -76,11 +76,9 @@ const cards = [
   },
 ];
 
-// One row = large C + small C side by side
 function DoubleCRow() {
   return (
     <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-      {/* Large C arc */}
       <div
         style={{
           width: 46,
@@ -93,7 +91,6 @@ function DoubleCRow() {
           flexShrink: 0,
         }}
       />
-      {/* Small C arc — roughly half the size */}
       <div
         style={{
           width: 22,
@@ -113,6 +110,7 @@ function DoubleCRow() {
 function ArcColumn() {
   return (
     <div
+      className="arc-column"
       style={{
         display: "flex",
         flexDirection: "column",
@@ -145,12 +143,12 @@ export default function WhoWeServe() {
         </div>
 
         {/* Main content */}
-        <div style={{ flex: 1, padding: "0 1.5rem" }}>
+        <div style={{ flex: 1, padding: "0 1rem" }}>
           {/* Heading */}
           <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
             <h2
               style={{
-                fontSize: "2rem",
+                fontSize: "clamp(1.5rem, 4vw, 2rem)",
                 fontWeight: 800,
                 color: "#fff",
                 marginBottom: "0.5rem",
@@ -164,15 +162,7 @@ export default function WhoWeServe() {
           </div>
 
           {/* Cards grid */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "repeat(3, 1fr)",
-              gap: "1.25rem",
-              maxWidth: 860,
-              margin: "0 auto",
-            }}
-          >
+          <div className="who-we-serve-grid">
             {cards.map((card) => (
               <div
                 key={card.title}
@@ -222,6 +212,32 @@ export default function WhoWeServe() {
           <ArcColumn />
         </div>
       </div>
+
+      <style>{`
+        .who-we-serve-grid {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.25rem;
+          max-width: 860px;
+          margin: 0 auto;
+        }
+        .arc-column {
+          display: flex;
+        }
+        @media (max-width: 860px) {
+          .who-we-serve-grid {
+            grid-template-columns: repeat(2, 1fr);
+          }
+        }
+        @media (max-width: 560px) {
+          .who-we-serve-grid {
+            grid-template-columns: 1fr;
+          }
+          .arc-column {
+            display: none;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -11,20 +11,15 @@ export default function Hero() {
   return (
     <>
       {/* Hero Section */}
-      <section className="relative w-full flex flex-col" style={{ fontFamily: "'Segoe UI', sans-serif" }}>
+      <section className="relative w-full flex flex-col hero-section" style={{ fontFamily: "'Segoe UI', sans-serif" }}>
         {/* Main hero row */}
-        <div className="flex" style={{ minHeight: "78vh" }}>
+        <div className="hero-row" style={{ minHeight: "78vh" }}>
 
           {/* ── LEFT PANEL ── */}
           <div
-            className="relative flex flex-col justify-center"
+            className="hero-left"
             style={{
-              width: "54%",
-              padding: "3.5rem 3.5rem 3.5rem 4rem",
               background: "#f9fafb",
-              /* subtle dot pattern */
-              // backgroundImage:
-              //   "radial-gradient(circle, #b6d4c0 1px, transparent 1px)",
               backgroundSize: "28px 28px",
               borderRight: "1px solid #e2e8f0",
               zIndex: 1,
@@ -51,17 +46,17 @@ export default function Hero() {
                   flexShrink: 0,
                 }}
               />
-              <span style={{ fontSize: "16px", color: "#000000", fontWeight: 400, fontStyle: "regular" }}>
+              <span style={{ fontSize: "clamp(13px, 2vw, 16px)", color: "#000000", fontWeight: 400 }}>
                 Welcome To Girei Microfinance Bank
               </span>
             </div>
 
             {/* Headline */}
             <h1
+              className="hero-headline"
               style={{
-                fontSize: "58px",
                 fontWeight: 900,
-                lineHeight: "65px",
+                lineHeight: 1.15,
                 color: "#111827",
                 marginBottom: "1.1rem",
                 letterSpacing: "-0.01em",
@@ -113,14 +108,12 @@ export default function Hero() {
 
             {/* Subtext */}
             <p
+              className="hero-subtext"
               style={{
-                fontSize: "20px",
                 fontWeight: 400,
-                fontStyle: "regular",
                 color: "#4b5563",
                 lineHeight: 1.7,
                 marginBottom: "2rem",
-                maxWidth: 370,
               }}
             >
               Girei Microfinance Bank Limited, formerly Girei Community Bank,
@@ -152,12 +145,11 @@ export default function Hero() {
 
           {/* ── RIGHT PANEL ── */}
           <div
-            className="relative overflow-hidden"
-            style={{ flex: 1 }}
+            className="hero-right relative overflow-hidden"
           >
             {/* Background photo */}
             <img
-              src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?w=900&q=80"
+              src="/market.png"
               alt="Community banking"
               style={{
                 position: "absolute",
@@ -180,6 +172,7 @@ export default function Hero() {
 
             {/* Testimonial card */}
             <div
+              className="hero-testimonial-card"
               style={{
                 position: "absolute",
                 bottom: "18%",
@@ -202,7 +195,6 @@ export default function Hero() {
                       width: 36,
                       height: 36,
                       borderRadius: "50%",
-                      // background: "linear-gradient(135deg,#4ade80,#15803d)",
                       display: "flex",
                       alignItems: "center",
                       justifyContent: "center",
@@ -270,22 +262,12 @@ export default function Hero() {
         </div>
 
         {/* ── BOTTOM NAV BAR ── */}
-        <div
-          style={{
-            background: "#0b3d2e",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            gap: "0.75rem",
-            padding: "0.9rem 2rem",
-            width: "100%",
-            boxSizing: "border-box",
-          }}
-        >
+        <div className="hero-bottom-nav">
           {navItems.map((item, i) => (
             <a
               key={i}
               href="#"
+              className="hero-nav-pill"
               style={{
                 display: "inline-flex",
                 alignItems: "center",
@@ -316,6 +298,99 @@ export default function Hero() {
           ))}
         </div>
       </section>
+
+      <style>{`
+        .hero-row {
+          display: flex;
+        }
+        .hero-left {
+          position: relative;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          width: 54%;
+          padding: 3.5rem 3.5rem 3.5rem 4rem;
+        }
+        .hero-right {
+          flex: 1;
+          position: relative;
+          min-height: 320px;
+        }
+        .hero-headline {
+          font-size: 58px;
+          line-height: 65px;
+        }
+        .hero-subtext {
+          font-size: 20px;
+          max-width: 370px;
+        }
+        .hero-bottom-nav {
+          background: #0b3d2e;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 0.75rem;
+          padding: 0.9rem 2rem;
+          width: 100%;
+          box-sizing: border-box;
+          flex-wrap: wrap;
+        }
+        .hero-testimonial-card {
+          display: block;
+        }
+
+        @media (max-width: 900px) {
+          .hero-left {
+            width: 100%;
+            padding: 2.5rem 1.5rem;
+            border-right: none;
+            border-bottom: 1px solid #e2e8f0;
+          }
+          .hero-row {
+            flex-direction: column;
+            min-height: auto !important;
+          }
+          .hero-right {
+            min-height: 300px;
+          }
+          .hero-headline {
+            font-size: clamp(32px, 7vw, 52px);
+            line-height: 1.15;
+          }
+          .hero-subtext {
+            font-size: clamp(15px, 2.5vw, 18px);
+            max-width: 100%;
+          }
+          .hero-testimonial-card {
+            width: 240px !important;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .hero-left {
+            padding: 2rem 1rem;
+          }
+          .hero-headline {
+            font-size: clamp(26px, 8vw, 40px);
+          }
+          .hero-right {
+            min-height: 250px;
+          }
+          .hero-testimonial-card {
+            display: none;
+          }
+          .hero-bottom-nav {
+            padding: 0.75rem 1rem;
+            gap: 0.5rem;
+            justify-content: flex-start;
+            overflow-x: auto;
+            flex-wrap: nowrap;
+          }
+          .hero-nav-pill {
+            flex-shrink: 0;
+          }
+        }
+      `}</style>
     </>
   );
 }

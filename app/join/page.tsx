@@ -84,11 +84,7 @@ export default function Join() {
                     </h2>
 
                     {/* 3 feature cards */}
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "repeat(3, 1fr)",
-                        gap: "1.25rem",
-                    }}>
+                    <div className="join-why-choose-grid">
                         {[
                             {
                                 title: "CBN Licensed",
@@ -146,12 +142,7 @@ export default function Join() {
                 <div style={{ margin: "0 auto", padding: "2rem 2rem" }}>
 
                     {/* Main grid: 4 columns */}
-                    <div style={{
-                        display: "grid",
-                        gridTemplateColumns: "1.4fr 1fr 1.3fr 1.2fr",
-                        gap: "2.5rem",
-                        paddingBottom: "3rem",
-                    }}>
+                    <div className="join-footer-grid">
 
                         {/* Col 1: Brand */}
                         <div>
@@ -260,6 +251,38 @@ export default function Join() {
                     </div>
                 </div>
             </footer>
+
+            <style>{`
+                .join-why-choose-grid {
+                    display: grid;
+                    grid-template-columns: repeat(3, 1fr);
+                    gap: 1.25rem;
+                }
+                .join-footer-grid {
+                    display: grid;
+                    grid-template-columns: 1.4fr 1fr 1.3fr 1.2fr;
+                    gap: 2.5rem;
+                    padding-bottom: 3rem;
+                }
+                @media (max-width: 900px) {
+                    .join-why-choose-grid {
+                        grid-template-columns: repeat(2, 1fr);
+                    }
+                    .join-footer-grid {
+                        grid-template-columns: 1fr 1fr;
+                        gap: 2rem;
+                    }
+                }
+                @media (max-width: 600px) {
+                    .join-why-choose-grid {
+                        grid-template-columns: 1fr;
+                    }
+                    .join-footer-grid {
+                        grid-template-columns: 1fr;
+                        gap: 1.75rem;
+                    }
+                }
+            `}</style>
         </>
     )
 }

@@ -4,15 +4,14 @@ export default function AboutSection() {
       id="about"
       style={{
         background: "#f7f8f9",
-        padding: "2rem 2rem 2rem 3rem",
+        padding: "2rem 1.5rem 2rem",
       }}
     >
       {/* Section heading */}
       <h2
         style={{
           textAlign: "center",
-          fontSize: "40px",
-          fontStyle: 'bold',
+          fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
           fontWeight: 900,
           color: "#111827",
           marginBottom: "2.5rem",
@@ -21,26 +20,12 @@ export default function AboutSection() {
         Learn More About Who We Are
       </h2>
 
-      <div
-        style={{
-          maxWidth: 900,
-          margin: "auto auto",
-          marginBottom: "108px",
-          background: "#fff",
-          borderRadius: 16,
-          boxShadow: "0 4px 32px rgba(0,0,0,0.08)",
-          overflow: "visible",
-          display: "flex",
-          alignItems: "stretch",
-          minHeight: 220,
-        }}
-      >
+      <div className="about-card">
         {/* LEFT: Image + Satisfaction card */}
         <div
+          className="about-image-col"
           style={{
             position: "relative",
-            width: 240,
-            flexShrink: 0,
             borderRadius: "16px 0 0 16px",
             overflow: "hidden",
           }}
@@ -71,25 +56,10 @@ export default function AboutSection() {
               zIndex: 5,
             }}
           >
-            <div
-              style={{
-                fontSize: "0.62rem",
-                color: "#6b7280",
-                fontWeight: 500,
-                marginBottom: 3,
-              }}
-            >
+            <div style={{ fontSize: "0.62rem", color: "#6b7280", fontWeight: 500, marginBottom: 3 }}>
               Customer Satisfaction
             </div>
-            <div
-              style={{
-                fontSize: "1.5rem",
-                fontWeight: 900,
-                color: "#29B909",
-                lineHeight: 1.1,
-                marginBottom: 6,
-              }}
-            >
+            <div style={{ fontSize: "1.5rem", fontWeight: 900, color: "#29B909", lineHeight: 1.1, marginBottom: 6 }}>
               99%
             </div>
             <div style={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
@@ -110,9 +80,9 @@ export default function AboutSection() {
 
         {/* RIGHT: Content */}
         <div
+          className="about-content-col"
           style={{
             flex: 1,
-            padding: "1.6rem 2rem 1.6rem 2.8rem",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -121,7 +91,7 @@ export default function AboutSection() {
         >
           <h3
             style={{
-              fontSize: "22px",
+              fontSize: "clamp(1rem, 2.5vw, 1.4rem)",
               fontWeight: 700,
               color: "#111827",
               lineHeight: 1.3,
@@ -130,7 +100,7 @@ export default function AboutSection() {
           >
             Empowering Individuals &amp; Businesses to
             <br />
-            Bank Smatter and Live Better
+            Bank Smarter and Live Better
           </h3>
 
           <p
@@ -140,7 +110,6 @@ export default function AboutSection() {
               color: "#4b5563",
               lineHeight: 1.7,
               margin: 0,
-              maxWidth: 420,
             }}
           >
             At Girei, we empower individuals, businesses, and communities with
@@ -150,7 +119,7 @@ export default function AboutSection() {
           </p>
 
           {/* Stats row */}
-          <div style={{ display: "flex", gap: "2.5rem", alignItems: "flex-start" }}>
+          <div className="about-stats-row">
             {[
               { number: "500", suffix: "+", label: "Customers Served" },
               { number: "1", suffix: "k+", label: "Loans Completed" },
@@ -176,6 +145,52 @@ export default function AboutSection() {
           </div>
         </div>
       </div>
+
+      <style>{`
+        .about-card {
+          max-width: 900px;
+          margin: auto auto;
+          margin-bottom: 108px;
+          background: #fff;
+          border-radius: 16px;
+          box-shadow: 0 4px 32px rgba(0,0,0,0.08);
+          overflow: visible;
+          display: flex;
+          align-items: stretch;
+          min-height: 220px;
+        }
+        .about-image-col {
+          width: 240px;
+          flex-shrink: 0;
+        }
+        .about-content-col {
+          padding: 1.6rem 2rem 1.6rem 2.8rem;
+        }
+        .about-stats-row {
+          display: flex;
+          gap: 2.5rem;
+          align-items: flex-start;
+          flex-wrap: wrap;
+        }
+
+        @media (max-width: 700px) {
+          .about-card {
+            flex-direction: column;
+            margin-bottom: 60px;
+          }
+          .about-image-col {
+            width: 100%;
+            height: 200px;
+            border-radius: 16px 16px 0 0;
+          }
+          .about-content-col {
+            padding: 1.4rem 1.2rem;
+          }
+          .about-stats-row {
+            gap: 1.5rem;
+          }
+        }
+      `}</style>
     </section>
   );
 }

@@ -6,43 +6,21 @@ import Image from "next/image";
 export default function Footer() {
   return (
     <>
-      {/* ── Newsletter Banner — overlaps FAQ above and footer below ── */}
-      <div style={{ position: "relative", zIndex: 10, padding: "0 2rem" }}>
-        <div style={{
-          maxWidth: 700,
-          margin: "0 auto",
-          background: "linear-gradient(to bottom, #025236 0%, #04B879 100%)",
-          borderRadius: 20,
-          padding: "2.5rem 3rem",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "space-between",
-          gap: "2rem",
-          boxShadow: "0 8px 40px rgba(2,82,54,0.25)",
-          position: "relative",
-          top: 40,
-        }}>
+      {/* ── Newsletter Banner ── */}
+      <div className="newsletter-wrapper">
+        <div className="newsletter-inner">
           {/* Left text */}
-          <div style={{ flex: 1 }}>
-            <h3 style={{ fontSize: "1.6rem", fontWeight: 800, color: "#fff", marginBottom: "0.6rem", lineHeight: 1.2 }}>
+          <div className="newsletter-text">
+            <h3 style={{ fontSize: "clamp(1.2rem, 3vw, 1.6rem)", fontWeight: 800, color: "#fff", marginBottom: "0.6rem", lineHeight: 1.2 }}>
               Bank News In Your Inbox
             </h3>
-            <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.7, margin: 0, maxWidth: 300 }}>
+            <p style={{ fontSize: "0.8rem", color: "rgba(255,255,255,0.85)", lineHeight: 1.7, margin: 0 }}>
               Yes, you can make use of the covenant mfb debit card for payments on spotify and other payment websites that accept verve cards.
             </p>
           </div>
 
           {/* Right: email input + subscribe */}
-          <div style={{
-            background: "#fff",
-            borderRadius: 999,
-            display: "flex",
-            alignItems: "center",
-            padding: "0.3rem 0.3rem 0.3rem 1rem",
-            gap: "0.5rem",
-            minWidth: 300,
-            boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-          }}>
+          <div className="newsletter-input-row">
             <span style={{ color: "#9ca3af", fontSize: "0.9rem" }}>✉</span>
             <input
               type="email"
@@ -54,6 +32,7 @@ export default function Footer() {
                 fontSize: "0.8rem",
                 color: "#374151",
                 background: "transparent",
+                minWidth: 0,
               }}
             />
             <button style={{
@@ -69,6 +48,7 @@ export default function Footer() {
               alignItems: "center",
               gap: 6,
               whiteSpace: "nowrap",
+              flexShrink: 0,
             }}>
               <Image src="/sent.png" alt="Subscribe" width={16} height={16} /> Subscribe
             </button>
@@ -83,19 +63,13 @@ export default function Footer() {
         paddingTop: "5rem",
         paddingBottom: 0,
       }}>
-        <div style={{ margin: "0 auto", padding: "2rem 2rem" }}>
+        <div style={{ margin: "0 auto", padding: "2rem 1.5rem" }}>
 
-          {/* Main grid: 4 columns */}
-          <div style={{
-            display: "grid",
-            gridTemplateColumns: "1.4fr 1fr 1.3fr 1.2fr",
-            gap: "2.5rem",
-            paddingBottom: "3rem",
-          }}>
+          {/* Main grid: 4 columns → stacks on mobile */}
+          <div className="footer-grid">
 
             {/* Col 1: Brand */}
             <div>
-              {/* Logo box */}
               <div style={{
                 background: "#fff",
                 borderRadius: 10,
@@ -169,17 +143,14 @@ export default function Footer() {
             <div>
               <h4 style={{ color: "#fff", fontWeight: 700, fontSize: "0.88rem", marginBottom: "1.1rem" }}>Contact Us</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
-                {/* Address */}
                 <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <MapPin size={12} color="#29B909" />
                   <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Giei Pont 2, 100, Adamawa state, Nigeria</span>
                 </div>
-                {/* Phone */}
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <PhoneIcon size={12} color="#29B909" />
                   <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>07011079676</span>
                 </div>
-                {/* Email */}
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <MailIcon size={12} color="#29B909" />
                   <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>gireibank@gmail.com</span>
@@ -200,6 +171,78 @@ export default function Footer() {
           </div>
         </div>
       </footer>
+
+      <style>{`
+        .newsletter-wrapper {
+          position: relative;
+          z-index: 10;
+          padding: 0 1.5rem;
+        }
+        .newsletter-inner {
+          max-width: 700px;
+          margin: 0 auto;
+          background: linear-gradient(to bottom, #025236 0%, #04B879 100%);
+          border-radius: 20px;
+          padding: 2.5rem 3rem;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 2rem;
+          box-shadow: 0 8px 40px rgba(2,82,54,0.25);
+          position: relative;
+          top: 40px;
+        }
+        .newsletter-text {
+          flex: 1;
+        }
+        .newsletter-input-row {
+          background: #fff;
+          border-radius: 999px;
+          display: flex;
+          align-items: center;
+          padding: 0.3rem 0.3rem 0.3rem 1rem;
+          gap: 0.5rem;
+          min-width: 260px;
+          box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+        }
+        .footer-grid {
+          display: grid;
+          grid-template-columns: 1.4fr 1fr 1.3fr 1.2fr;
+          gap: 2.5rem;
+          padding-bottom: 3rem;
+        }
+
+        @media (max-width: 900px) {
+          .newsletter-inner {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 2rem 1.5rem;
+            gap: 1.5rem;
+          }
+          .newsletter-input-row {
+            min-width: 0;
+            width: 100%;
+          }
+          .footer-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+          }
+        }
+
+        @media (max-width: 600px) {
+          .newsletter-wrapper {
+            padding: 0 1rem;
+          }
+          .newsletter-inner {
+            padding: 1.5rem 1rem;
+            border-radius: 14px;
+          }
+          .footer-grid {
+            grid-template-columns: 1fr;
+            gap: 1.75rem;
+          }
+        }
+      `}</style>
     </>
   );
 }

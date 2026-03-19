@@ -235,15 +235,7 @@ export default function AccountDetailModal({
           />
 
           {/* Three-column table */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              columnGap: 12,
-              rowGap: 0,
-              marginBottom: 20,
-            }}
-          >
+          <div className="modal-details-grid">
             {/* ─ Benefit column ─ */}
             <div>
               <p
@@ -379,6 +371,19 @@ export default function AccountDetailModal({
       </div>
 
       <style>{`
+        .modal-details-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          column-gap: 12px;
+          row-gap: 0;
+          margin-bottom: 20px;
+        }
+        @media (max-width: 600px) {
+          .modal-details-grid {
+            grid-template-columns: 1fr;
+            row-gap: 20px;
+          }
+        }
         @keyframes gmfbFadeIn {
           from { opacity: 0; }
           to   { opacity: 1; }

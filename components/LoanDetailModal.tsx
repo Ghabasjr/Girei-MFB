@@ -229,14 +229,7 @@ export default function LoanDetailModal({ loan, onClose }: LoanDetailModalProps)
           </div>
 
           {/* Three-column section */}
-          <div
-            style={{
-              display: "grid",
-              gridTemplateColumns: "1fr 1fr 1fr",
-              columnGap: 16,
-              marginBottom: 24,
-            }}
-          >
+          <div className="modal-details-grid">
             {/* Benefit */}
             <div>
               <p
@@ -337,6 +330,18 @@ export default function LoanDetailModal({ loan, onClose }: LoanDetailModalProps)
       </div>
 
       <style>{`
+        .modal-details-grid {
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr;
+          column-gap: 16px;
+          margin-bottom: 24px;
+        }
+        @media (max-width: 600px) {
+          .modal-details-grid {
+            grid-template-columns: 1fr;
+            row-gap: 20px;
+          }
+        }
         @keyframes loanFadeIn {
           from { opacity: 0; }
           to   { opacity: 1; }
