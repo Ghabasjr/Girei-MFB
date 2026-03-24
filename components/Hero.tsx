@@ -112,18 +112,17 @@ export default function Hero() {
               style={{
                 fontWeight: 400,
                 color: "#4b5563",
-                lineHeight: 1.7,
-                marginBottom: "2rem",
+                lineHeight: 1.2,
+                marginBottom: "1.5rem",
               }}
             >
-              Girei Microfinance Bank Limited, formerly Girei Community Bank,
-              was established to empower the unbanked and under-banked by
-              delivering reliable and inclusive financial services.
+              Girei Microfinance Bank Limited, formerly Girei Community
+              Bank, was established to empower the unbanked and under-banked by delivering reliable and inclusive financial services.
             </p>
 
             {/* CTA */}
             <a
-              href="#"
+              href="/join"
               style={{
                 display: "inline-block",
                 background: "#16a34a",
@@ -274,7 +273,7 @@ export default function Hero() {
                 justifyContent: "center",
                 background: "#fff",
                 color: "#1a1a1a",
-                fontSize: "0.75rem",
+                fontSize: "1.2rem",
                 fontWeight: 500,
                 padding: "0.5rem 1.25rem",
                 borderRadius: "999px",
@@ -321,7 +320,7 @@ export default function Hero() {
           line-height: 65px;
         }
         .hero-subtext {
-          font-size: 20px;
+          font-size: 18px;
           max-width: 370px;
         }
         .hero-bottom-nav {

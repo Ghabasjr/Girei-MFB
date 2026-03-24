@@ -25,7 +25,7 @@ function ATMModal({ onClose }: { onClose: () => void }) {
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         textAlign: 'center'
       }} onClick={e => e.stopPropagation()}>
-        <button 
+        <button
           onClick={onClose}
           style={{
             position: 'absolute',
@@ -73,7 +73,7 @@ function ATMModal({ onClose }: { onClose: () => void }) {
           <span style={{ color: '#9ca3af', fontSize: '0.8rem', textTransform: 'uppercase', letterSpacing: '0.05em', fontWeight: 600 }}>Location</span><br />
           Giei Pont 2, 100, Adamawa State, Nigeria
         </p>
-        <button 
+        <button
           onClick={onClose}
           style={{
             background: '#29B909',
@@ -237,7 +237,7 @@ function ServiceCard({ service, onOpenModal }: any) {
       position: "relative",
       transition: "transform 0.25s, box-shadow 0.25s",
     }}
-      onMouseEnter={e => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.12)"; }}
+      onMouseEnter={(e: { currentTarget: { style: { transform: string; boxShadow: string; }; }; }) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.12)"; }}
       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; }}
     >
       {/* ── Image area with light green bg ── */}
@@ -328,10 +328,10 @@ export default function ServicesSection() {
         </div>
         <div className="services-grid">
           {services.map(s => (
-            <ServiceCard 
-              key={s.id} 
-              service={s} 
-              onOpenModal={() => setIsModalOpen(true)} 
+            <ServiceCard
+              key={s.id}
+              service={s}
+              onOpenModal={() => setIsModalOpen(true)}
             />
           ))}
         </div>

@@ -91,7 +91,7 @@ export default function AboutSection() {
         >
           <h3
             style={{
-              fontSize: "clamp(1rem, 2.5vw, 1.4rem)",
+              fontSize: "clamp(1.2rem, 2.6vw, 1.5rem)",
               fontWeight: 700,
               color: "#111827",
               lineHeight: 1.3,
@@ -105,10 +105,10 @@ export default function AboutSection() {
 
           <p
             style={{
-              fontSize: "13px",
+              fontSize: "18px",
               fontWeight: 400,
               color: "#4b5563",
-              lineHeight: 1.7,
+              lineHeight: 1.5,
               margin: 0,
             }}
           >

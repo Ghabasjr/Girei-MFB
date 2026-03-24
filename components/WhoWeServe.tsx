@@ -200,7 +200,7 @@ export default function WhoWeServe() {
                 >
                   {card.title}
                 </div>
-                <div style={{ fontSize: "0.75rem", color: "#9ca3af", lineHeight: 1.5 }}>
+                <div style={{ fontSize: "0.95rem", color: "#9ca3af", lineHeight: 1.5 }}>
                   {card.desc}
                 </div>
               </div>
