@@ -267,7 +267,7 @@ function ServiceCard({ service, onOpenModal }: any) {
         <h3 style={{ fontWeight: 800, fontSize: "1rem", color: "#111827", marginBottom: "0.45rem" }}>
           {service.title}
         </h3>
-        <p style={{ fontSize: "0.75rem", color: "#6b7280", lineHeight: 1.65, marginBottom: "1rem", flex: 1 }}>
+        <p style={{ fontSize: "0.95rem", color: "#6b7280", lineHeight: 1.65, marginBottom: "1rem", flex: 1 }}>
           {service.description}
         </p>
 

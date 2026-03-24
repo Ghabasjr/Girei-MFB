@@ -273,7 +273,7 @@ export default function Hero() {
                 justifyContent: "center",
                 background: "#fff",
                 color: "#1a1a1a",
-                fontSize: "1.2rem",
+                fontSize: "1rem",
                 fontWeight: 500,
                 padding: "0.5rem 1.25rem",
                 borderRadius: "999px",

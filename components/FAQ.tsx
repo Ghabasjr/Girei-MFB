@@ -85,7 +85,7 @@ export default function FAQ() {
                     transition: "all 0.2s",
                     lineHeight: 1,
                   }}>
-                    +
+                    {isOpen ? "−" : "+"}
                   </div>
                 </button>
 
