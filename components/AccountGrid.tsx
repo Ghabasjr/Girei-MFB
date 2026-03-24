@@ -350,8 +350,7 @@ export default function AccountsGrid() {
 
   return (
     <>
-      <section style={{ background: "#fff", padding: "2rem 1.5rem 3rem" }}>
-        <div style={{ maxWidth: 900, margin: "0 auto" }}>
+      <section style={{ background: "#fff", padding: "2rem 1rem 3rem" }}>
           <div className="accounts-grid">
             {accounts.map((account, i) => (
               <AccountCard
@@ -361,7 +360,6 @@ export default function AccountsGrid() {
               />
             ))}
           </div>
-        </div>
       </section>
 
       <AccountDetailModal
@@ -372,8 +370,13 @@ export default function AccountsGrid() {
       <style>{`
         .accounts-grid {
           display: grid;
-          grid-template-columns: 1fr 1fr;
+          grid-template-columns: 1fr 1fr 1fr;
           gap: 1.25rem;
+        }
+        @media (max-width: 900px) {
+          .accounts-grid {
+            grid-template-columns: 1fr 1fr;
+          }
         }
         @media (max-width: 600px) {
           .accounts-grid {
