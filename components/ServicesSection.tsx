@@ -319,8 +319,8 @@ export default function ServicesSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <section id="services" style={{ padding: "4rem 1.5rem", background: "#fff" }}>
-      <div style={{ maxWidth: 1000, margin: "0 auto" }}>
+    <section id="services" style={{ padding: "2rem 1.5rem", background: "#fff" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
         <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
           <h2 style={{ fontSize: "clamp(1.3rem, 3vw, 1.6rem)", fontWeight: 800, color: "#111827" }}>
             Services Designed Around Your Needs

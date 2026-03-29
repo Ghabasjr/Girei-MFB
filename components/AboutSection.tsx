@@ -31,7 +31,7 @@ export default function AboutSection() {
           }}
         >
           <img
-            src="/Rectangle 3072.png"
+            src="/arewa.png"
             alt="Business professional"
             style={{
               width: "100%",

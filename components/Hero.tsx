@@ -56,6 +56,7 @@ export default function Hero() {
               className="hero-headline"
               style={{
                 fontWeight: 900,
+                // fontSize: "58px",
                 lineHeight: 1.15,
                 color: "#111827",
                 marginBottom: "1.1rem",
@@ -275,7 +276,7 @@ export default function Hero() {
                 color: "#1a1a1a",
                 fontSize: "1rem",
                 fontWeight: 500,
-                padding: "0.5rem 1.25rem",
+                padding: "0.2rem 1.25rem",
                 borderRadius: "999px",
                 textDecoration: "none",
                 whiteSpace: "nowrap",
@@ -316,7 +317,7 @@ export default function Hero() {
           min-height: 320px;
         }
         .hero-headline {
-          font-size: 58px;
+          font-size: 50px;
           line-height: 65px;
         }
         .hero-subtext {
@@ -329,7 +330,7 @@ export default function Hero() {
           align-items: center;
           justify-content: center;
           gap: 0.75rem;
-          padding: 0.9rem 2rem;
+          padding: 0.7rem 1.5rem;
           width: 100%;
           box-sizing: border-box;
           flex-wrap: wrap;

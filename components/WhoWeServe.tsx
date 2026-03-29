@@ -107,24 +107,24 @@ function DoubleCRow() {
   );
 }
 
-// function ArcColumn() {
-//   return (
-//     <div
-//       className="arc-column"
-//       style={{
-//         display: "flex",
-//         flexDirection: "column",
-//         gap: "14px",
-//         padding: "1.5rem 0.75rem",
-//         justifyContent: "center",
-//       }}
-//     >
-//       {Array.from({ length: 7 }).map((_, i) => (
-//         <DoubleCRow key={i} />
-//       ))}
-//     </div>
-//   );
-// }
+function ArcColumn() {
+  return (
+    <div
+      className="arc-column"
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "14px",
+        padding: "1.5rem 0.75rem",
+        justifyContent: "center",
+      }}
+    >
+      {Array.from({ length: 7 }).map((_, i) => (
+        <DoubleCRow key={i} />
+      ))}
+    </div>
+  );
+}
 
 export default function WhoWeServe() {
   return (
@@ -139,9 +139,9 @@ export default function WhoWeServe() {
     >
       <div style={{ display: "flex", alignItems: "stretch" }}>
         {/* Left decorative double-C arcs */}
-        {/* <div style={{ flexShrink: 0 }}>
+        <div style={{ flexShrink: 0 }}>
           <ArcColumn />
-        </div> */}
+        </div>
 
         {/* Main content */}
         <div style={{ flex: 1, padding: "0 1rem" }}>
@@ -209,9 +209,9 @@ export default function WhoWeServe() {
         </div>
 
         {/* Right decorative double-C arcs */}
-        {/* <div style={{ flexShrink: 0 }}>
+        <div style={{ flexShrink: 0 }}>
           <ArcColumn />
-        </div> */}
+        </div>
       </div>
 
       <style>{`
