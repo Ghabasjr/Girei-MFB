@@ -185,14 +185,14 @@ export default function Hero() {
           <div className="hero-right relative overflow-hidden">
             {/* Background photo */}
             <img
-              src="/market.png"
+              src="/market.jpeg"
               alt="Community banking"
               style={{
                 position: "absolute",
                 inset: 0,
                 width: "100%",
                 height: "100%",
-                // objectFit: "cover",
+                objectFit: "cover",
                 objectPosition: "center top",
               }}
             />
