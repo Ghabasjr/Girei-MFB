@@ -204,98 +204,112 @@ export default function Hero() {
               }}
             />
 
-            {/* ── TESTIMONIAL CAROUSEL CARD ── */}
+            {/* ── TESTIMONIAL CONVEYOR BELT ── */}
+            {/* Viewport: clips to one card width */}
             <div
               className="hero-testimonial-card"
               style={{
                 position: "absolute",
-                top: "50%",
+                top: "65%",
                 left: "50%",
                 transform: "translate(-50%, -50%)",
                 width: "82%",
-                background: "#fff",
-                borderRadius: 20,
-                padding: "1.4rem 1.6rem",
-                boxShadow: "0 20px 60px rgba(0,0,0,0.28)",
-                zIndex: 5,
                 overflow: "hidden",
+                borderRadius: 20,
+                zIndex: 5,
               }}
             >
-              {/* Header row */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
-                {/* Avatar + name */}
-                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-                  <img
-                    src={slide.avatar}
-                    alt={slide.name}
-                    style={{
-                      width: 58,
-                      height: 58,
-                      borderRadius: "50%",
-                      objectFit: "cover",
-                      flexShrink: 0,
-                      border: "2px solid #e5e7eb",
-                    }}
-                  />
-                  <div>
-                    <div style={{ fontSize: "1rem", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>
-                      {slide.name}
-                    </div>
-                    <div style={{ fontSize: "0.85rem", color: "#16a34a", fontWeight: 600 }}>
-                      {slide.role}
-                    </div>
-                  </div>
-                </div>
-
-                {/* Stacked avatars + 1k+ */}
-                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-                  <div style={{ display: "flex" }}>
-                    {[
-                      "/Ellipse 68.png",
-                      "/Ellipse 69.png",
-                      "/Ellipse 70.png",
-                    ].map((src, i) => (
-                      <img
-                        key={i}
-                        src={src}
-                        alt={`avatar-${i}`}
-                        style={{
-                          width: 30,
-                          height: 30,
-                          borderRadius: "50%",
-                          border: "2.5px solid #fff",
-                          marginLeft: i === 0 ? 0 : -10,
-                          objectFit: "cover",
-                        }}
-                      />
-                    ))}
-                  </div>
-                  <span style={{ fontSize: "0.8rem", color: "#6b7280", fontWeight: 500, whiteSpace: "nowrap" }}>
-                    1k+ Others
-                  </span>
-                </div>
-              </div>
-
-              {/* Quote box */}
-              <div style={{
-                background: "#f9fafb",
-                border: "1px solid #e5e7eb",
-                borderRadius: 12,
-                padding: "0.9rem 1.1rem",
-              }}>
-                <p style={{ fontSize: "0.95rem", color: "#111827", lineHeight: 1.6, fontWeight: 500, margin: 0 }}>
-                  {slide.quote}
-                </p>
-              </div>
-
-              {/* Bottom accent bar */}
+              {/* Track: all cards side-by-side, slides left */}
               <div
                 style={{
-                  height: 7,
-                  background: "#004C3F",
-                  margin: "0.8rem -1.6rem -1.4rem -1.6rem",
+                  display: "flex",
+                  width: `${testimonials.length * 100}%`,
+                  transform: `translateX(-${(activeSlide * 100) / testimonials.length}%)`,
+                  transition: "transform 0.55s cubic-bezier(0.25, 0.46, 0.45, 0.94)",
                 }}
-              />
+              >
+                {testimonials.map((t, idx) => (
+                  <div
+                    key={idx}
+                    style={{
+                      width: `${100 / testimonials.length}%`,
+                      flexShrink: 0,
+                      background: "#fff",
+                      borderRadius: 20,
+                      padding: "1.4rem 1.6rem",
+                      boxShadow: "0 20px 60px rgba(0,0,0,0.28)",
+                      overflow: "hidden",
+                      boxSizing: "border-box",
+                    }}
+                  >
+                    {/* Header row */}
+                    <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+                      {/* Avatar + name */}
+                      <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                        <img
+                          src={t.avatar}
+                          alt={t.name}
+                          style={{
+                            width: 58,
+                            height: 58,
+                            borderRadius: "50%",
+                            objectFit: "cover",
+                            flexShrink: 0,
+                            border: "2px solid #e5e7eb",
+                          }}
+                        />
+                        <div>
+                          <div style={{ fontSize: "1rem", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>
+                            {t.name}
+                          </div>
+                          <div style={{ fontSize: "0.85rem", color: "#16a34a", fontWeight: 600 }}>
+                            {t.role}
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Stacked avatars + 1k+ */}
+                      <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+                        <div style={{ display: "flex" }}>
+                          {["/Ellipse 68.png", "/Ellipse 69.png", "/Ellipse 70.png"].map((src, i) => (
+                            <img
+                              key={i}
+                              src={src}
+                              alt={`avatar-${i}`}
+                              style={{
+                                width: 30,
+                                height: 30,
+                                borderRadius: "50%",
+                                border: "2.5px solid #fff",
+                                marginLeft: i === 0 ? 0 : -10,
+                                objectFit: "cover",
+                              }}
+                            />
+                          ))}
+                        </div>
+                        <span style={{ fontSize: "0.8rem", color: "#6b7280", fontWeight: 500, whiteSpace: "nowrap" }}>
+                          1k+ Others
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Quote box */}
+                    <div style={{
+                      background: "#f9fafb",
+                      border: "1px solid #e5e7eb",
+                      borderRadius: 12,
+                      padding: "0.9rem 1.1rem",
+                    }}>
+                      <p style={{ fontSize: "0.95rem", color: "#111827", lineHeight: 1.6, fontWeight: 500, margin: 0 }}>
+                        {t.quote}
+                      </p>
+                    </div>
+
+                    {/* Bottom accent bar */}
+                    <div style={{ height: 7, background: "#004C3F", margin: "0.8rem -1.6rem -1.4rem -1.6rem" }} />
+                  </div>
+                ))}
+              </div>
             </div>
 
             {/* ── SLIDE INDICATORS (on background image, below card) ── */}
@@ -406,6 +420,19 @@ export default function Hero() {
         }
         .hero-testimonial-card {
           display: block;
+        }
+        @keyframes slideInLeft {
+          from {
+            transform: translateX(-110%);
+            opacity: 0;
+          }
+          to {
+            transform: translateX(0);
+            opacity: 1;
+          }
+        }
+        .testimonial-slide {
+          animation: slideInLeft 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
         }
 
         @media (max-width: 900px) {
