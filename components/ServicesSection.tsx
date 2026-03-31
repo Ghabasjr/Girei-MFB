@@ -100,11 +100,14 @@ function ATMModal({ onClose }: { onClose: () => void }) {
 
 function AccountMockup() {
   return (
-    <div style={{ background: "#fff", borderRadius: 10, padding: "10px 12px", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: 145, position: "relative", zIndex: 3 }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }}>
+    <div style={{
+      background: "#FAFCFB", borderRadius: 10, left: -50, padding: "10px 12px", width: 145, position: "relative",
+    }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }
+      } >
         <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#29B909" }} />
         <span style={{ fontSize: "0.6rem", fontWeight: 800, color: "#111" }}>GIREI</span>
-      </div>
+      </ div>
       <div style={{ fontSize: "0.48rem", color: "#9ca3af", marginBottom: 6 }}>Open an Account With Us</div>
       {["Name", "Email Address", "Password"].map((ph, i) => (
         <div key={i} style={{ background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 4, padding: "3px 6px", fontSize: "0.48rem", color: "#9ca3af", marginBottom: 4 }}>{ph}</div>
@@ -115,7 +118,7 @@ function AccountMockup() {
 
 function LoanMockup() {
   return (
-    <div style={{ background: "#fff", borderRadius: 10, padding: "10px 12px", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: 148, position: "relative", zIndex: 3 }}>
+    <div style={{ background: "#FAFCFB", borderRadius: 10, left: -50, padding: "10px 12px", width: 148, position: "relative", zIndex: 3, transform: "translateX(-15px)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }}>
         <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#29B909" }} />
         <span style={{ fontSize: "0.6rem", fontWeight: 800, color: "#111" }}>GIREI</span>
@@ -130,7 +133,7 @@ function LoanMockup() {
 
 function SavingsMockup() {
   return (
-    <div style={{ background: "#fff", borderRadius: 10, padding: "10px 12px", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: 140, position: "relative", zIndex: 3 }}>
+    <div style={{ background: "#FAFCFB", borderRadius: 10, left: -50, padding: "10px 12px", width: 140, position: "relative" }}>
       <div style={{ fontSize: "0.48rem", color: "#6b7280", marginBottom: 3 }}>Customer Satisfaction</div>
       <div style={{ fontSize: "1.4rem", fontWeight: 900, color: "#29B909", lineHeight: 1, marginBottom: 6 }}>99%</div>
       <div style={{ display: "flex", alignItems: "flex-end", gap: 3 }}>
@@ -144,7 +147,7 @@ function SavingsMockup() {
 
 function ATMMockup() {
   return (
-    <div style={{ background: "linear-gradient(135deg,#1a7a3a,#29B909)", borderRadius: 12, padding: "12px 14px", boxShadow: "0 8px 24px rgba(0,0,0,0.25)", width: 155, position: "relative", zIndex: 3 }}>
+    <div style={{ background: "linear-gradient(135deg,#1a7a3a,#29B909)", borderRadius: 12, padding: "12px 14px", width: 155, position: "relative", zIndex: 3, transform: "translateX(-15px),", left: -50 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#fff" }} />
@@ -166,7 +169,7 @@ function ATMMockup() {
 
 function MobileMockup() {
   return (
-    <div style={{ background: "#fff", borderRadius: 10, padding: "10px 12px", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: 150, position: "relative", zIndex: 3 }}>
+    <div style={{ background: "#FAFCFB", borderRadius: 10, left: -50, padding: "10px 12px", width: 150, position: "relative", zIndex: 3, transform: "translateX(-15px)" }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 4 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#29B909" }} />
@@ -186,7 +189,7 @@ function MobileMockup() {
 
 function POSMockup() {
   return (
-    <div style={{ background: "#fff", borderRadius: 10, padding: "10px 12px", boxShadow: "0 4px 20px rgba(0,0,0,0.15)", width: 145, position: "relative", zIndex: 3 }}>
+    <div style={{ background: "#FAFCFB", borderRadius: 10, left: -50, padding: "10px 12px", width: 145, position: "relative", zIndex: 3, transform: "translateX(-15px)" }}>
       <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }}>
         <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#29B909" }} />
         <span style={{ fontSize: "0.6rem", fontWeight: 800, color: "#111" }}>GIREI</span>
@@ -227,15 +230,15 @@ function ServiceCard({ service, onOpenModal }: any) {
 
   return (
     <div style={{
-      background: "#fff",
+      background: "#F2FBF5",
       borderRadius: 16,
       overflow: "hidden",
       border: "1px solid #d1fae5",
-      boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
+      // boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
       display: "flex",
       flexDirection: "column",
       position: "relative",
-      transition: "transform 0.25s, box-shadow 0.25s",
+      // transition: "transform 0.25s, box-shadow 0.25s",
     }}
       onMouseEnter={(e: { currentTarget: { style: { transform: string; boxShadow: string; }; }; }) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.12)"; }}
       onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; }}
@@ -252,7 +255,7 @@ function ServiceCard({ service, onOpenModal }: any) {
       }}>
         <img src={service.image} alt={service.title} style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
-          objectFit: "cover", objectPosition: service.imagePos, opacity: 0.5,
+          objectFit: "cover", objectPosition: service.imagePos,
         }} />
         <div style={{ position: "relative", zIndex: 2 }}>
           {mockups[service.id]}
@@ -307,7 +310,7 @@ function ServiceCard({ service, onOpenModal }: any) {
             flexShrink: 0,
             cursor: "pointer",
           }}>
-            ✦
+            <img src="/stars.png" alt="stars" />
           </div>
         </div>
       </div>

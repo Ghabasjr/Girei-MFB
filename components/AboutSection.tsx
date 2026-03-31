@@ -8,7 +8,7 @@ export default function AboutSection() {
       }}
     >
       {/* Section heading */}
-      <h2
+      {/* <h2
         style={{
           textAlign: "center",
           fontSize: "clamp(1rem, 3vw, 2rem)",
@@ -18,7 +18,7 @@ export default function AboutSection() {
         }}
       >
         Learn More About Who We Are
-      </h2>
+      </h2> */}
 
       {/* Card */}
       <div className="about-card">
@@ -153,7 +153,7 @@ export default function AboutSection() {
       <style>{`
         .about-card {
           max-width: 900px;
-          margin: 0 auto 108px;
+          margin: 50px auto 108px;
           background: #fff;
           border-radius: 16px;
           box-shadow: 0 4px 32px rgba(0,0,0,0.08);
