@@ -153,7 +153,7 @@ export default function AboutSection() {
       <style>{`
         .about-card {
           max-width: 900px;
-          margin: 50px auto 108px;
+          margin: 50px auto 50px;
           background: #fff;
           border-radius: 16px;
           box-shadow: 0 4px 32px rgba(0,0,0,0.08);

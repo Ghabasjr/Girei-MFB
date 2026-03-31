@@ -284,7 +284,7 @@ function ServiceCard({ service, onOpenModal }: any) {
               background: "#29B909",
               color: "#fff",
               fontWeight: 600,
-              fontSize: "0.72rem",
+              fontSize: "1rem",
               padding: "0.5rem 0",
               borderRadius: "999px",
               textDecoration: "none",
@@ -324,7 +324,7 @@ export default function ServicesSection() {
   return (
     <section id="services" style={{ padding: "2rem 1.5rem", background: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+        <div style={{ textAlign: "center", marginBottom: "2.5rem", marginTop: "1rem" }}>
           <h2 style={{ fontSize: "clamp(1.3rem, 3vw, 1.6rem)", fontWeight: 800, color: "#111827" }}>
             Services Designed Around Your Needs
           </h2>
