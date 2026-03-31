@@ -133,12 +133,17 @@ export default function AboutSection() {
               { number: "1", suffix: "k+", label: "Loans Completed" },
               { number: "30", suffix: "+", label: "Years Of Banking" },
             ].map((stat, i) => (
-              <div key={i} className="stat-item">
-                <div className="stat-value">
-                  <span style={{ color: "#111827" }}>{stat.number}</span>
-                  <span style={{ color: "#29B909" }}>{stat.suffix}</span>
+              <div key={i} style={{ display: "flex", alignItems: "center", gap: "4rem" }}>
+                {i > 0 && (
+                  <div style={{ width: 1, height: 40, background: "#29B909", opacity: 0.3 }} />
+                )}
+                <div className="stat-item">
+                  <div className="stat-value">
+                    <span style={{ color: "#111827" }}>{stat.number}</span>
+                    <span style={{ color: "#29B909" }}>{stat.suffix}</span>
+                  </div>
+                  <div className="stat-label">{stat.label}</div>
                 </div>
-                <div className="stat-label">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -171,9 +176,9 @@ export default function AboutSection() {
         }
         .about-stats-row {
           display: flex;
-          gap: 4rem;
+          gap: 0;
           align-items: flex-start;
-          justify-content:space-between;
+          justify-content: space-between;
           marginTop: 1rem;
           flex-wrap: wrap;
         }
