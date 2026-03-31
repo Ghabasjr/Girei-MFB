@@ -147,7 +147,7 @@ export default function Footer() {
               <h4 style={{ color: "#fff", fontWeight: 700, fontSize: "0.88rem", marginBottom: "1.1rem" }}>Contact Us</h4>
               <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                  <MapPin size={12} color="#29B909" />
+                  <MapPin size={20} color="#29B909" />
                   <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Girei Community Bank 9G5X+Q24, Girei 652108
                     Mubi Road, Adamawa State, Nigeria</span>
                 </div>
