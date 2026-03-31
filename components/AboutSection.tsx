@@ -11,7 +11,7 @@ export default function AboutSection() {
       <h2
         style={{
           textAlign: "center",
-          fontSize: "clamp(1.5rem, 4vw, 2.5rem)",
+          fontSize: "clamp(1rem, 3vw, 2rem)",
           fontWeight: 900,
           color: "#111827",
           marginBottom: "2.5rem",
@@ -20,60 +20,68 @@ export default function AboutSection() {
         Learn More About Who We Are
       </h2>
 
+      {/* Card */}
       <div className="about-card">
-        {/* LEFT: Image + Satisfaction card */}
-        <div
-          className="about-image-col"
-          style={{
-            position: "relative",
-            borderRadius: "16px 0 0 16px",
-            overflow: "hidden",
-          }}
-        >
-          <img
-            src="/arewa.png"
-            alt="Business professional"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-              display: "block",
-            }}
-          />
 
-          {/* Customer Satisfaction overlay card */}
+        {/* LEFT: Image inset inside the card */}
+        <div className="about-image-col">
           <div
             style={{
-              position: "absolute",
-              bottom: 16,
-              right: -16,
-              background: "#fff",
-              borderRadius: 12,
-              padding: "0.5rem 0.8rem 0.65rem",
-              boxShadow: "0 6px 20px rgba(0,0,0,0.13)",
-              minWidth: 140,
-              zIndex: 5,
+              position: "relative",
+              width: "100%",
+              height: "100%",
+              overflow: "visible",
+              zIndex: 10,
             }}
           >
-            <div style={{ fontSize: "0.62rem", color: "#6b7280", fontWeight: 500, marginBottom: 3 }}>
-              Customer Satisfaction
-            </div>
-            <div style={{ fontSize: "1.5rem", fontWeight: 900, color: "#29B909", lineHeight: 1.1, marginBottom: 6 }}>
-              99%
-            </div>
-            <div style={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
-              {[6, 10, 14, 18, 22, 27].map((h, i) => (
-                <div
-                  key={i}
-                  style={{
-                    width: 8,
-                    height: h,
-                    background: "#29B909",
-                    borderRadius: "2px 2px 1px 1px",
-                  }}
-                />
-              ))}
+            <img
+              src="/arewa.png"
+              alt="Business professional"
+              style={{
+                width: "100%",
+                height: "100%",
+                objectFit: "cover",
+                objectPosition: "center top",
+                display: "block",
+                borderRadius: 12,
+              }}
+            />
+
+            {/* Customer Satisfaction overlay */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: 16,
+                right: -30,
+                background: "#fff",
+                borderRadius: 12,
+                padding: "0.4rem 0.6rem 0.5rem",
+                boxShadow: "0 6px 20px rgba(0,0,0,0.13)",
+                minWidth: 90,
+                zIndex: 10,
+              }}
+            >
+              <div style={{ fontSize: "0.55rem", color: "#6b7280", fontWeight: 500, marginBottom: 2 }}>
+                Customer Satisfaction
+              </div>
+              <div style={{
+                fontSize: "1.3rem", fontWeight: 900, color: "#29B909", lineHeight: 1.1, marginBottom: 4
+              }}>
+                99%
+              </div>
+              <div style={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
+                {[10, 16, 22, 28, 35, 43].map((h, i) => (
+                  <div
+                    key={i}
+                    style={{
+                      width: "14px",
+                      height: h,
+                      background: "#29B909",
+                      borderRadius: "10px 10px 6px 6px",
+                    }}
+                  />
+                ))}
+              </div>
             </div>
           </div>
         </div>
@@ -86,30 +94,30 @@ export default function AboutSection() {
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
-            gap: "0.75rem",
+            gap: "1rem",
           }}
         >
           <h3
             style={{
-              fontSize: "clamp(1.2rem, 2.6vw, 1.5rem)",
+              fontSize: "clamp(1.2rem, 2.6vw, 1.3rem)",
               fontWeight: 700,
               color: "#111827",
               lineHeight: 1.3,
               margin: 0,
+              marginBottom: "0.5rem",
             }}
           >
-            Empowering Individuals &amp; Businesses
-            <br />
-            To Bank Smarter and Live Better
+            Empowering Individuals &amp; Businesses To Bank <br />Smarter and Live Better
           </h3>
 
           <p
             style={{
-              fontSize: "18px",
+              fontSize: "16px",
               fontWeight: 400,
               color: "#4b5563",
               lineHeight: 1.5,
               margin: 0,
+              marginBottom: "1.5rem",
             }}
           >
             At Girei, we empower individuals, businesses, and communities with
@@ -130,9 +138,7 @@ export default function AboutSection() {
                   <span style={{ color: "#111827" }}>{stat.number}</span>
                   <span style={{ color: "#29B909" }}>{stat.suffix}</span>
                 </div>
-                <div className="stat-label">
-                  {stat.label}
-                </div>
+                <div className="stat-label">{stat.label}</div>
               </div>
             ))}
           </div>
@@ -142,34 +148,40 @@ export default function AboutSection() {
       <style>{`
         .about-card {
           max-width: 900px;
-          margin: auto auto;
-          margin-bottom: 108px;
+          margin: 0 auto 108px;
           background: #fff;
           border-radius: 16px;
           box-shadow: 0 4px 32px rgba(0,0,0,0.08);
           overflow: visible;
           display: flex;
-          align-items: stretch;
-          min-height: 220px;
+          align-items: center;
+          padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+          gap: 0;
         }
         .about-image-col {
-          width: 240px;
+          /* Inset image — smaller than the card, not edge-to-edge */
+          width: 220px;
+          height: 240px;
           flex-shrink: 0;
+          position: relative;
+          margin-right: 1.5rem;
         }
         .about-content-col {
-          padding: 1.6rem 2rem 1.6rem 2.8rem;
+          padding: 0.4rem 1.8rem 0.4rem 1.2rem;
         }
         .about-stats-row {
           display: flex;
-          gap: 2.5rem;
+          gap: 4rem;
           align-items: flex-start;
+          justify-content:space-between;
+          marginTop: 1rem;
           flex-wrap: wrap;
         }
         .stat-value {
-          font-size: 1.25rem;
+          font-size: 1.5rem;
           font-weight: 900;
-          line-height: 0.5;
-          margin-bottom: 3px;
+          line-height: 1;
+          margin-bottom: 4px;
         }
         .stat-label {
           font-size: 0.65rem;
@@ -181,14 +193,16 @@ export default function AboutSection() {
           .about-card {
             flex-direction: column;
             margin-bottom: 60px;
+            padding: 1rem;
           }
           .about-image-col {
             width: 100%;
             height: 200px;
-            border-radius: 16px 16px 0 0;
+            margin-right: 0;
+            margin-bottom: 1.2rem;
           }
           .about-content-col {
-            padding: 1.4rem 1.2rem;
+            padding: 0.4rem 0.2rem;
           }
           .about-stats-row {
             gap: 0.5rem;
@@ -198,7 +212,6 @@ export default function AboutSection() {
           .stat-value {
             font-size: 1rem;
             margin-bottom: 8px;
-            line-height: 1;
           }
           .stat-item {
             display: flex;

@@ -149,7 +149,7 @@ export default function Hero() {
               className="hero-subtext"
               style={{
                 fontWeight: 400,
-                color: "#4b5563",
+                color: "#000",
                 lineHeight: 1.2,
                 marginBottom: "1rem",
                 marginTop: "1rem",
