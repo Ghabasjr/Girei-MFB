@@ -4,13 +4,25 @@ import { useState } from "react";
 
 const faqItems = [
   {
-    question: "Can I use my debit card to make payment",
-    answer: "Yes, you can make use of the covenant mfb debit card for payments on spotify and other payment websites that accept verve cards.",
+    question: " How do I open an account",
+    answer: "Visit any branch with valid ID, BVN, passport photos, and complete the account opening form successfully.",
   },
-  { question: "Can I use my debit card to make payment", answer: "Yes, you can make use of the covenant mfb debit card for payments on spotify and other payment websites that accept verve cards." },
-  { question: "Can I use my debit card to make payment", answer: "Yes, you can make use of the covenant mfb debit card for payments on spotify and other payment websites that accept verve cards." },
-  { question: "Can I use my debit card to make payment", answer: "Yes, you can make use of the covenant mfb debit card for payments on spotify and other payment websites that accept verve cards." },
-  { question: "Can I use my debit card to make payment", answer: "Yes, you can make use of the covenant mfb debit card for payments on spotify and other payment websites that accept verve cards." },
+  {
+    question: "What documents are required for account",
+    answer: "You need valid identification, BVN, passport photographs, and a recent utility bill for address verification purposes."
+  },
+  {
+    question: "How can I apply for loans",
+    answer: " Visit the bank, submit application, provide required documents, and undergo assessment before loan approval and disbursement process."
+  },
+  {
+    question: "What types of loans are available",
+    answer: " We offer business, agricultural, salary, education, and personal loans tailored to meet different customer financial needs."
+  },
+  {
+    question: "How long does loan approval take",
+    answer: " Loan approval depends on documentation, verification, and assessment, but processing is designed to be fast and efficient."
+  },
 ];
 
 export default function FAQ() {
