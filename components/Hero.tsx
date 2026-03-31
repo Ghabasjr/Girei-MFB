@@ -1,4 +1,30 @@
 "use client";
+import { useState, useEffect } from "react";
+
+const testimonials = [
+  {
+    name: "Kabir Sani",
+    role: "Business Owner",
+    avatar: "/Ellipse 68.png",
+    quote:
+      "As a business owner, Girei Microfinance Bank has assisted my growth reliably financially.",
+  },
+  {
+    name: "Amina Mohammed",
+    role: "Farmer",
+    avatar: "/Ellipse 69.png",
+    quote:
+      "Girei MFB gave me the loan I needed to expand my farm and improve my family's livelihood.",
+  },
+  {
+    name: "Ibrahim Yusuf",
+    role: "Civil Servant",
+    avatar: "/Ellipse 70.png",
+    quote:
+      "The savings plan at Girei Microfinance Bank has helped me build a solid financial safety net.",
+  },
+];
+
 export default function Hero() {
   const navItems = [
     "Loans & Credit Facilities",
@@ -7,6 +33,17 @@ export default function Hero() {
     "Community Development",
     "Digital & Electronic Banking",
   ];
+
+  const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setActiveSlide((prev) => (prev + 1) % testimonials.length);
+    }, 4000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const slide = testimonials[activeSlide];
 
   return (
     <>
@@ -29,11 +66,12 @@ export default function Hero() {
             <div
               className="inline-flex items-center gap-2 mb-5"
               style={{
-                background: "#fff",
+                background: "#f9fafb",
                 border: "1px solid #d1fae5",
                 borderRadius: "999px",
                 padding: "5px 14px 5px 10px",
                 width: "fit-content",
+                marginBottom: "1rem",
               }}
             >
               <span
@@ -56,7 +94,6 @@ export default function Hero() {
               className="hero-headline"
               style={{
                 fontWeight: 900,
-                // fontSize: "58px",
                 lineHeight: 1.15,
                 color: "#111827",
                 marginBottom: "1.1rem",
@@ -114,11 +151,10 @@ export default function Hero() {
                 fontWeight: 400,
                 color: "#4b5563",
                 lineHeight: 1.2,
-                marginBottom: "1.5rem",
+                marginBottom: "1rem",
               }}
             >
-              Girei Microfinance Bank Limited, formerly Girei Community
-              Bank, was established to empower the unbanked and under-banked by delivering reliable and inclusive financial services.
+              Girei Microfinance Bank Limited, formerly Girei Community Bank, was established to empower the unbanked and under-banked by delivering reliable and inclusive financial services.
             </p>
 
             {/* CTA */}
@@ -144,9 +180,7 @@ export default function Hero() {
           </div>
 
           {/* ── RIGHT PANEL ── */}
-          <div
-            className="hero-right relative overflow-hidden"
-          >
+          <div className="hero-right relative overflow-hidden">
             {/* Background photo */}
             <img
               src="/market.png"
@@ -170,54 +204,51 @@ export default function Hero() {
               }}
             />
 
-            {/* Testimonial card */}
+            {/* ── TESTIMONIAL CAROUSEL CARD ── */}
             <div
               className="hero-testimonial-card"
               style={{
                 position: "absolute",
-                bottom: "18%",
+                top: "50%",
                 left: "50%",
-                transform: "translateX(-50%)",
-                width: 290,
+                transform: "translate(-50%, -50%)",
+                width: "82%",
                 background: "#fff",
-                borderRadius: 16,
-                padding: "1rem 1.1rem",
-                boxShadow: "0 16px 48px rgba(0,0,0,0.22)",
+                borderRadius: 20,
+                padding: "1.4rem 1.6rem",
+                boxShadow: "0 20px 60px rgba(0,0,0,0.28)",
                 zIndex: 5,
+                overflow: "hidden",
               }}
             >
               {/* Header row */}
-              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 10 }}>
+              <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
                 {/* Avatar + name */}
-                <div style={{ display: "flex", alignItems: "center", gap: 9 }}>
-                  <div
+                <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
+                  <img
+                    src={slide.avatar}
+                    alt={slide.name}
                     style={{
-                      width: 36,
-                      height: 36,
+                      width: 58,
+                      height: 58,
                       borderRadius: "50%",
-                      display: "flex",
-                      alignItems: "center",
-                      justifyContent: "center",
-                      color: "#fff",
-                      fontWeight: 700,
-                      fontSize: "0.72rem",
+                      objectFit: "cover",
                       flexShrink: 0,
+                      border: "2px solid #e5e7eb",
                     }}
-                  >
-                    <img src="/Ellipse 68.png" alt="image" />
-                  </div>
+                  />
                   <div>
-                    <div style={{ fontSize: "0.72rem", fontWeight: 700, color: "#111827", lineHeight: 1.2 }}>
-                      Kabir Sani
+                    <div style={{ fontSize: "1rem", fontWeight: 700, color: "#111827", lineHeight: 1.3 }}>
+                      {slide.name}
                     </div>
-                    <div style={{ fontSize: "0.65rem", color: "#16a34a", fontWeight: 600 }}>
-                      Business Owner
+                    <div style={{ fontSize: "0.85rem", color: "#16a34a", fontWeight: 600 }}>
+                      {slide.role}
                     </div>
                   </div>
                 </div>
 
                 {/* Stacked avatars + 1k+ */}
-                <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
+                <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
                   <div style={{ display: "flex" }}>
                     {[
                       "/Ellipse 68.png",
@@ -229,34 +260,73 @@ export default function Hero() {
                         src={src}
                         alt={`avatar-${i}`}
                         style={{
-                          width: 22,
-                          height: 22,
+                          width: 30,
+                          height: 30,
                           borderRadius: "50%",
-                          border: "2px solid #fff",
-                          marginLeft: i === 0 ? 0 : -7,
+                          border: "2.5px solid #fff",
+                          marginLeft: i === 0 ? 0 : -10,
                           objectFit: "cover",
                         }}
                       />
                     ))}
                   </div>
-                  <span style={{ fontSize: "0.63rem", color: "#6b7280", fontWeight: 500, whiteSpace: "nowrap" }}>
+                  <span style={{ fontSize: "0.8rem", color: "#6b7280", fontWeight: 500, whiteSpace: "nowrap" }}>
                     1k+ Others
                   </span>
                 </div>
               </div>
 
-              {/* Quote */}
-              <p style={{ fontSize: "13px", color: "#000000", lineHeight: "14px", fontWeight: 500, fontStyle: "normal", margin: 0 }}>
-                As a business owner, Girei Microfinance Bank has assisted
-                my growth reliably financially.
-              </p>
-
-              {/* Slide indicators */}
-              <div style={{ display: "flex", gap: 5, marginTop: 10, alignItems: "center" }}>
-                <div style={{ width: 22, height: 5, borderRadius: 99, background: "#f59e0b" }} />
-                <div style={{ width: 8, height: 5, borderRadius: 99, background: "#f59e0b", opacity: 0.45 }} />
-                <div style={{ width: 8, height: 5, borderRadius: 99, background: "#f59e0b", opacity: 0.45 }} />
+              {/* Quote box */}
+              <div style={{
+                background: "#f9fafb",
+                border: "1px solid #e5e7eb",
+                borderRadius: 12,
+                padding: "0.9rem 1.1rem",
+              }}>
+                <p style={{ fontSize: "0.95rem", color: "#111827", lineHeight: 1.6, fontWeight: 500, margin: 0 }}>
+                  {slide.quote}
+                </p>
               </div>
+
+              {/* Bottom accent bar */}
+              <div
+                style={{
+                  height: 7,
+                  background: "#004C3F",
+                  margin: "0.8rem -1.6rem -1.4rem -1.6rem",
+                }}
+              />
+            </div>
+
+            {/* ── SLIDE INDICATORS (on background image, below card) ── */}
+            <div
+              style={{
+                position: "absolute",
+                bottom: "8%",
+                left: "20%",
+                transform: "translateX(-50%)",
+                display: "flex",
+                gap: 7,
+                alignItems: "center",
+                zIndex: 6,
+              }}
+            >
+              {testimonials.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => setActiveSlide(i)}
+                  style={{
+                    width: i === activeSlide ? 30 : 10,
+                    height: 6,
+                    borderRadius: 99,
+                    background: i === activeSlide ? "#fff" : "rgba(255,255,255,0.45)",
+                    border: "none",
+                    cursor: "pointer",
+                    padding: 0,
+                    transition: "width 0.35s ease, background 0.35s ease",
+                  }}
+                />
+              ))}
             </div>
           </div>
         </div>
@@ -321,8 +391,7 @@ export default function Hero() {
           line-height: 65px;
         }
         .hero-subtext {
-          font-size: 18px;
-          max-width: 370px;
+          font-size: 20px;
         }
         .hero-bottom-nav {
           background: #0b3d2e;
@@ -351,18 +420,18 @@ export default function Hero() {
             min-height: auto !important;
           }
           .hero-right {
-            min-height: 300px;
+            min-height: 360px;
           }
           .hero-headline {
             font-size: clamp(32px, 7vw, 52px);
             line-height: 1.15;
           }
           .hero-subtext {
-            font-size: clamp(15px, 2.5vw, 18px);
+            font-size: clamp(10px, 2.5vw, 15px);
             max-width: 100%;
           }
           .hero-testimonial-card {
-            width: 240px !important;
+            width: 88% !important;
           }
         }
 
@@ -374,7 +443,7 @@ export default function Hero() {
             font-size: clamp(26px, 8vw, 40px);
           }
           .hero-right {
-            min-height: 250px;
+            min-height: 300px;
           }
           .hero-testimonial-card {
             display: none;
