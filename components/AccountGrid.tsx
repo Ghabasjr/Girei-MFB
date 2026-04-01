@@ -255,7 +255,7 @@ function AccountCard({
             right: 12,
             background: account.tagColor,
             color: "#fff",
-            fontSize: "0.6rem",
+            fontSize: "15px",
             fontWeight: 700,
             padding: "2px 10px",
             borderRadius: 999,
@@ -267,7 +267,7 @@ function AccountCard({
 
         <h3
           style={{
-            fontSize: "0.85rem",
+            fontSize: "15px",
             fontWeight: 800,
             color: "#111827",
             marginBottom: "0.35rem",
@@ -279,7 +279,7 @@ function AccountCard({
         </h3>
         <p
           style={{
-            fontSize: "0.68rem",
+            fontSize: "15px",
             color: "#6b7280",
             lineHeight: 1.6,
             marginBottom: "0.65rem",
@@ -311,7 +311,7 @@ function AccountCard({
                   flexShrink: 0,
                 }}
               />
-              <span style={{ fontSize: "0.67rem", color: "#374151" }}>{f}</span>
+              <span style={{ fontSize: "15px", color: "#374151" }}>{f}</span>
             </li>
           ))}
         </ul>
@@ -351,15 +351,15 @@ export default function AccountsGrid() {
   return (
     <>
       <section style={{ background: "#fff", padding: "2rem 1rem 3rem" }}>
-          <div className="accounts-grid">
-            {accounts.map((account, i) => (
-              <AccountCard
-                key={i}
-                account={account}
-                onOpenModal={setSelectedAccount}
-              />
-            ))}
-          </div>
+        <div className="accounts-grid">
+          {accounts.map((account, i) => (
+            <AccountCard
+              key={i}
+              account={account}
+              onOpenModal={setSelectedAccount}
+            />
+          ))}
+        </div>
       </section>
 
       <AccountDetailModal
