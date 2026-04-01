@@ -2,9 +2,9 @@
 
 export default function BlogSection() {
   const posts = [
-    { id: 1, title: "Why people are opening account in GMBF", tag: "Savings & Current Account", image: "/Rectangle 3203.png" },
-    { id: 2, title: "Why people are opening account in GMBF", tag: "Savings & Current Account", image: "/Rectangle 3204.png" },
-    { id: 3, title: "Why people are opening account in GMBF", tag: "Savings & Current Account", image: "/Rectangle 3205.png" },
+    { id: 1, title: "Empowering communities through inclusive financial services", tag: "Savings & Current Account", image: "/Rectangle 3203.png" },
+    { id: 2, title: "Driving growth and opportunities across local communities", tag: "Savings & Current Account", image: "/Rectangle 3204.png" },
+    { id: 3, title: "Bringing banking closer to the people", tag: "Savings & Current Account", image: "/Rectangle 3205.png" },
   ];
 
   return (
