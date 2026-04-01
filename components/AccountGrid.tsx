@@ -444,7 +444,7 @@ function AccountCard({
           style={{
             position: "absolute",
             top: 12,
-            right: 12,
+            left: 20,
             background: account.tagColor,
             color: "#fff",
             fontSize: "15px",
@@ -459,7 +459,7 @@ function AccountCard({
 
         <h3
           style={{
-            fontSize: "15px",
+            fontSize: "18px",
             fontWeight: 800,
             color: "#111827",
             marginBottom: "0.35rem",
@@ -518,7 +518,7 @@ function AccountCard({
               background: "#29B909",
               color: "#fff",
               fontWeight: 700,
-              fontSize: "18px",
+              fontSize: "15px",
               padding: "0.5rem 0",
               borderRadius: 999,
               border: "none",
