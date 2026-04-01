@@ -2,13 +2,13 @@ import { Metadata } from "next";
 import Navbar from "@/components/Navbar";
 
 export const metadata: Metadata = {
-  title: "Loans & Credit | GIREI Microfinance Bank",
-  description:
-    "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank. Apply for personal, business, or agricultural loans.",
-  openGraph: {
     title: "Loans & Credit | GIREI Microfinance Bank",
-    description: "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank.",
-  }
+    description:
+        "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank. Apply for personal, business, or agricultural loans.",
+    openGraph: {
+        title: "Loans & Credit | GIREI Microfinance Bank",
+        description: "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank.",
+    }
 };
 
 import { MapPin, PhoneIcon, MailIcon } from "lucide-react";
@@ -231,17 +231,17 @@ export default function Loan() {
                                 {/* Address */}
                                 <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
                                     <MapPin size={12} color="#29B909" />
-                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Giei Pont 2, 100, Adamawa state, Nigeria</span>
+                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Girei Community Bank 9G5X+Q24, Girei 652108 Mubi Road, Adamawa State, Nigeria</span>
                                 </div>
                                 {/* Phone */}
                                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                                     <PhoneIcon size={12} color="#29B909" />
-                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>07011079676</span>
+                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>(+234) 000 000 000</span>
                                 </div>
                                 {/* Email */}
                                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                                     <MailIcon size={12} color="#29B909" />
-                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>gireibank@gmail.com</span>
+                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>info@gmfbank.com.ng</span>
                                 </div>
                             </div>
                         </div>
