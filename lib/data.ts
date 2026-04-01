@@ -1,7 +1,7 @@
 // ─── Navigation ────────────────────────────────────────────────────────────
 export const navLinks = [
   { label: "About Us", href: "#about", },
-  { label: "Products", href: "/aboutHero", },
+  { label: "Products", href: "#services", },
   { label: "Media", href: "/media" },
   { label: "Contact Us", href: "#contact" },
 ];

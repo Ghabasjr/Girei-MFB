@@ -3,6 +3,206 @@
 import { useState } from "react";
 import AccountDetailModal, { AccountDetail } from "./AccountDetailModal";
 
+const accountSVGs: Record<string, string> = {
+  "ADASHE": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#e6f9e0"/>
+    <circle cx="30" cy="36" r="8" fill="#29B909"/>
+    <path d="M18 56c0-7 5-11 12-11s12 4 12 11" fill="#004C3F"/>
+    <circle cx="60" cy="36" r="8" fill="#29B909"/>
+    <path d="M48 56c0-7 5-11 12-11s12 4 12 11" fill="#004C3F"/>
+    <circle cx="45" cy="30" r="8" fill="#22a006"/>
+    <path d="M33 52c0-7 5-11 12-11s12 4 12 11" fill="#003830"/>
+    <circle cx="45" cy="68" r="9" fill="#FFD700" stroke="#FFA500" stroke-width="1.5"/>
+    <text x="45" y="73" text-anchor="middle" font-size="10" fill="#7a5c00" font-weight="bold">₦</text>
+  </svg>`,
+
+  "Current Account Clubs": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#e0f0ff"/>
+    <rect x="20" y="50" width="50" height="25" rx="3" fill="#004C3F"/>
+    <rect x="28" y="42" width="34" height="12" rx="2" fill="#006655"/>
+    <polygon points="45,18 15,42 75,42" fill="#29B909"/>
+    <circle cx="37" cy="36" r="2.5" fill="#FFD700"/>
+    <circle cx="45" cy="30" r="2.5" fill="#FFD700"/>
+    <circle cx="53" cy="36" r="2.5" fill="#FFD700"/>
+    <rect x="39" y="60" width="12" height="15" rx="2" fill="#FFD700"/>
+  </svg>`,
+
+  "Current Account Corporate": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#eaf4ff"/>
+    <rect x="30" y="20" width="30" height="55" rx="3" fill="#004C3F"/>
+    <rect x="34" y="25" width="6" height="6" rx="1" fill="#7dd3fc"/>
+    <rect x="44" y="25" width="6" height="6" rx="1" fill="#7dd3fc"/>
+    <rect x="34" y="35" width="6" height="6" rx="1" fill="#7dd3fc"/>
+    <rect x="44" y="35" width="6" height="6" rx="1" fill="#7dd3fc"/>
+    <rect x="34" y="45" width="6" height="6" rx="1" fill="#29B909"/>
+    <rect x="44" y="45" width="6" height="6" rx="1" fill="#29B909"/>
+    <rect x="34" y="55" width="6" height="6" rx="1" fill="#7dd3fc"/>
+    <rect x="44" y="55" width="6" height="6" rx="1" fill="#7dd3fc"/>
+    <rect x="40" y="64" width="10" height="11" rx="1" fill="#FFD700"/>
+    <rect x="10" y="52" width="18" height="13" rx="3" fill="#29B909"/>
+    <rect x="14" y="49" width="10" height="5" rx="2" fill="#004C3F"/>
+  </svg>`,
+
+  "Current Account Individual": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#f0fdf4"/>
+    <circle cx="45" cy="28" r="12" fill="#29B909"/>
+    <path d="M25 70c0-11 9-18 20-18s20 7 20 18" fill="#004C3F"/>
+    <rect x="24" y="60" width="42" height="24" rx="4" fill="#004C3F"/>
+    <rect x="28" y="65" width="14" height="10" rx="2" fill="#FFD700"/>
+    <line x1="30" y1="79" x2="62" y2="79" stroke="#29B909" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+
+  "Current Account Staff": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#fef9e7"/>
+    <rect x="25" y="20" width="40" height="52" rx="5" fill="#004C3F"/>
+    <rect x="35" y="14" width="20" height="10" rx="5" fill="#29B909"/>
+    <circle cx="45" cy="40" r="10" fill="#e5e7eb"/>
+    <path d="M32 60c0-7 6-12 13-12s13 5 13 12" fill="#006655"/>
+    <rect x="33" y="64" width="24" height="4" rx="2" fill="#29B909"/>
+    <circle cx="62" cy="22" r="8" fill="#FFD700"/>
+    <text x="62" y="26" text-anchor="middle" font-size="10" fill="#7a5c00">★</text>
+  </svg>`,
+
+  "Long Term Deposit": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#fdf8e1"/>
+    <rect x="40" y="60" width="10" height="18" rx="2" fill="#8B5E3C"/>
+    <line x1="45" y1="60" x2="45" y2="30" stroke="#29B909" stroke-width="3"/>
+    <ellipse cx="35" cy="45" rx="12" ry="7" fill="#29B909" transform="rotate(-20 35 45)"/>
+    <ellipse cx="55" cy="38" rx="12" ry="7" fill="#22a006" transform="rotate(20 55 38)"/>
+    <ellipse cx="45" cy="28" rx="10" ry="7" fill="#004C3F"/>
+    <ellipse cx="45" cy="75" rx="16" ry="5" fill="#FFD700"/>
+    <ellipse cx="45" cy="72" rx="16" ry="5" fill="#FFC300"/>
+    <text x="45" y="75" text-anchor="middle" font-size="9" fill="#7a5c00" font-weight="bold">₦₦₦</text>
+  </svg>`,
+
+  "Current Account Micro Female": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#fce4f0"/>
+    <circle cx="45" cy="26" r="11" fill="#e91e8c"/>
+    <path d="M28 65c0-10 8-16 17-16s17 6 17 16" fill="#004C3F"/>
+    <path d="M33 49 Q45 75 57 49" fill="#e91e8c" opacity="0.6"/>
+    <rect x="58" y="52" width="18" height="13" rx="4" fill="#FFD700"/>
+    <path d="M62 52 Q67 46 72 52" stroke="#FFA500" stroke-width="2" fill="none"/>
+    <circle cx="22" cy="30" r="7" fill="#e91e8c" opacity="0.3"/>
+    <text x="22" y="34" text-anchor="middle" font-size="10" fill="#e91e8c">♀</text>
+  </svg>`,
+
+  "Current Account Micro Male": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#e8f4fd"/>
+    <circle cx="45" cy="26" r="11" fill="#1565C0"/>
+    <path d="M28 65c0-10 8-16 17-16s17 6 17 16" fill="#004C3F"/>
+    <rect x="36" y="49" width="18" height="14" rx="2" fill="#1565C0"/>
+    <rect x="43" y="49" width="4" height="14" fill="#fff" opacity="0.4"/>
+    <rect x="60" y="52" width="16" height="12" rx="3" fill="#004C3F"/>
+    <rect x="64" y="49" width="8" height="4" rx="2" fill="#006655"/>
+    <circle cx="20" cy="30" r="7" fill="#1565C0" opacity="0.2"/>
+    <text x="20" y="34" text-anchor="middle" font-size="10" fill="#1565C0">♂</text>
+  </svg>`,
+
+  "Mandatory Deposit Female": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#fce4f0"/>
+    <ellipse cx="45" cy="52" rx="22" ry="18" fill="#e91e8c" opacity="0.8"/>
+    <circle cx="60" cy="46" r="8" fill="#e91e8c"/>
+    <ellipse cx="24" cy="48" rx="5" ry="7" fill="#c2185b"/>
+    <circle cx="57" cy="44" r="2" fill="#fff"/>
+    <circle cx="57" cy="44" r="1" fill="#333"/>
+    <rect x="37" y="36" width="16" height="3" rx="1.5" fill="#333"/>
+    <circle cx="45" cy="29" r="7" fill="#FFD700"/>
+    <text x="45" y="33" text-anchor="middle" font-size="9" fill="#7a5c00" font-weight="bold">₦</text>
+    <rect x="32" y="67" width="6" height="10" rx="3" fill="#c2185b"/>
+    <rect x="42" y="67" width="6" height="10" rx="3" fill="#c2185b"/>
+    <rect x="52" y="67" width="6" height="10" rx="3" fill="#c2185b"/>
+  </svg>`,
+
+  "Mandatory Deposit Male": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#e8f4fd"/>
+    <ellipse cx="45" cy="52" rx="22" ry="18" fill="#1565C0" opacity="0.8"/>
+    <circle cx="60" cy="46" r="8" fill="#1565C0"/>
+    <ellipse cx="24" cy="48" rx="5" ry="7" fill="#0d47a1"/>
+    <circle cx="57" cy="44" r="2" fill="#fff"/>
+    <circle cx="57" cy="44" r="1" fill="#333"/>
+    <rect x="37" y="36" width="16" height="3" rx="1.5" fill="#333"/>
+    <circle cx="45" cy="29" r="7" fill="#FFD700"/>
+    <text x="45" y="33" text-anchor="middle" font-size="9" fill="#7a5c00" font-weight="bold">₦</text>
+    <rect x="32" y="67" width="6" height="10" rx="3" fill="#0d47a1"/>
+    <rect x="42" y="67" width="6" height="10" rx="3" fill="#0d47a1"/>
+    <rect x="52" y="67" width="6" height="10" rx="3" fill="#0d47a1"/>
+  </svg>`,
+
+  "Medium Term Deposit": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#e8fdf0"/>
+    <path d="M30 18 L60 18 L50 45 L30 45 Z" fill="#004C3F"/>
+    <path d="M50 45 L60 72 L30 72 L40 45 Z" fill="#29B909"/>
+    <rect x="27" y="15" width="36" height="5" rx="2" fill="#004C3F"/>
+    <rect x="27" y="70" width="36" height="5" rx="2" fill="#004C3F"/>
+    <circle cx="39" cy="62" r="4" fill="#FFD700"/>
+    <circle cx="51" cy="62" r="4" fill="#FFD700"/>
+    <circle cx="45" cy="57" r="4" fill="#FFC300"/>
+  </svg>`,
+
+  "Savings Account Non-Interest": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#f0fdf4"/>
+    <path d="M55 22 A22 22 0 1 0 55 68 A14 14 0 1 1 55 22Z" fill="#004C3F"/>
+    <polygon points="68,35 70,41 76,41 71,45 73,51 68,47 63,51 65,45 60,41 66,41" fill="#FFD700"/>
+    <rect x="22" y="58" width="30" height="22" rx="4" fill="#29B909"/>
+    <circle cx="37" cy="69" r="6" fill="#004C3F"/>
+    <circle cx="37" cy="69" r="3" fill="#29B909"/>
+    <rect x="48" y="64" width="4" height="10" rx="1" fill="#004C3F"/>
+  </svg>`,
+
+  "Savings Account Clubs": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#f3e5f5"/>
+    <rect x="38" y="62" width="14" height="6" rx="2" fill="#8B5E3C"/>
+    <rect x="31" y="68" width="28" height="5" rx="2" fill="#6D4C41"/>
+    <path d="M30 28 L60 28 L56 55 Q45 62 34 55 Z" fill="#FFD700"/>
+    <path d="M20 30 Q22 48 30 50 L34 42 Q28 40 28 30Z" fill="#FFC300"/>
+    <path d="M70 30 Q68 48 60 50 L56 42 Q62 40 62 30Z" fill="#FFC300"/>
+    <polygon points="45,34 47,40 53,40 48,44 50,50 45,46 40,50 42,44 37,40 43,40" fill="#fff" opacity="0.8"/>
+  </svg>`,
+
+  "Savings Account Corporate": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#e8f5e9"/>
+    <rect x="18" y="22" width="54" height="50" rx="6" fill="#004C3F"/>
+    <rect x="23" y="27" width="44" height="40" rx="4" fill="#006655"/>
+    <circle cx="45" cy="47" r="14" fill="#004C3F" stroke="#29B909" stroke-width="2"/>
+    <circle cx="45" cy="47" r="8" fill="#003830"/>
+    <circle cx="45" cy="47" r="3" fill="#FFD700"/>
+    <line x1="45" y1="34" x2="45" y2="37" stroke="#29B909" stroke-width="1.5"/>
+    <line x1="45" y1="57" x2="45" y2="60" stroke="#29B909" stroke-width="1.5"/>
+    <line x1="32" y1="47" x2="35" y2="47" stroke="#29B909" stroke-width="1.5"/>
+    <line x1="55" y1="47" x2="58" y2="47" stroke="#29B909" stroke-width="1.5"/>
+    <rect x="58" y="44" width="10" height="6" rx="3" fill="#FFD700"/>
+  </svg>`,
+
+  "Short Term Deposit": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#fff8e1"/>
+    <path d="M45 15 Q58 28 58 50 L45 58 L32 50 Q32 28 45 15Z" fill="#004C3F"/>
+    <path d="M45 15 Q52 28 52 50 L45 58 L38 50 Q38 28 45 15Z" fill="#29B909"/>
+    <circle cx="45" cy="36" r="5" fill="#7dd3fc"/>
+    <path d="M38 58 Q33 68 40 72 Q38 63 45 62 Q52 63 50 72 Q57 68 52 58" fill="#FF6B00"/>
+    <path d="M40 58 Q37 65 42 68 Q41 62 45 62 Q49 62 48 68 Q53 65 50 58" fill="#FFD700"/>
+    <line x1="62" y1="36" x2="72" y2="36" stroke="#29B909" stroke-width="2" stroke-linecap="round"/>
+    <line x1="64" y1="44" x2="72" y2="44" stroke="#29B909" stroke-width="2" stroke-linecap="round"/>
+    <line x1="62" y1="52" x2="70" y2="52" stroke="#29B909" stroke-width="2" stroke-linecap="round"/>
+  </svg>`,
+
+  "Savings Account Individual": `<svg viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="45" cy="45" r="42" fill="#f0fdf4"/>
+    <ellipse cx="45" cy="56" rx="24" ry="20" fill="#29B909"/>
+    <ellipse cx="45" cy="36" rx="10" ry="8" fill="#22a006"/>
+    <rect x="39" y="29" width="12" height="3" rx="1.5" fill="#004C3F"/>
+    <circle cx="53" cy="54" r="2.5" fill="#fff"/>
+    <circle cx="53" cy="54" r="1.2" fill="#222"/>
+    <ellipse cx="60" cy="58" rx="5" ry="4" fill="#22a006"/>
+    <circle cx="58.5" cy="57" r="1" fill="#004C3F"/>
+    <circle cx="61.5" cy="57" r="1" fill="#004C3F"/>
+    <ellipse cx="40" cy="32" rx="5" ry="6" fill="#22a006" transform="rotate(-10 40 32)"/>
+    <rect x="30" y="73" width="7" height="8" rx="3.5" fill="#22a006"/>
+    <rect x="40" y="73" width="7" height="8" rx="3.5" fill="#22a006"/>
+    <rect x="50" y="73" width="7" height="8" rx="3.5" fill="#22a006"/>
+    <path d="M21 52 Q14 48 18 42 Q22 36 19 30" stroke="#22a006" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  </svg>`,
+};
+
 const accounts: (AccountDetail & {
   tag: string;
   tagColor: string;
@@ -25,6 +225,7 @@ const accounts: (AccountDetail & {
     {
       tag: "Current",
       tagColor: "#004C3F",
+      // image: "/current-account.png",
       title: "Current Account Clubs",
       desc: "Popular current account designed for registered social groups and associations.",
       features: ["Multiple signatories allowed", "Easy fund management", "Mobile access", "Track payment records"],
@@ -223,27 +424,18 @@ function AccountCard({
         position: "relative",
       }}
     >
-      {/* LEFT: coin jar image */}
+      {/* LEFT: unique SVG illustration per account */}
       <div
         style={{
           width: 120,
           flexShrink: 0,
-          position: "relative",
-          overflow: "hidden",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          padding: "0.5rem",
         }}
-      >
-        <img
-          src="/coin-jar.png"
-          alt="Savings jar"
-          style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center",
-            display: "block",
-          }}
-        />
-      </div>
+        dangerouslySetInnerHTML={{ __html: accountSVGs[account.title] ?? accountSVGs["Savings Account Individual"] }}
+      />
 
       {/* RIGHT: text + button */}
       <div style={{ flex: 1, padding: "1.1rem 1.1rem 1.1rem", display: "flex", flexDirection: "column" }}>
@@ -326,7 +518,7 @@ function AccountCard({
               background: "#29B909",
               color: "#fff",
               fontWeight: 700,
-              fontSize: "0.72rem",
+              fontSize: "18px",
               padding: "0.5rem 0",
               borderRadius: 999,
               border: "none",

@@ -4,17 +4,19 @@ import React, { useState } from "react";
 
 function ATMModal({ onClose }: { onClose: () => void }) {
   return (
-    <div style={{
-      position: 'fixed',
-      inset: 0,
-      background: 'rgba(0,0,0,0.6)',
-      backdropFilter: 'blur(4px)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      zIndex: 10000,
-      padding: '1.5rem'
-    }} onClick={onClose}>
+    <div
+      id="services"
+      style={{
+        position: 'fixed',
+        inset: 0,
+        background: 'rgba(0,0,0,0.6)',
+        backdropFilter: 'blur(4px)',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        zIndex: 10000,
+        padding: '1.5rem'
+      }} onClick={onClose}>
       <div style={{
         background: '#fff',
         padding: '2.5rem 2rem',
