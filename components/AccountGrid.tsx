@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import AccountDetailModal, { AccountDetail } from "./AccountDetailModal";
 
 const accountSVGs: Record<string, string> = {
@@ -225,7 +225,6 @@ const accounts: (AccountDetail & {
     {
       tag: "Current",
       tagColor: "#004C3F",
-      // image: "/current-account.png",
       title: "Current Account Clubs",
       desc: "Popular current account designed for registered social groups and associations.",
       features: ["Multiple signatories allowed", "Easy fund management", "Mobile access", "Track payment records"],
@@ -408,52 +407,46 @@ const accounts: (AccountDetail & {
 function AccountCard({
   account,
   onOpenModal,
+  animIndex,
 }: {
   account: typeof accounts[0];
   onOpenModal: (account: AccountDetail) => void;
+  animIndex: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("ac-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      style={{
-        background: "#fff",
-        borderRadius: 16,
-        overflow: "hidden",
-        border: "1px solid #e5e7eb",
-        boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-        display: "flex",
-        position: "relative",
-      }}
+      ref={ref}
+      className="ac-card"
+      style={{ "--ac-delay": `${animIndex * 60}ms` } as React.CSSProperties}
     >
       {/* LEFT: unique SVG illustration per account */}
       <div
-        style={{
-          width: 120,
-          flexShrink: 0,
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          padding: "0.5rem",
-        }}
+        className="ac-svg-wrap"
         dangerouslySetInnerHTML={{ __html: accountSVGs[account.title] ?? accountSVGs["Savings Account Individual"] }}
       />
 
       {/* RIGHT: text + button */}
       <div style={{ flex: 1, padding: "1.1rem 1.1rem 1.1rem", display: "flex", flexDirection: "column" }}>
-        {/* Tag top-right */}
-        <div
-          style={{
-            position: "absolute",
-            top: 12,
-            left: 20,
-            background: account.tagColor,
-            color: "#fff",
-            fontSize: "15px",
-            fontWeight: 700,
-            padding: "2px 10px",
-            borderRadius: 999,
-            zIndex: 2,
-          }}
-        >
+        {/* Tag */}
+        <div className="ac-tag">
           {account.tag}
         </div>
 
@@ -511,23 +504,8 @@ function AccountCard({
         {/* Open Account Button */}
         <div style={{ marginTop: "0.85rem" }}>
           <button
+            className="ac-btn"
             onClick={() => onOpenModal(account)}
-            style={{
-              display: "block",
-              width: "100%",
-              background: "#29B909",
-              color: "#fff",
-              fontWeight: 700,
-              fontSize: "15px",
-              padding: "0.5rem 0",
-              borderRadius: 999,
-              border: "none",
-              cursor: "pointer",
-              textAlign: "center",
-              transition: "background 0.2s",
-            }}
-            onMouseEnter={(e) => { e.currentTarget.style.background = "#22a006"; }}
-            onMouseLeave={(e) => { e.currentTarget.style.background = "#29B909"; }}
           >
             {account.btn}
           </button>
@@ -549,6 +527,7 @@ export default function AccountsGrid() {
               key={i}
               account={account}
               onOpenModal={setSelectedAccount}
+              animIndex={i}
             />
           ))}
         </div>
@@ -560,20 +539,140 @@ export default function AccountsGrid() {
       />
 
       <style>{`
+        /* ── Grid layout ── */
         .accounts-grid {
           display: grid;
           grid-template-columns: 1fr 1fr 1fr;
           gap: 1.25rem;
         }
         @media (max-width: 900px) {
-          .accounts-grid {
-            grid-template-columns: 1fr 1fr;
-          }
+          .accounts-grid { grid-template-columns: 1fr 1fr; }
         }
         @media (max-width: 600px) {
-          .accounts-grid {
-            grid-template-columns: 1fr;
-          }
+          .accounts-grid { grid-template-columns: 1fr; }
+        }
+
+        /* ── Card base (hidden before scroll) ── */
+        .ac-card {
+          background: #fff;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid #e5e7eb;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+          display: flex;
+          position: relative;
+          opacity: 0;
+          transform: translateY(36px);
+          transition:
+            opacity 0.55s ease var(--ac-delay, 0ms),
+            transform 0.55s cubic-bezier(.22,.68,0,1.2) var(--ac-delay, 0ms),
+            box-shadow 0.28s ease,
+            border-color 0.28s ease;
+          will-change: opacity, transform;
+        }
+
+        /* ── Visible state (added by IntersectionObserver) ── */
+        .ac-card.ac-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* ── Hover: lift + green glow shadow ── */
+        .ac-card:hover {
+          box-shadow:
+            0 8px 32px rgba(41,185,9,0.15),
+            0 2px 8px rgba(0,0,0,0.08);
+          border-color: #c3f5b0;
+          transform: translateY(-5px);
+        }
+        /* Don't override the entry animation when not yet visible */
+        .ac-card:not(.ac-visible):hover {
+          transform: translateY(36px);
+        }
+        .ac-card.ac-visible:hover {
+          transform: translateY(-5px);
+        }
+
+        /* ── SVG illustration ── */
+        .ac-svg-wrap {
+          width: 120px;
+          flex-shrink: 0;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 0.5rem;
+          transition: transform 0.35s cubic-bezier(.22,.68,0,1.3);
+        }
+        .ac-card:hover .ac-svg-wrap {
+          transform: scale(1.1) rotate(-2deg);
+        }
+
+        /* ── Tag pill ── */
+        .ac-tag {
+          position: absolute;
+          top: 12px;
+          left: 20px;
+          background: #004C3F;
+          color: #fff;
+          font-size: 13px;
+          font-weight: 700;
+          padding: 2px 10px;
+          border-radius: 999px;
+          z-index: 2;
+          transition: transform 0.25s ease, background 0.25s ease;
+        }
+        .ac-card:hover .ac-tag {
+          background: #29B909;
+          transform: scale(1.08);
+        }
+
+        /* ── Open Account button with shimmer ── */
+        .ac-btn {
+          display: block;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+          background: #29B909;
+          color: #fff;
+          font-weight: 700;
+          font-size: 15px;
+          padding: 0.5rem 0;
+          border-radius: 999px;
+          border: none;
+          cursor: pointer;
+          text-align: center;
+          transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .ac-btn::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 60%;
+          height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+          transition: left 0.45s ease;
+        }
+        .ac-btn:hover::after {
+          left: 150%;
+        }
+        .ac-btn:hover {
+          background: #22a006;
+          transform: scale(1.03);
+          box-shadow: 0 4px 16px rgba(41,185,9,0.35);
+        }
+        .ac-btn:active {
+          transform: scale(0.97);
+        }
+
+        /* ── Feature dot pulse on hover ── */
+        @keyframes ac-dot-pop {
+          0%   { transform: scale(1); }
+          50%  { transform: scale(1.7); }
+          100% { transform: scale(1); }
+        }
+        .ac-card:hover li span:first-child {
+          animation: ac-dot-pop 0.4s ease;
         }
       `}</style>
     </>
