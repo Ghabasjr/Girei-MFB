@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import LoanDetailModal, { LoanDetail } from "./LoanDetailModal";
 
 const loans: (LoanDetail & {
@@ -193,26 +193,44 @@ const loans: (LoanDetail & {
 function LoanCard({
   loan,
   onOpenModal,
+  animIndex,
 }: {
   loan: typeof loans[0];
   onOpenModal: (loan: LoanDetail) => void;
+  animIndex: number;
 }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("lc-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
-      style={{
-        background: "#fff",
-        borderRadius: 16,
-        overflow: "hidden",
-        border: "1px solid #e5e7eb",
-        display: "flex",
-        flexDirection: "column",
-      }}
+      ref={ref}
+      className="lc-card"
+      style={{ "--lc-delay": `${animIndex * 50}ms` } as React.CSSProperties}
     >
-      <img
-        src={loan.image}
-        alt={loan.title}
-        style={{ width: "100%", height: 180, objectFit: "cover", display: "block" }}
-      />
+      <div className="lc-img-wrap" style={{ overflow: "hidden", height: 180 }}>
+        <img
+          src={loan.image}
+          alt={loan.title}
+          className="lc-img"
+          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
+      </div>
       <div
         style={{
           padding: "18px 18px 20px",
@@ -239,32 +257,22 @@ function LoanCard({
           {loan.features.map((feature, j) => (
             <div
               key={j}
+              className="feature-row"
               style={{ display: "flex", alignItems: "center", gap: 8, fontSize: 12.5, color: "#374151" }}
             >
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style={{ flexShrink: 0 }}>
-                <circle cx="8" cy="8" r="8" fill="#29B909" fillOpacity="0.15" />
-                <path d="M5 8l2 2 4-4" stroke="#29B909" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
+              <span className="dot-anim-wrap" style={{ display: "inline-flex", flexShrink: 0 }}>
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                  <circle cx="8" cy="8" r="8" fill="#29B909" fillOpacity="0.15" />
+                  <path d="M5 8l2 2 4-4" stroke="#29B909" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </span>
               {feature}
             </div>
           ))}
         </div>
         <button
+          className="lc-btn"
           onClick={() => onOpenModal(loan)}
-          style={{
-            width: "100%",
-            background: "#29B909",
-            color: "#fff",
-            border: "none",
-            borderRadius: 999,
-            padding: "12px 0",
-            fontSize: 14,
-            fontWeight: 600,
-            cursor: "pointer",
-            transition: "background 0.2s",
-          }}
-          onMouseEnter={(e) => { e.currentTarget.style.background = "#22a006"; }}
-          onMouseLeave={(e) => { e.currentTarget.style.background = "#29B909"; }}
         >
           Apply For Loan
         </button>
@@ -313,7 +321,7 @@ export default function LoanSection() {
         {/* Cards Grid */}
         <div className="loan-grid">
           {loans.map((loan, i) => (
-            <LoanCard key={i} loan={loan} onOpenModal={setSelectedLoan} />
+            <LoanCard key={i} loan={loan} onOpenModal={setSelectedLoan} animIndex={i} />
           ))}
         </div>
       </div>
@@ -340,6 +348,104 @@ export default function LoanSection() {
           .loan-heading-br {
             display: none;
           }
+        }
+
+        /* ── Card base (hidden before scroll) ── */
+        .lc-card {
+          background: #fff;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid #e5e7eb;
+          display: flex;
+          flex-direction: column;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+          position: relative;
+          opacity: 0;
+          transform: translateY(36px);
+          transition:
+            opacity 0.55s ease var(--lc-delay, 0ms),
+            transform 0.55s cubic-bezier(.22,.68,0,1.2) var(--lc-delay, 0ms),
+            box-shadow 0.28s ease,
+            border-color 0.28s ease;
+          will-change: opacity, transform;
+        }
+
+        /* ── Visible state (added by IntersectionObserver) ── */
+        .lc-card.lc-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* ── Hover: lift + green glow shadow ── */
+        .lc-card:hover {
+          box-shadow:
+            0 8px 32px rgba(41,185,9,0.15),
+            0 2px 8px rgba(0,0,0,0.08);
+          border-color: #c3f5b0;
+          transform: translateY(-5px);
+        }
+        .lc-card:not(.lc-visible):hover {
+          transform: translateY(36px);
+        }
+        .lc-card.lc-visible:hover {
+          transform: translateY(-5px);
+        }
+
+        /* ── Image scaling on hover ── */
+        .lc-img {
+          transition: transform 0.4s ease;
+        }
+        .lc-card:hover .lc-img {
+          transform: scale(1.05);
+        }
+
+        /* ── Open Account button with shimmer ── */
+        .lc-btn {
+          display: block;
+          width: 100%;
+          position: relative;
+          overflow: hidden;
+          background: #29B909;
+          color: #fff;
+          font-weight: 600;
+          font-size: 14px;
+          padding: 12px 0;
+          border-radius: 999px;
+          border: none;
+          cursor: pointer;
+          text-align: center;
+          transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .lc-btn::after {
+          content: "";
+          position: absolute;
+          top: 0;
+          left: -100%;
+          width: 60%;
+          height: 100%;
+          background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+          transition: left 0.45s ease;
+        }
+        .lc-btn:hover::after {
+          left: 150%;
+        }
+        .lc-btn:hover {
+          background: #22a006;
+          transform: scale(1.03);
+          box-shadow: 0 4px 16px rgba(41,185,9,0.35);
+        }
+        .lc-btn:active {
+          transform: scale(0.97);
+        }
+        
+        /* ── Feature dot pulse on hover ── */
+        @keyframes lc-dot-pop {
+          0%   { transform: scale(1); }
+          50%  { transform: scale(1.7); }
+          100% { transform: scale(1); }
+        }
+        .lc-card:hover .feature-row .dot-anim-wrap {
+          animation: lc-dot-pop 0.4s ease;
         }
       `}</style>
     </>
