@@ -1,5 +1,7 @@
 "use client";
 
+import { useEffect, useRef } from "react";
+
 const cards = [
   {
     iconBg: "#FEE8D6",
@@ -76,57 +78,35 @@ const cards = [
   },
 ];
 
-// function DoubleCRow() {
-//   return (
-//     <div style={{ display: "flex", alignItems: "center", gap: 3 }}>
-//       <div
-//         style={{
-//           width: 46,
-//           height: 46,
-//           borderRadius: "50%",
-//           border: "8px solid #04B879",
-//           borderRight: "8px solid transparent",
-//           borderBottom: "8px solid transparent",
-//           transform: "rotate(45deg)",
-//           flexShrink: 0,
-//         }}
-//       />
-//       <div
-//         style={{
-//           width: 22,
-//           height: 22,
-//           borderRadius: "50%",
-//           border: "5px solid #04B879",
-//           borderRight: "5px solid transparent",
-//           borderBottom: "5px solid transparent",
-//           transform: "rotate(45deg)",
-//           flexShrink: 0,
-//         }}
-//       />
-//     </div>
-//   );
-// }
-
-// function ArcColumn() {
-//   return (
-//     <div
-//       className="arc-column"
-//       style={{
-//         display: "flex",
-//         flexDirection: "column",
-//         gap: "14px",
-//         padding: "1.5rem 0.75rem",
-//         justifyContent: "center",
-//       }}
-//     >
-//       {Array.from({ length: 7 }).map((_, i) => (
-//         <DoubleCRow key={i} />
-//       ))}
-//     </div>
-//   );
-// }
-
 export default function WhoWeServe() {
+  const headingRef = useRef<HTMLDivElement>(null);
+  const cardRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    const observe = (el: HTMLElement | null, cls: string, delay = 0) => {
+      if (!el) return;
+      el.style.setProperty("--wws-delay", `${delay}ms`);
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.classList.add(cls);
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.12 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    };
+
+    observe(headingRef.current, "wws-heading-visible", 0);
+    cardRefs.current.forEach((el, i) => observe(el, "wws-card-visible", i * 80));
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   return (
     <section
       className="whoweserve-wrapper"
@@ -137,84 +117,95 @@ export default function WhoWeServe() {
         overflow: "hidden",
       }}
     >
-      <div style={{ display: "flex", alignItems: "stretch" }}>
-        {/* Left decorative double-C arcs */}
-        {/* <div style={{ flexShrink: 0 }}>
-          <ArcColumn />
-        </div> */}
+      <div style={{ flex: 1, padding: "0 1rem" }}>
 
-        {/* Main content */}
-        <div style={{ flex: 1, padding: "0 1rem" }}>
-          {/* Heading */}
-          <div style={{ textAlign: "center", marginBottom: "2.5rem" }}>
-            <h2
-              style={{
-                fontSize: "clamp(1.5rem, 4vw, 2rem)",
-                fontWeight: 800,
-                color: "#fff",
-                marginBottom: "0.5rem",
-              }}
-            >
-              Who We Serve
-            </h2>
-            <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
-              We serve different customers across the globe
-            </p>
-          </div>
-
-          {/* Cards grid */}
-          <div className="who-we-serve-grid">
-            {cards.map((card) => (
-              <div
-                key={card.title}
-                style={{
-                  background: "#fff",
-                  borderRadius: 16,
-                  padding: "1.5rem",
-                  boxShadow: "0 4px 20px rgba(0,0,0,0.15)",
-                }}
-              >
-                {/* Icon */}
-                <div
-                  style={{
-                    width: 48,
-                    height: 48,
-                    borderRadius: 12,
-                    background: card.iconBg,
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    marginBottom: "1rem",
-                  }}
-                >
-                  {card.icon}
-                </div>
-                <div
-                  style={{
-                    fontSize: "0.92rem",
-                    fontWeight: 700,
-                    color: "#111827",
-                    marginBottom: "0.4rem",
-                    lineHeight: 1.3,
-                  }}
-                >
-                  {card.title}
-                </div>
-                <div style={{ fontSize: "0.95rem", color: "#9ca3af", lineHeight: 1.5 }}>
-                  {card.desc}
-                </div>
-              </div>
-            ))}
-          </div>
+        {/* Heading */}
+        <div ref={headingRef} className="wws-heading" style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+          <h2 style={{
+            fontSize: "clamp(1.5rem, 4vw, 2rem)",
+            fontWeight: 800, color: "#fff", marginBottom: "0.5rem",
+          }}>
+            Who We Serve
+          </h2>
+          <p style={{ fontSize: "0.88rem", color: "rgba(255,255,255,0.85)", margin: 0 }}>
+            We serve different customers across the globe
+          </p>
         </div>
 
-        {/* Right decorative double-C arcs */}
-        {/* <div style={{ flexShrink: 0 }}>
-          <ArcColumn />
-        </div> */}
+        {/* Cards grid */}
+        <div className="who-we-serve-grid">
+          {cards.map((card, i) => (
+            <div
+              key={card.title}
+              ref={(el) => { cardRefs.current[i] = el; }}
+              className="wws-card"
+              style={{ "--wws-delay": `${i * 80}ms` } as React.CSSProperties}
+            >
+              {/* Icon */}
+              <div style={{
+                width: 48, height: 48, borderRadius: 12,
+                background: card.iconBg,
+                display: "flex", alignItems: "center",
+                justifyContent: "center", marginBottom: "1rem",
+              }}>
+                {card.icon}
+              </div>
+              <div style={{
+                fontSize: "0.92rem", fontWeight: 700,
+                color: "#111827", marginBottom: "0.4rem", lineHeight: 1.3,
+              }}>
+                {card.title}
+              </div>
+              <div style={{ fontSize: "0.95rem", color: "#9ca3af", lineHeight: 1.5 }}>
+                {card.desc}
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
 
       <style>{`
+        /* ── Heading: fade + slide down ── */
+        .wws-heading {
+          opacity: 0;
+          transform: translateY(-24px);
+          transition:
+            opacity 0.6s ease var(--wws-delay, 0ms),
+            transform 0.6s cubic-bezier(.22,.68,0,1.2) var(--wws-delay, 0ms);
+          will-change: opacity, transform;
+        }
+        .wws-heading.wws-heading-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* ── Cards: fade + slide up ── */
+        .wws-card {
+          background: #fff;
+          border-radius: 16px;
+          padding: 1.5rem;
+          box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+          opacity: 0;
+          transform: translateY(36px) scale(0.96);
+          transition:
+            opacity 0.5s ease var(--wws-delay, 0ms),
+            transform 0.5s cubic-bezier(.22,.68,0,1.25) var(--wws-delay, 0ms),
+            box-shadow 0.28s ease,
+            border-color 0.28s ease;
+          will-change: opacity, transform;
+        }
+        .wws-card.wws-card-visible {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
+        /* ── Card hover ── */
+        .wws-card.wws-card-visible:hover {
+          transform: translateY(-5px) scale(1.02);
+          box-shadow: 0 12px 32px rgba(0,0,0,0.18);
+        }
+
+        /* ── Grid layout ── */
         .who-we-serve-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
@@ -222,20 +213,15 @@ export default function WhoWeServe() {
           max-width: 860px;
           margin: 0 auto;
         }
-        .arc-column {
-          display: flex;
-        }
         @media (max-width: 860px) {
-          .who-we-serve-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+          .who-we-serve-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 560px) {
-          .who-we-serve-grid {
-            grid-template-columns: 1fr;
-          }
-          .arc-column {
-            display: none;
+          .who-we-serve-grid { grid-template-columns: 1fr; }
+          /* Faster, no stagger on mobile single column */
+          .wws-card {
+            --wws-delay: 0ms !important;
+            transform: translateY(20px) scale(0.97);
           }
         }
         @media (max-width: 768px) {

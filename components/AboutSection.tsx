@@ -1,85 +1,76 @@
+"use client";
+
+import { useEffect, useRef } from "react";
+
 export default function AboutSection() {
+  const cardRef = useRef<HTMLDivElement>(null);
+  const imageRef = useRef<HTMLDivElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
+  const statRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    const observers: IntersectionObserver[] = [];
+
+    const observe = (el: HTMLElement | null, cls: string, delay = 0) => {
+      if (!el) return;
+      el.style.setProperty("--anim-delay", `${delay}ms`);
+      const obs = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            el.classList.add(cls);
+            obs.disconnect();
+          }
+        },
+        { threshold: 0.15 }
+      );
+      obs.observe(el);
+      observers.push(obs);
+    };
+
+    observe(imageRef.current, "ab-img-visible", 0);
+    observe(contentRef.current, "ab-content-visible", 150);
+    statRefs.current.forEach((el, i) => observe(el, "ab-stat-visible", 300 + i * 100));
+
+    return () => observers.forEach((o) => o.disconnect());
+  }, []);
+
   return (
-    <section
-      id="about"
-      style={{
-        background: "#f7f8f9",
-        padding: "2rem 1.5rem 2rem",
-      }}
-    >
-      {/* Section heading */}
-      {/* <h2
-        style={{
-          textAlign: "center",
-          fontSize: "clamp(1rem, 3vw, 2rem)",
-          fontWeight: 900,
-          color: "#111827",
-          marginBottom: "2.5rem",
-        }}
-      >
-        Learn More About Who We Are
-      </h2> */}
+    <section id="about" style={{ background: "#f7f8f9", padding: "2rem 1.5rem 2rem" }}>
+      <div className="about-card" ref={cardRef}>
 
-      {/* Card */}
-      <div className="about-card">
-
-        {/* LEFT: Image inset inside the card */}
-        <div className="about-image-col">
-          <div
-            style={{
-              position: "relative",
-              width: "100%",
-              height: "100%",
-              overflow: "visible",
-              zIndex: 10,
-            }}
-          >
+        {/* LEFT: Image */}
+        <div className="about-image-col ab-img" ref={imageRef}>
+          <div style={{ position: "relative", width: "100%", height: "100%", overflow: "visible", zIndex: 10 }}>
             <img
               src="/arewa.png"
               alt="Business professional"
               style={{
-                width: "100%",
-                height: "100%",
-                objectFit: "cover",
-                objectPosition: "center top",
-                display: "block",
-                borderRadius: 12,
+                width: "100%", height: "100%",
+                objectFit: "cover", objectPosition: "center top",
+                display: "block", borderRadius: 12,
               }}
             />
-
             {/* Customer Satisfaction overlay */}
-            <div
-              style={{
-                position: "absolute",
-                bottom: 16,
-                right: -30,
-                background: "#fff",
-                borderRadius: 12,
-                padding: "0.4rem 0.6rem 0.5rem",
-                boxShadow: "0 6px 20px rgba(0,0,0,0.13)",
-                minWidth: 90,
-                zIndex: 10,
-              }}
-            >
+            <div style={{
+              position: "absolute", bottom: 16, right: -30,
+              background: "#fff", borderRadius: 12,
+              padding: "0.4rem 0.6rem 0.5rem",
+              boxShadow: "0 6px 20px rgba(0,0,0,0.13)",
+              minWidth: 90, zIndex: 10,
+            }}>
               <div style={{ fontSize: "0.55rem", color: "#6b7280", fontWeight: 500, marginBottom: 2 }}>
                 Customer Satisfaction
               </div>
-              <div style={{
-                fontSize: "1.3rem", fontWeight: 900, color: "#29B909", lineHeight: 1.1, marginBottom: 4
-              }}>
+              <div style={{ fontSize: "1.3rem", fontWeight: 900, color: "#29B909", lineHeight: 1.1, marginBottom: 4 }}>
                 99%
               </div>
               <div style={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
                 {[10, 16, 22, 28, 35, 43].map((h, i) => (
-                  <div
-                    key={i}
-                    style={{
-                      width: "14px",
-                      height: h,
-                      background: "#29B909",
-                      borderRadius: "10px 10px 6px 6px",
-                    }}
-                  />
+                  <div key={i} style={{
+                    width: "14px", height: h,
+                    background: "#29B909",
+                    borderRadius: "10px 10px 6px 6px",
+                  }} />
                 ))}
               </div>
             </div>
@@ -88,38 +79,21 @@ export default function AboutSection() {
 
         {/* RIGHT: Content */}
         <div
-          className="about-content-col"
-          style={{
-            flex: 1,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            gap: "1rem",
-          }}
+          className="about-content-col ab-content"
+          ref={contentRef}
+          style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "1rem" }}
         >
-          <h3
-            style={{
-              fontSize: "clamp(1.2rem, 2.6vw, 1.3rem)",
-              fontWeight: 700,
-              color: "#111827",
-              lineHeight: 1.3,
-              margin: 0,
-              marginBottom: "0.5rem",
-            }}
-          >
+          <h3 style={{
+            fontSize: "clamp(1.2rem, 2.6vw, 1.3rem)", fontWeight: 700,
+            color: "#111827", lineHeight: 1.3, margin: 0, marginBottom: "0.5rem",
+          }}>
             Empowering Individuals &amp; Businesses To Bank <br />Smarter and Live Better
           </h3>
 
-          <p
-            style={{
-              fontSize: "16px",
-              fontWeight: 400,
-              color: "#4b5563",
-              lineHeight: 1.5,
-              margin: 0,
-              marginBottom: "1.5rem",
-            }}
-          >
+          <p style={{
+            fontSize: "16px", fontWeight: 400, color: "#4b5563",
+            lineHeight: 1.5, margin: 0, marginBottom: "1.5rem",
+          }}>
             At Girei, we empower individuals, businesses, and communities with
             accessible banking solutions, flexible loans, secure savings, and digital
             services designed to promote financial inclusion, growth, sustainability,
@@ -133,7 +107,12 @@ export default function AboutSection() {
               { number: "1", suffix: "k+", label: "Loans Completed" },
               { number: "30", suffix: "+", label: "Years Of Banking" },
             ].map((stat, i) => (
-              <div key={i} style={{ display: "flex", alignItems: "center", gap: "4rem" }}>
+              <div
+                key={i}
+                className="ab-stat"
+                ref={(el) => { statRefs.current[i] = el; }}
+                style={{ display: "flex", alignItems: "center", gap: "4rem" }}
+              >
                 {i > 0 && (
                   <div style={{ width: 1, height: 40, background: "#29B909", opacity: 0.3 }} />
                 )}
@@ -151,6 +130,7 @@ export default function AboutSection() {
       </div>
 
       <style>{`
+        /* ── Card ── */
         .about-card {
           max-width: 900px;
           margin: 50px auto 50px;
@@ -160,11 +140,54 @@ export default function AboutSection() {
           overflow: visible;
           display: flex;
           align-items: center;
-          padding: 1.2rem 1.2rem 1.2rem 1.2rem;
+          padding: 1.2rem;
           gap: 0;
         }
+
+        /* ── Image: slide in from left ── */
+        .ab-img {
+          opacity: 0;
+          transform: translateX(-48px);
+          transition:
+            opacity 0.6s ease var(--anim-delay, 0ms),
+            transform 0.6s cubic-bezier(.22,.68,0,1.2) var(--anim-delay, 0ms);
+          will-change: opacity, transform;
+        }
+        .ab-img.ab-img-visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        /* ── Content: slide in from right ── */
+        .ab-content {
+          opacity: 0;
+          transform: translateX(48px);
+          transition:
+            opacity 0.6s ease var(--anim-delay, 0ms),
+            transform 0.6s cubic-bezier(.22,.68,0,1.2) var(--anim-delay, 0ms);
+          will-change: opacity, transform;
+        }
+        .ab-content.ab-content-visible {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        /* ── Stats: fade + pop up ── */
+        .ab-stat {
+          opacity: 0;
+          transform: translateY(20px) scale(0.92);
+          transition:
+            opacity 0.45s ease var(--anim-delay, 0ms),
+            transform 0.45s cubic-bezier(.22,.68,0,1.35) var(--anim-delay, 0ms);
+          will-change: opacity, transform;
+        }
+        .ab-stat.ab-stat-visible {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
+        /* ── Static layout styles ── */
         .about-image-col {
-          /* Inset image — smaller than the card, not edge-to-edge */
           width: 220px;
           height: 240px;
           flex-shrink: 0;
@@ -179,7 +202,6 @@ export default function AboutSection() {
           gap: 0;
           align-items: flex-start;
           justify-content: space-between;
-          marginTop: 1rem;
           flex-wrap: wrap;
         }
         .stat-value {
@@ -194,6 +216,7 @@ export default function AboutSection() {
           font-weight: 500;
         }
 
+        /* ── Mobile ── */
         @media (max-width: 700px) {
           .about-card {
             flex-direction: column;
@@ -205,6 +228,20 @@ export default function AboutSection() {
             height: 200px;
             margin-right: 0;
             margin-bottom: 1.2rem;
+          }
+          /* On mobile: image fades up instead of sliding left */
+          .ab-img {
+            transform: translateY(32px);
+          }
+          .ab-img.ab-img-visible {
+            transform: translateY(0);
+          }
+          /* Content fades up too */
+          .ab-content {
+            transform: translateY(32px);
+          }
+          .ab-content.ab-content-visible {
+            transform: translateY(0);
           }
           .about-content-col {
             padding: 0.4rem 0.2rem;

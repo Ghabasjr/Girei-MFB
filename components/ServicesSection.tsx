@@ -1,28 +1,21 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 
 function ATMModal({ onClose }: { onClose: () => void }) {
   return (
     <div
       id="services"
       style={{
-        position: 'fixed',
-        inset: 0,
+        position: 'fixed', inset: 0,
         background: 'rgba(0,0,0,0.6)',
         backdropFilter: 'blur(4px)',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        zIndex: 10000,
-        padding: '1.5rem'
+        display: 'flex', alignItems: 'center', justifyContent: 'center',
+        zIndex: 10000, padding: '1.5rem'
       }} onClick={onClose}>
       <div style={{
-        background: '#fff',
-        padding: '2.5rem 2rem',
-        borderRadius: 24,
-        maxWidth: 420,
-        width: '100%',
+        background: '#fff', padding: '2.5rem 2rem',
+        borderRadius: 24, maxWidth: 420, width: '100%',
         position: 'relative',
         boxShadow: '0 25px 50px -12px rgba(0,0,0,0.25)',
         textAlign: 'center'
@@ -30,42 +23,22 @@ function ATMModal({ onClose }: { onClose: () => void }) {
         <button
           onClick={onClose}
           style={{
-            position: 'absolute',
-            top: 20,
-            right: 20,
-            background: '#f3f4f6',
-            border: 'none',
-            width: 32,
-            height: 32,
-            borderRadius: '50%',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '1.2rem',
-            cursor: 'pointer',
-            color: '#6b7280',
+            position: 'absolute', top: 20, right: 20,
+            background: '#f3f4f6', border: 'none',
+            width: 32, height: 32, borderRadius: '50%',
+            display: 'flex', alignItems: 'center', justifyContent: 'center',
+            fontSize: '1.2rem', cursor: 'pointer', color: '#6b7280',
             transition: 'background 0.2s'
           }}
           onMouseEnter={e => e.currentTarget.style.background = '#e5e7eb'}
           onMouseLeave={e => e.currentTarget.style.background = '#f3f4f6'}
-        >
-          &times;
-        </button>
+        >&times;</button>
         <div style={{
-          width: 70,
-          height: 70,
-          borderRadius: '20px',
-          background: '#ecfdf5',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          margin: '0 auto 1.5rem',
-          color: '#29B909',
-          fontSize: '2rem',
-          transform: 'rotate(-5deg)'
-        }}>
-          💳
-        </div>
+          width: 70, height: 70, borderRadius: '20px',
+          background: '#ecfdf5', display: 'flex', alignItems: 'center',
+          justifyContent: 'center', margin: '0 auto 1.5rem',
+          color: '#29B909', fontSize: '2rem', transform: 'rotate(-5deg)'
+        }}>💳</div>
         <h3 style={{ fontSize: '1.5rem', fontWeight: 800, color: '#111827', marginBottom: '0.75rem' }}>
           ATM Card Request
         </h3>
@@ -78,23 +51,15 @@ function ATMModal({ onClose }: { onClose: () => void }) {
         <button
           onClick={onClose}
           style={{
-            background: '#29B909',
-            color: '#fff',
-            border: 'none',
-            borderRadius: 14,
-            padding: '1rem 2rem',
-            fontSize: '1rem',
-            fontWeight: 700,
-            cursor: 'pointer',
-            width: '100%',
+            background: '#29B909', color: '#fff', border: 'none',
+            borderRadius: 14, padding: '1rem 2rem', fontSize: '1rem',
+            fontWeight: 700, cursor: 'pointer', width: '100%',
             boxShadow: '0 10px 15px -3px rgba(41, 185, 9, 0.3)',
             transition: 'transform 0.2s, background 0.2s'
           }}
           onMouseEnter={e => { e.currentTarget.style.background = '#229a07'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
           onMouseLeave={e => { e.currentTarget.style.background = '#29B909'; e.currentTarget.style.transform = 'translateY(0)'; }}
-        >
-          Understood
-        </button>
+        >Understood</button>
       </div>
     </div>
   );
@@ -102,14 +67,11 @@ function ATMModal({ onClose }: { onClose: () => void }) {
 
 function AccountMockup() {
   return (
-    <div style={{
-      background: "#FAFCFB", borderRadius: 10, left: -50, padding: "10px 12px", width: 145, position: "relative",
-    }}>
-      <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }
-      } >
+    <div style={{ background: "#FAFCFB", borderRadius: 10, left: -50, padding: "10px 12px", width: 145, position: "relative" }}>
+      <div style={{ display: "flex", alignItems: "center", gap: 4, marginBottom: 6 }}>
         <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#29B909" }} />
         <span style={{ fontSize: "0.6rem", fontWeight: 800, color: "#111" }}>GIREI</span>
-      </ div>
+      </div>
       <div style={{ fontSize: "0.48rem", color: "#9ca3af", marginBottom: 6 }}>Open an Account With Us</div>
       {["Name", "Email Address", "Password"].map((ph, i) => (
         <div key={i} style={{ background: "#f9fafb", border: "1px solid #e5e7eb", borderRadius: 4, padding: "3px 6px", fontSize: "0.48rem", color: "#9ca3af", marginBottom: 4 }}>{ph}</div>
@@ -149,7 +111,7 @@ function SavingsMockup() {
 
 function ATMMockup() {
   return (
-    <div style={{ background: "linear-gradient(135deg,#1a7a3a,#29B909)", borderRadius: 12, padding: "12px 14px", width: 155, position: "relative", zIndex: 3, transform: "translateX(-15px),", left: -50 }}>
+    <div style={{ background: "linear-gradient(135deg,#1a7a3a,#29B909)", borderRadius: 12, padding: "12px 14px", width: 155, position: "relative", zIndex: 3, transform: "translateX(-15px)", left: -50 }}>
       <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 4 }}>
           <div style={{ width: 7, height: 7, borderRadius: "50%", background: "#fff" }} />
@@ -222,38 +184,42 @@ const services = [
   { id: "pos", title: "POS Services", btnText: "Request POS", href: "/pos", image: "/Rectangle 3273.png", imagePos: "center center", description: "Our POS services provide secure, fast, and convenient payment solutions for businesses, enabling seamless transactions and improving customer experience." },
 ];
 
-function ServiceCard({ service, onOpenModal }: any) {
+function ServiceCard({ service, onOpenModal, animIndex }: { service: typeof services[0]; onOpenModal: () => void; animIndex: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.setProperty("--svc-delay", `${animIndex * 80}ms`);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("svc-visible");
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [animIndex]);
+
   const handleClick = (e: React.MouseEvent) => {
-    if (service.id === 'atm') {
-      e.preventDefault();
-      onOpenModal();
-    }
+    if (service.id === "atm") { e.preventDefault(); onOpenModal(); }
   };
 
   return (
-    <div style={{
-      background: "#F2FBF5",
-      borderRadius: 16,
-      overflow: "hidden",
-      border: "1px solid #d1fae5",
-      // boxShadow: "0 2px 12px rgba(0,0,0,0.06)",
-      display: "flex",
-      flexDirection: "column",
-      position: "relative",
-      // transition: "transform 0.25s, box-shadow 0.25s",
-    }}
-      onMouseEnter={(e: { currentTarget: { style: { transform: string; boxShadow: string; }; }; }) => { e.currentTarget.style.transform = "translateY(-4px)"; e.currentTarget.style.boxShadow = "0 12px 36px rgba(0,0,0,0.12)"; }}
-      onMouseLeave={e => { e.currentTarget.style.transform = "translateY(0)"; e.currentTarget.style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; }}
+    <div
+      ref={ref}
+      className="svc-card"
+      onMouseEnter={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(-6px)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 16px 40px rgba(0,0,0,0.13)"; }}
+      onMouseLeave={e => { (e.currentTarget as HTMLDivElement).style.transform = "translateY(0)"; (e.currentTarget as HTMLDivElement).style.boxShadow = "0 2px 12px rgba(0,0,0,0.06)"; }}
     >
-      {/* ── Image area with light green bg ── */}
+      {/* Image area */}
       <div style={{
-        background: "#e8f9f0",
-        position: "relative",
-        minHeight: 185,
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        overflow: "hidden",
+        background: "#e8f9f0", position: "relative",
+        minHeight: 185, display: "flex", alignItems: "center",
+        justifyContent: "center", overflow: "hidden",
       }}>
         <img src={service.image} alt={service.title} style={{
           position: "absolute", inset: 0, width: "100%", height: "100%",
@@ -264,53 +230,34 @@ function ServiceCard({ service, onOpenModal }: any) {
         </div>
       </div>
 
-      {/* ── Text content ── */}
-      <div style={{
-        padding: "1rem 1.1rem 1.4rem", flex: 1, display: "flex", flexDirection: "column",
-        position: "relative",
-      }}>
+      {/* Text content */}
+      <div style={{ padding: "1rem 1.1rem 1.4rem", flex: 1, display: "flex", flexDirection: "column", position: "relative" }}>
         <h3 style={{ fontWeight: 800, fontSize: "1rem", color: "#111827", marginBottom: "0.45rem" }}>
           {service.title}
         </h3>
         <p style={{ fontSize: "0.95rem", color: "#6b7280", lineHeight: 1.65, marginBottom: "1rem", flex: 1 }}>
           {service.description}
         </p>
-
         <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
           <a
             href={service.href || "#"}
             onClick={handleClick}
             style={{
-              flex: 1,
-              display: "block",
-              background: "#29B909",
-              color: "#fff",
-              fontWeight: 600,
-              fontSize: "1rem",
-              padding: "0.5rem 0",
-              borderRadius: "999px",
-              textDecoration: "none",
-              textAlign: "center",
-              transition: "background 0.2s, transform 0.1s",
+              flex: 1, display: "block", background: "#29B909", color: "#fff",
+              fontWeight: 600, fontSize: "1rem", padding: "0.5rem 0",
+              borderRadius: "999px", textDecoration: "none", textAlign: "center",
+              transition: "background 0.2s",
             }}
             onMouseEnter={e => { e.currentTarget.style.background = "#22a006"; }}
             onMouseLeave={e => { e.currentTarget.style.background = "#29B909"; }}
           >
             {service.btnText}
           </a>
-
           <div style={{
-            width: 32, height: 32,
-            borderRadius: "50%",
-            border: "1.5px solid #29B909",
-            background: "#fff",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            color: "#29B909",
-            fontSize: "0.8rem",
-            flexShrink: 0,
-            cursor: "pointer",
+            width: 32, height: 32, borderRadius: "50%",
+            border: "1.5px solid #29B909", background: "#fff",
+            display: "flex", alignItems: "center", justifyContent: "center",
+            color: "#29B909", fontSize: "0.8rem", flexShrink: 0, cursor: "pointer",
           }}>
             <img src="/stars.png" alt="stars" />
           </div>
@@ -322,21 +269,40 @@ function ServiceCard({ service, onOpenModal }: any) {
 
 export default function ServicesSection() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const headingRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = headingRef.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) { el.classList.add("svc-heading-visible"); observer.disconnect(); }
+      },
+      { threshold: 0.2 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
 
   return (
     <section id="services" style={{ padding: "2rem 1.5rem", background: "#fff" }}>
       <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-        <div style={{ textAlign: "center", marginBottom: "2.5rem", marginTop: "1rem" }}>
+
+        {/* Heading */}
+        <div ref={headingRef} className="svc-heading" style={{ textAlign: "center", marginBottom: "2.5rem", marginTop: "1rem" }}>
           <h2 style={{ fontSize: "clamp(1.3rem, 3vw, 1.6rem)", fontWeight: 800, color: "#111827" }}>
             Services Designed Around Your Needs
           </h2>
         </div>
+
+        {/* Grid */}
         <div className="services-grid">
-          {services.map(s => (
+          {services.map((s, i) => (
             <ServiceCard
               key={s.id}
               service={s}
               onOpenModal={() => setIsModalOpen(true)}
+              animIndex={i}
             />
           ))}
         </div>
@@ -345,19 +311,65 @@ export default function ServicesSection() {
       {isModalOpen && <ATMModal onClose={() => setIsModalOpen(false)} />}
 
       <style>{`
+        /* ── Heading: fade + slide down ── */
+        .svc-heading {
+          opacity: 0;
+          transform: translateY(-20px);
+          transition: opacity 0.6s ease, transform 0.6s cubic-bezier(.22,.68,0,1.2);
+          will-change: opacity, transform;
+        }
+        .svc-heading.svc-heading-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* ── Cards: fade + slide up with scale ── */
+        .svc-card {
+          background: #F2FBF5;
+          border-radius: 16px;
+          overflow: hidden;
+          border: 1px solid #d1fae5;
+          display: flex;
+          flex-direction: column;
+          position: relative;
+          opacity: 0;
+          transform: translateY(40px) scale(0.96);
+          transition:
+            opacity 0.55s ease var(--svc-delay, 0ms),
+            transform 0.55s cubic-bezier(.22,.68,0,1.2) var(--svc-delay, 0ms),
+            box-shadow 0.25s ease,
+            border-color 0.25s ease;
+          will-change: opacity, transform;
+          box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+        }
+        .svc-card.svc-visible {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+
+        /* Hover only after card is visible */
+        .svc-card:not(.svc-visible):hover {
+          transform: translateY(40px) scale(0.96) !important;
+        }
+
+        /* ── Grid layout ── */
         .services-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
           gap: 1.25rem;
         }
         @media (max-width: 900px) {
-          .services-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+          .services-grid { grid-template-columns: repeat(2, 1fr); }
         }
         @media (max-width: 560px) {
-          .services-grid {
-            grid-template-columns: 1fr;
+          .services-grid { grid-template-columns: 1fr; }
+          /* No stagger on mobile */
+          .svc-card {
+            --svc-delay: 0ms !important;
+            transform: translateY(24px) scale(0.97);
+          }
+          .svc-card:not(.svc-visible):hover {
+            transform: translateY(24px) scale(0.97) !important;
           }
         }
       `}</style>

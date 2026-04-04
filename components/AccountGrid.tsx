@@ -548,9 +548,30 @@ export default function AccountsGrid() {
         @media (max-width: 900px) {
           .accounts-grid { grid-template-columns: 1fr 1fr; }
         }
-        @media (max-width: 600px) {
-          .accounts-grid { grid-template-columns: 1fr; }
-        }
+      @media (max-width: 600px) {
+  .accounts-grid { grid-template-columns: 1fr; }
+
+  /* Faster fade-in on mobile — no stagger, smaller lift */
+  .ac-card {
+    --ac-delay: 0ms !important;
+    transform: translateY(20px);
+    transition:
+      opacity 0.45s ease,
+      transform 0.45s cubic-bezier(.22,.68,0,1.2),
+      box-shadow 0.28s ease,
+      border-color 0.28s ease;
+  }
+  .ac-card.ac-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .ac-card:not(.ac-visible):hover {
+    transform: translateY(20px);
+  }
+  .ac-card.ac-visible:hover {
+    transform: translateY(-3px);
+  }
+}
 
         /* ── Card base (hidden before scroll) ── */
         .ac-card {
