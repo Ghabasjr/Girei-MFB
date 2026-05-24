@@ -215,7 +215,7 @@ export default function AboutSection() {
           line-height: 1.25;
         }
         .ab-body {
-          font-size: 0.95rem;
+          font-size: 1.2rem;
           color: #4b5563;
           line-height: 1.65;
           margin: 0 0 1.25rem;

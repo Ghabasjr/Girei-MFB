@@ -150,7 +150,7 @@ export default function Hero() {
 
         }
         .hero-subtext {
-          font-size: 1rem;
+          font-size: 1.25rem;
           line-height: 1.65;
           color: #4b5563;
           margin: 0 0 1.75rem;

@@ -36,7 +36,7 @@ const categories: Category[] = [
       "Business Current Account",
     ],
     icon: (
-      <img src="./bank.png" alt="bank" />
+      <img src="./banking.png" alt="bank" />
     ),
   },
   {
