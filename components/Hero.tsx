@@ -8,17 +8,7 @@ export default function Hero() {
         <div className="hero-left">
           {/* Welcome pill */}
           <div className="hero-welcome-pill">
-            <span className="hero-welcome-leaf" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path
-                  d="M4 20c0-7 5-14 16-16-2 11-9 16-16 16zm0 0c0-3 1-6 4-9"
-                  stroke="#29B909"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                />
-              </svg>
-            </span>
+            <img src="./halfLogo.png" alt="half logo" />
             <span>WELCOME TO GIREI MICROFINANCE BANK</span>
           </div>
 
