@@ -235,7 +235,7 @@ export default function Join() {
                                 {/* Address */}
                                 <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
                                     <MapPin size={12} color="#29B909" />
-                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Girei Community Bank 9G5X+Q24, Girei 652108 Mubi Road, Adamawa State, Nigeria</span>
+                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Along Mubi Road, Girei Main Market, P.O. Box 1033, Girei, Adamawa State, Nigeria</span>
                                 </div>
                                 {/* Phone */}
                                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
@@ -245,7 +245,7 @@ export default function Join() {
                                 {/* Email */}
                                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                                     <MailIcon size={12} color="#29B909" />
-                                    <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>info@gmfbank.com.ng</span>
+                                    <a href="mailto:info@gmfb.ng" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>info@gmfb.ng</a>
                                 </div>
                             </div>
                         </div>

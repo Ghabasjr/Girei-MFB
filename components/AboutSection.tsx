@@ -2,18 +2,60 @@
 
 import { useEffect, useRef } from "react";
 
+type Impact = {
+  value: string;
+  label: string;
+  icon: React.ReactNode;
+};
+
+const impacts: Impact[] = [
+  {
+    value: "50,000+",
+    label: "Happy Customers",
+    icon: (
+      <img src="./user-group-03.png" alt="user" />
+    ),
+  },
+  {
+    value: "₦280B+",
+    label: "Total Asset",
+    icon: (
+      <img src="./money-receive-circle.png" alt="asset" />
+    ),
+  },
+  {
+    value: "30+",
+    label: "Communities Served",
+    icon: (
+      <img src="./group-items.png" alt="group" />
+    ),
+  },
+  {
+    value: "150+",
+    label: "Dedicated Staff",
+    icon: (
+      <img src="./work.png" alt="work" />
+    ),
+  },
+];
+
+const bullets = [
+  "Deep community roots in Girei, Adamawa",
+  "Personalized financial solutions",
+  "Strong governance and professional management",
+  "Supporting individuals, SMEs and local development",
+];
+
 export default function AboutSection() {
-  const cardRef = useRef<HTMLDivElement>(null);
-  const imageRef = useRef<HTMLDivElement>(null);
-  const contentRef = useRef<HTMLDivElement>(null);
-  const statRefs = useRef<(HTMLDivElement | null)[]>([]);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const midRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observers: IntersectionObserver[] = [];
-
     const observe = (el: HTMLElement | null, cls: string, delay = 0) => {
       if (!el) return;
-      el.style.setProperty("--anim-delay", `${delay}ms`);
+      el.style.setProperty("--ab-delay", `${delay}ms`);
       const obs = new IntersectionObserver(
         ([entry]) => {
           if (entry.isIntersecting) {
@@ -26,102 +68,65 @@ export default function AboutSection() {
       obs.observe(el);
       observers.push(obs);
     };
-
-    observe(imageRef.current, "ab-img-visible", 0);
-    observe(contentRef.current, "ab-content-visible", 150);
-    statRefs.current.forEach((el, i) => observe(el, "ab-stat-visible", 300 + i * 100));
-
+    observe(leftRef.current, "ab-visible", 0);
+    observe(midRef.current, "ab-visible", 120);
+    observe(rightRef.current, "ab-visible", 240);
     return () => observers.forEach((o) => o.disconnect());
   }, []);
 
   return (
-    <section id="about" style={{ background: "#f7f8f9", padding: "2rem 1.5rem 2rem" }}>
-      <div className="about-card" ref={cardRef}>
-
-        {/* LEFT: Image */}
-        <div className="about-image-col ab-img" ref={imageRef}>
-          <div style={{ position: "relative", width: "100%", height: "100%", overflow: "visible", zIndex: 10 }}>
-            <img
-              src="/arewa.png"
-              alt="Business professional"
-              style={{
-                width: "100%", height: "100%",
-                objectFit: "cover", objectPosition: "center top",
-                display: "block", borderRadius: 12,
-              }}
-            />
-            {/* Customer Satisfaction overlay */}
-            <div style={{
-              position: "absolute", bottom: 16, right: -30,
-              background: "#fff", borderRadius: 12,
-              padding: "0.4rem 0.6rem 0.5rem",
-              boxShadow: "0 6px 20px rgba(0,0,0,0.13)",
-              minWidth: 90, zIndex: 10,
-            }}>
-              <div style={{ fontSize: "0.55rem", color: "#6b7280", fontWeight: 500, marginBottom: 2 }}>
-                Customer Satisfaction
-              </div>
-              <div style={{ fontSize: "1.3rem", fontWeight: 900, color: "#29B909", lineHeight: 1.1, marginBottom: 4 }}>
-                99%
-              </div>
-              <div style={{ display: "flex", alignItems: "flex-end", gap: 2 }}>
-                {[10, 16, 22, 28, 35, 43].map((h, i) => (
-                  <div key={i} style={{
-                    width: "14px", height: h,
-                    background: "#29B909",
-                    borderRadius: "10px 10px 6px 6px",
-                  }} />
-                ))}
-              </div>
+    <section id="about" style={{ background: "#fff", padding: "3.5rem 1.5rem" }}>
+      <div className="ab-grid">
+        {/* LEFT: photo with 32+ overlay */}
+        <div ref={leftRef} className="ab-col ab-photo-wrap">
+          <img src="/Rectangle 3072.png" alt="Girei Microfinance Bank professional" className="ab-photo" />
+          <div className="ab-32-card">
+            <div className="ab-32-value">32+</div>
+            <div className="ab-32-label">
+              Years of Commitment
+              <br />
+              to Our Community
             </div>
           </div>
         </div>
 
-        {/* RIGHT: Content */}
-        <div
-          className="about-content-col ab-content"
-          ref={contentRef}
-          style={{ flex: 1, display: "flex", flexDirection: "column", justifyContent: "center", gap: "1rem" }}
-        >
-          <h3 style={{
-            fontSize: "clamp(1.2rem, 2.6vw, 1.3rem)", fontWeight: 700,
-            color: "#111827", lineHeight: 1.3, margin: 0, marginBottom: "0.5rem",
-          }}>
-            Empowering Individuals &amp; Businesses To Bank <br />Smarter and Live Better
-          </h3>
-
-          <p style={{
-            fontSize: "16px", fontWeight: 400, color: "#4b5563",
-            lineHeight: 1.5, margin: 0, marginBottom: "1.5rem",
-          }}>
-            At Girei, we empower individuals, businesses, and communities with
-            accessible banking solutions, flexible loans, secure savings, and digital
-            services designed to promote financial inclusion, growth, sustainability,
-            and long-term economic development.
+        {/* MIDDLE: heading + bullets + CTA */}
+        <div ref={midRef} className="ab-col ab-content">
+          <div className="ab-eyebrow">About GMFB</div>
+          <h2 className="ab-heading">Rooted In Girei. Committed to You.</h2>
+          <p className="ab-body">
+            Established in 1992, GMFB has grown from a community initiative to a
+            licensed and trusted financial institution dedicated to driving
+            financial inclusion and economic growth.
           </p>
 
-          {/* Stats row */}
-          <div className="about-stats-row">
-            {[
-              { number: "500", suffix: "+", label: "Customers Served" },
-              { number: "1", suffix: "k+", label: "Loans Completed" },
-              { number: "30", suffix: "+", label: "Years Of Banking" },
-            ].map((stat, i) => (
-              <div
-                key={i}
-                className="ab-stat"
-                ref={(el) => { statRefs.current[i] = el; }}
-                style={{ display: "flex", alignItems: "center", gap: "4rem" }}
-              >
-                {i > 0 && (
-                  <div style={{ width: 1, height: 40, background: "#29B909", opacity: 0.3 }} />
-                )}
-                <div className="stat-item">
-                  <div className="stat-value">
-                    <span style={{ color: "#111827" }}>{stat.number}</span>
-                    <span style={{ color: "#29B909" }}>{stat.suffix}</span>
-                  </div>
-                  <div className="stat-label">{stat.label}</div>
+          <ul className="ab-bullets">
+            {bullets.map((b, i) => (
+              <li key={i}>
+                <span className="ab-check" aria-hidden="true">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                    <circle cx="12" cy="12" r="10" fill="#29B909" fillOpacity="0.18" />
+                    <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#29B909" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
+                <span>{b}</span>
+              </li>
+            ))}
+          </ul>
+
+          <a href="/aboutHero" className="ab-cta">Learn More About Us</a>
+        </div>
+
+        {/* RIGHT: Our Impacts card */}
+        <div ref={rightRef} className="ab-col ab-impacts-card">
+          <h3 className="ab-impacts-title">Our Impacts</h3>
+          <div className="ab-impacts-list">
+            {impacts.map((it) => (
+              <div className="ab-impact-row" key={it.label}>
+                <div className="ab-impact-icon">{it.icon}</div>
+                <div>
+                  <div className="ab-impact-value">{it.value}</div>
+                  <div className="ab-impact-label">{it.label}</div>
                 </div>
               </div>
             ))}
@@ -130,140 +135,202 @@ export default function AboutSection() {
       </div>
 
       <style>{`
-        /* ── Card ── */
-        .about-card {
-          max-width: 900px;
-          margin: 50px auto 50px;
+        .ab-grid {
+          max-width: 1320px;
+          margin: 0 auto;
+          display: grid;
+          grid-template-columns: 1fr 1.15fr 0.85fr;
+          gap: 2rem;
+          align-items: stretch;
+        }
+        .ab-col {
+          opacity: 0;
+          transform: translateY(28px);
+          transition:
+            opacity 0.55s ease var(--ab-delay, 0ms),
+            transform 0.55s cubic-bezier(.22,.68,0,1.2) var(--ab-delay, 0ms);
+        }
+        .ab-col.ab-visible {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        /* ─── LEFT: photo ─── */
+        .ab-photo-wrap {
+          position: relative;
+          border-radius: 18px;
+          overflow: hidden;
+          min-height: 360px;
+        }
+        .ab-photo {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+          display: block;
+          position: absolute;
+          inset: 0;
+        }
+        .ab-32-card {
+          position: absolute;
+          bottom: 1rem;
+          left: 1rem;
           background: #fff;
-          border-radius: 16px;
-          box-shadow: 0 4px 32px rgba(0,0,0,0.08);
-          overflow: visible;
+          border-radius: 14px;
+          padding: 1rem 1.2rem;
+          box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+          min-width: 150px;
+        }
+        .ab-32-value {
+          font-size: 2.6rem;
+          font-weight: 900;
+          color: #025236;
+          line-height: 1;
+          margin-bottom: 0.35rem;
+        }
+        .ab-32-label {
+          font-size: 0.78rem;
+          color: #4b5563;
+          font-weight: 500;
+          line-height: 1.4;
+        }
+
+        /* ─── MIDDLE: content ─── */
+        .ab-content {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+        }
+        .ab-eyebrow {
+          font-size: 0.85rem;
+          font-weight: 700;
+          color: #29B909;
+          margin-bottom: 0.6rem;
+        }
+        .ab-heading {
+          font-size: clamp(1.4rem, 2.6vw, 1.8rem);
+          font-weight: 800;
+          color: #0b0b0b;
+          margin: 0 0 0.9rem;
+          line-height: 1.25;
+        }
+        .ab-body {
+          font-size: 0.95rem;
+          color: #4b5563;
+          line-height: 1.65;
+          margin: 0 0 1.25rem;
+        }
+        .ab-bullets {
+          list-style: none;
+          margin: 0 0 1.5rem;
+          padding: 0;
+          display: flex;
+          flex-direction: column;
+          gap: 0.7rem;
+        }
+        .ab-bullets li {
           display: flex;
           align-items: center;
-          padding: 1.2rem;
-          gap: 0;
+          gap: 0.6rem;
+          font-size: 0.92rem;
+          color: #0b0b0b;
         }
-
-        /* ── Image: slide in from left ── */
-        .ab-img {
-          opacity: 0;
-          transform: translateX(-48px);
-          transition:
-            opacity 0.6s ease var(--anim-delay, 0ms),
-            transform 0.6s cubic-bezier(.22,.68,0,1.2) var(--anim-delay, 0ms);
-          will-change: opacity, transform;
-        }
-        .ab-img.ab-img-visible {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        /* ── Content: slide in from right ── */
-        .ab-content {
-          opacity: 0;
-          transform: translateX(48px);
-          transition:
-            opacity 0.6s ease var(--anim-delay, 0ms),
-            transform 0.6s cubic-bezier(.22,.68,0,1.2) var(--anim-delay, 0ms);
-          will-change: opacity, transform;
-        }
-        .ab-content.ab-content-visible {
-          opacity: 1;
-          transform: translateX(0);
-        }
-
-        /* ── Stats: fade + pop up ── */
-        .ab-stat {
-          opacity: 0;
-          transform: translateY(20px) scale(0.92);
-          transition:
-            opacity 0.45s ease var(--anim-delay, 0ms),
-            transform 0.45s cubic-bezier(.22,.68,0,1.35) var(--anim-delay, 0ms);
-          will-change: opacity, transform;
-        }
-        .ab-stat.ab-stat-visible {
-          opacity: 1;
-          transform: translateY(0) scale(1);
-        }
-
-        /* ── Static layout styles ── */
-        .about-image-col {
-          width: 220px;
-          height: 240px;
+        .ab-check {
+          display: inline-flex;
           flex-shrink: 0;
-          position: relative;
-          margin-right: 1.5rem;
         }
-        .about-content-col {
-          padding: 0.4rem 1.8rem 0.4rem 1.2rem;
+        .ab-cta {
+          align-self: flex-start;
+          background: #025236;
+          color: #fff;
+          font-weight: 700;
+          font-size: 0.9rem;
+          padding: 0.85rem 1.6rem;
+          border-radius: 10px;
+          text-decoration: none;
+          transition: background 0.2s;
         }
-        .about-stats-row {
-          display: flex;
-          gap: 0;
-          align-items: flex-start;
-          justify-content: space-between;
-          flex-wrap: wrap;
-        }
-        .stat-value {
-          font-size: 1.5rem;
-          font-weight: 900;
-          line-height: 1;
-          margin-bottom: 4px;
-        }
-        .stat-label {
-          font-size: 0.65rem;
-          color: #6b7280;
-          font-weight: 500;
+        .ab-cta:hover {
+          background: #03734a;
         }
 
-        /* ── Mobile ── */
+        /* ─── RIGHT: Our Impacts ─── */
+        .ab-impacts-card {
+          background: #f1faef;
+          border-radius: 16px;
+          padding: 1.4rem 1.25rem;
+          border: 1px solid #d6f0d0;
+          display: flex;
+          flex-direction: column;
+        }
+        .ab-impacts-title {
+          font-size: 1.05rem;
+          font-weight: 800;
+          color: #025236;
+          margin: 0 0 1rem;
+        }
+        .ab-impacts-list {
+          display: flex;
+          flex-direction: column;
+          gap: 0.7rem;
+        }
+        .ab-impact-row {
+          background: #fff;
+          border-radius: 12px;
+          padding: 0.8rem 0.9rem;
+          display: flex;
+          align-items: center;
+          gap: 0.85rem;
+          border: 1px solid #e5f4dd;
+          transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .ab-impact-row:hover {
+          transform: translateX(3px);
+          box-shadow: 0 4px 14px rgba(2,82,54,0.08);
+        }
+        .ab-impact-icon {
+          width: 38px;
+          height: 38px;
+          border-radius: 10px;
+          background: #e6f4ea;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          flex-shrink: 0;
+        }
+        .ab-impact-value {
+          font-size: 1rem;
+          font-weight: 800;
+          color: #025236;
+          line-height: 1.1;
+        }
+        .ab-impact-label {
+          font-size: 0.72rem;
+          color: #6b7280;
+          margin-top: 2px;
+        }
+
+        /* ─── Responsive ─── */
+        @media (max-width: 1024px) {
+          .ab-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+          }
+          .ab-impacts-card {
+            grid-column: 1 / -1;
+          }
+          .ab-impacts-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.75rem;
+          }
+        }
         @media (max-width: 700px) {
-          .about-card {
-            flex-direction: column;
-            margin-bottom: 60px;
-            padding: 1rem;
+          .ab-grid {
+            grid-template-columns: 1fr;
           }
-          .about-image-col {
-            width: 100%;
-            height: 200px;
-            margin-right: 0;
-            margin-bottom: 1.2rem;
-          }
-          /* On mobile: image fades up instead of sliding left */
-          .ab-img {
-            transform: translateY(32px);
-          }
-          .ab-img.ab-img-visible {
-            transform: translateY(0);
-          }
-          /* Content fades up too */
-          .ab-content {
-            transform: translateY(32px);
-          }
-          .ab-content.ab-content-visible {
-            transform: translateY(0);
-          }
-          .about-content-col {
-            padding: 0.4rem 0.2rem;
-          }
-          .about-stats-row {
-            gap: 0.5rem;
-            flex-wrap: nowrap;
-            justify-content: space-between;
-          }
-          .stat-value {
-            font-size: 1rem;
-            margin-bottom: 8px;
-          }
-          .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-          }
-          .stat-label {
-            font-size: 0.55rem;
-          }
+          .ab-photo-wrap { min-height: 320px; }
+          .ab-impacts-list { grid-template-columns: 1fr; }
         }
       `}</style>
     </section>

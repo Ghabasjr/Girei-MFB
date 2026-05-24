@@ -3,7 +3,6 @@
 import { useState } from "react";
 import Image from "next/image";
 import { navLinks } from "@/lib/data";
-import { ChevronDown } from "lucide-react";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -14,62 +13,88 @@ export default function Navbar() {
         position: "sticky",
         top: 0,
         zIndex: 50,
-        background: "#004C3F",
-        borderBottom: "1px solid #e8e8e8",
-        boxShadow: "0 1px 8px rgba(0,0,0,0.06)",
+        background: "#ffffff",
+        borderBottom: "1px solid #f0f0f0",
+        boxShadow: "0 1px 6px rgba(0,0,0,0.04)",
       }}
     >
-      <nav className="container-xl" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: "68px" }}>
+      <nav
+        className="nav-row"
+        style={{
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "space-between",
+          height: 76,
+          maxWidth: 1320,
+          margin: "0 auto",
+          padding: "0 2rem",
+        }}
+      >
         {/* Logo */}
-        <a href="/" style={{ display: "flex", alignItems: "center", gap: "0.5rem", textDecoration: "none" }}>
+        <a href="/" style={{ display: "flex", alignItems: "center", textDecoration: "none", flexShrink: 0 }}>
           <Image
-            src="/girei.png"
-            alt="GIREI Logo"
-            width={120}
-            height={40}
+            src="/girei2.png"
+            alt="GIREI Microfinance Bank Ltd"
+            width={130}
+            height={42}
             priority
             style={{ objectFit: "contain" }}
           />
         </a>
 
-        {/* Desktop Nav */}
+        {/* Centered nav */}
         <ul
+          className="desktop-nav"
           style={{
             display: "flex",
-            gap: "2rem",
+            gap: "2.75rem",
             listStyle: "none",
             margin: 0,
             padding: 0,
           }}
-          className="desktop-nav"
         >
           {navLinks.map((link) => (
             <li key={link.label}>
               <a
                 href={link.href}
+                className="nav-link"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "4px",
-                  color: "white",
-                  fontWeight: 500,
-                  fontSize: "0.95rem",
+                  color: "#0b0b0b",
+                  fontWeight: 600,
+                  fontSize: "1rem",
                   textDecoration: "none",
                   transition: "color 0.2s",
+                  whiteSpace: "nowrap",
                 }}
-                onMouseEnter={(e) => ((e.target as HTMLAnchorElement).style.color = "#2EC05E")}
-                onMouseLeave={(e) => ((e.target as HTMLAnchorElement).style.color = "white")}
               >
                 {link.label}
-                {(link as any).icon !== undefined && <ChevronDown size={14} />}
               </a>
             </li>
           ))}
         </ul>
 
         {/* CTA */}
-        <div style={{ display: "flex", alignItems: "center", gap: "1rem" }} className="desktop-nav">
-          <a href="/join" className="btn-primary" style={{ padding: "0.6rem 1.4rem", fontSize: "0.88rem" }}>
+        <div className="desktop-nav" style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
+          <a
+            href="/join"
+            style={{
+              background: "#004C3F",
+              color: "#fff",
+              fontWeight: 700,
+              fontSize: "0.95rem",
+              padding: "0.85rem 1.75rem",
+              borderRadius: 12,
+              textDecoration: "none",
+              transition: "background 0.2s, transform 0.15s",
+              display: "inline-block",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.background = "#006655";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.background = "#004C3F";
+            }}
+          >
             Open Account
           </a>
         </div>
@@ -85,8 +110,8 @@ export default function Navbar() {
             cursor: "pointer",
             display: "none",
             flexDirection: "column",
-            gap: "5px",
-            padding: "4px",
+            gap: 5,
+            padding: 4,
           }}
         >
           {[0, 1, 2].map((i) => (
@@ -97,7 +122,7 @@ export default function Navbar() {
                 width: 24,
                 height: 2,
                 borderRadius: 2,
-                background: menuOpen && i === 1 ? "transparent" : "white",
+                background: menuOpen && i === 1 ? "transparent" : "#0b0b0b",
                 transform:
                   menuOpen && i === 0
                     ? "rotate(45deg) translate(5px, 5px)"
@@ -115,7 +140,7 @@ export default function Navbar() {
       {menuOpen && (
         <div
           style={{
-            background: "#004C3F",
+            background: "#fff",
             borderTop: "1px solid #eee",
             padding: "1rem 1.5rem",
           }}
@@ -123,15 +148,28 @@ export default function Navbar() {
           <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "1rem" }}>
             {navLinks.map((link) => (
               <li key={link.label}>
-                <a href={link.href} style={{ display: "flex", alignItems: "center", gap: "6px", color: "white", fontWeight: 500, textDecoration: "none", fontSize: "1rem" }}
-                  onClick={() => setMenuOpen(false)}>
+                <a
+                  href={link.href}
+                  style={{ color: "#0b0b0b", fontWeight: 600, fontSize: "1rem", textDecoration: "none" }}
+                  onClick={() => setMenuOpen(false)}
+                >
                   {link.label}
-                  {(link as any).icon !== undefined && <ChevronDown size={16} />}
                 </a>
               </li>
             ))}
             <li>
-              <a href="#" className="btn-primary" style={{ width: "100%", justifyContent: "center" }}>
+              <a
+                href="/join"
+                style={{
+                  background: "#004C3F",
+                  color: "#fff",
+                  fontWeight: 700,
+                  padding: "0.75rem 1.5rem",
+                  borderRadius: 12,
+                  textDecoration: "none",
+                  display: "inline-block",
+                }}
+              >
                 Open Account
               </a>
             </li>
@@ -140,7 +178,9 @@ export default function Navbar() {
       )}
 
       <style>{`
-        @media (max-width: 768px) {
+        .nav-link:hover { color: #29B909 !important; }
+
+        @media (max-width: 900px) {
           .desktop-nav { display: none !important; }
           .mobile-menu-btn { display: flex !important; }
         }

@@ -2,16 +2,22 @@
 
 import { useState } from "react";
 
+const ZOHO_FORM_URL = process.env.NEXT_PUBLIC_ZOHO_CAMPAIGN_FORM_URL || "";
+
 export default function Newsletter() {
   const [email, setEmail] = useState("");
   const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (email.trim()) {
-      setSubmitted(true);
-      setEmail("");
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    if (!ZOHO_FORM_URL) {
+      e.preventDefault();
+      if (email.trim()) {
+        setSubmitted(true);
+        setEmail("");
+      }
+      return;
     }
+    setSubmitted(true);
   };
 
   return (
@@ -112,7 +118,12 @@ export default function Newsletter() {
                 </p>
               </div>
             ) : (
-              <form onSubmit={handleSubmit}>
+              <form
+                onSubmit={handleSubmit}
+                action={ZOHO_FORM_URL || undefined}
+                method={ZOHO_FORM_URL ? "POST" : undefined}
+                target={ZOHO_FORM_URL ? "_blank" : undefined}
+              >
                 <div
                   style={{
                     display: "flex",
@@ -126,6 +137,7 @@ export default function Newsletter() {
                 >
                   <input
                     type="email"
+                    name="CONTACT_EMAIL"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     placeholder="Enter your email address"

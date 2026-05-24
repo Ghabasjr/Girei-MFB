@@ -12,13 +12,14 @@ export const metadata: Metadata = {
 };
 
 import Hero from "@/components/Hero";
+import ProductStrip from "@/components/ProductStrip";
 import AboutSection from "@/components/AboutSection";
 import WhoWeServe from "@/components/WhoWeServe";
 import ServicesSection from "@/components/ServicesSection";
 import Testimonials from "@/components/Testimonials";
 import BlogSection from "@/components/BlogSection";
+import NewsSection from "@/components/NewsSection";
 import FAQ from "@/components/FAQ";
-import Newsletter from "@/components/Newsletter";
 import Footer from "@/components/Footer";
 
 export default function Home() {
@@ -27,11 +28,13 @@ export default function Home() {
       <Navbar />
       <main>
         <Hero />
+        <ProductStrip />
         <AboutSection />
         <WhoWeServe />
         <ServicesSection />
-        <Testimonials />
         <BlogSection />
+        <Testimonials />
+        <NewsSection />
         <FAQ />
       </main>
       <Footer />

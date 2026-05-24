@@ -1,51 +1,211 @@
 "use client";
 
-export default function BlogSection() {
-  const posts = [
-    { id: 1, title: "Empowering communities through inclusive financial services", tag: "Savings & Current Account", image: "/Rectangle 3203.png" },
-    { id: 2, title: "Driving growth and opportunities across local communities", tag: "Savings & Current Account", image: "/Rectangle 3204.png" },
-    { id: 3, title: "Bringing banking closer to the people", tag: "Savings & Current Account", image: "/Rectangle 3205.png" },
-  ];
+import { useEffect, useRef } from "react";
+
+type Tip = {
+  id: number;
+  title: string;
+  excerpt: string;
+  image: string;
+  href: string;
+};
+
+const tips: Tip[] = [
+  {
+    id: 1,
+    title: "5 Ways To Start an Emergency Fund",
+    excerpt: "Learn simple steps to start saving for unexpected expenses.",
+    image: "/hausa.png",
+    href: "#",
+  },
+  {
+    id: 2,
+    title: "Smart Borrowing: How to Get the Right Loan",
+    excerpt: "Understand what to look for before applying for a personal or business loan.",
+    image: "/hausa2.png",
+    href: "#",
+  },
+  {
+    id: 3,
+    title: "Grow Your SME with Working Capital",
+    excerpt: "Practical ways to use working-capital loans to scale your small business.",
+    image: "/hausa3.png",
+    href: "#",
+  },
+];
+
+function TipCard({ tip, animIndex }: { tip: Tip; animIndex: number }) {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.setProperty("--tip-delay", `${animIndex * 90}ms`);
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("tip-visible");
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.12 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, [animIndex]);
 
   return (
-    <section style={{ padding: "5rem 1.5rem", background: "#f5f5f5" }}>
-      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
-        <h2 style={{ textAlign: "center", fontSize: "clamp(1.3rem, 3vw, 1.75rem)", fontWeight: 600, color: "#111", marginBottom: "3rem" }}>
-          Fresh Updates From Our Company
-        </h2>
+    <div ref={ref} className="tip-card">
+      <div className="tip-img-wrap">
+        <img src={tip.image} alt={tip.title} className="tip-img" />
+      </div>
+      <div className="tip-body">
+        <h3 className="tip-title">{tip.title}</h3>
+        <p className="tip-excerpt">{tip.excerpt}</p>
+        <a href={tip.href} className="tip-link">
+          Learn More
+          <span aria-hidden="true" className="tip-arrow">→</span>
+        </a>
+      </div>
+    </div>
+  );
+}
 
-        <div className="blog-grid">
-          {posts.map((post) => (
-            <div key={post.id}>
-              <div style={{ width: "100%", height: 180, borderRadius: 16, overflow: "hidden", marginBottom: "0.75rem" }}>
-                <img src={post.image} alt="blog" style={{ width: "100%", height: "100%", objectFit: "cover" }} />
-              </div>
-              <div style={{ fontSize: "12px", color: "#16a34a", marginBottom: "0.4rem" }}>{post.tag}</div>
-              <div style={{ fontSize: "16px", fontWeight: 600, color: "#111", lineHeight: 1.4, marginBottom: "1rem" }}>{post.title}</div>
-              <div style={{ fontSize: "13px", color: "#111", display: "flex", alignItems: "center", gap: "0.3rem", cursor: "pointer" }}>
-                Read More <span style={{ fontSize: "16px" }}>→</span>
-              </div>
-            </div>
+export default function BlogSection() {
+  const headRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = headRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.classList.add("tip-head-visible");
+          obs.disconnect();
+        }
+      },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
+  return (
+    <section style={{ background: "#ffffff", padding: "4rem 1.5rem" }}>
+      <div style={{ maxWidth: 1200, margin: "0 auto" }}>
+        <div ref={headRef} className="tip-head" style={{ textAlign: "center", marginBottom: "2.5rem" }}>
+          <div className="tip-eyebrow">FINANCE TIPS</div>
+          <h2 className="tip-h">Financial Tips &amp; Insight</h2>
+        </div>
+
+        <div className="tip-grid">
+          {tips.map((t, i) => (
+            <TipCard key={t.id} tip={t} animIndex={i} />
           ))}
         </div>
       </div>
 
       <style>{`
-        .blog-grid {
+        .tip-head {
+          opacity: 0;
+          transform: translateY(-16px);
+          transition: opacity 0.55s ease, transform 0.55s cubic-bezier(.22,.68,0,1.2);
+        }
+        .tip-head.tip-head-visible { opacity: 1; transform: translateY(0); }
+        .tip-eyebrow {
+          font-size: 0.78rem;
+          font-weight: 800;
+          color: #29B909;
+          letter-spacing: 0.18em;
+          margin-bottom: 0.5rem;
+        }
+        .tip-h {
+          font-size: clamp(1.4rem, 2.6vw, 1.85rem);
+          font-weight: 800;
+          color: #0b0b0b;
+          margin: 0;
+        }
+
+        .tip-grid {
           display: grid;
           grid-template-columns: repeat(3, 1fr);
-          gap: 2rem;
+          gap: 1.5rem;
         }
-        @media (max-width: 768px) {
-          .blog-grid {
-            grid-template-columns: repeat(2, 1fr);
-          }
+        @media (max-width: 900px) {
+          .tip-grid { grid-template-columns: repeat(2, 1fr); }
         }
-        @media (max-width: 500px) {
-          .blog-grid {
-            grid-template-columns: 1fr;
-          }
+        @media (max-width: 600px) {
+          .tip-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
         }
+
+        .tip-card {
+          background: #ffffff;
+          border: 1px solid #e7eee5;
+          border-radius: 14px;
+          overflow: hidden;
+          display: flex;
+          flex-direction: column;
+          opacity: 0;
+          transform: translateY(28px);
+          transition:
+            opacity 0.55s ease var(--tip-delay, 0ms),
+            transform 0.55s cubic-bezier(.22,.68,0,1.2) var(--tip-delay, 0ms),
+            box-shadow 0.22s ease,
+            border-color 0.22s ease;
+        }
+        .tip-card.tip-visible { opacity: 1; transform: translateY(0); }
+        .tip-card:hover {
+          border-color: #29B909;
+          box-shadow: 0 10px 28px rgba(2,82,54,0.08);
+        }
+
+        .tip-img-wrap {
+          width: 100%;
+          height: 180px;
+          overflow: hidden;
+        }
+        .tip-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          display: block;
+          transition: transform 0.4s ease;
+        }
+        .tip-card:hover .tip-img { transform: scale(1.04); }
+
+        .tip-body {
+          padding: 1.1rem 1.2rem 1.3rem;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+        }
+        .tip-title {
+          font-size: 1rem;
+          font-weight: 800;
+          color: #0b0b0b;
+          margin: 0 0 0.5rem;
+          line-height: 1.35;
+        }
+        .tip-excerpt {
+          font-size: 0.85rem;
+          color: #6b7280;
+          line-height: 1.55;
+          margin: 0 0 1rem;
+          flex: 1;
+        }
+        .tip-link {
+          color: #29B909;
+          font-weight: 700;
+          font-size: 0.88rem;
+          text-decoration: none;
+          display: inline-flex;
+          align-items: center;
+          gap: 0.4rem;
+          transition: gap 0.2s;
+          width: fit-content;
+        }
+        .tip-link:hover { gap: 0.7rem; }
+        .tip-arrow { font-size: 1rem; line-height: 1; }
       `}</style>
     </section>
   );

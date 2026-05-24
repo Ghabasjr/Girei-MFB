@@ -18,14 +18,21 @@ export default function Footer() {
               Enter your email address to receive the latest bank news updates and important notifications directly in your inbox anytime easily.            </p>
           </div>
 
-          {/* Right: email input + subscribe */}
-          <div className="newsletter-input-row">
+          {/* Right: email input + subscribe (POSTs to Zoho Campaigns when NEXT_PUBLIC_ZOHO_CAMPAIGN_FORM_URL is set) */}
+          <form
+            className="newsletter-input-row"
+            action={process.env.NEXT_PUBLIC_ZOHO_CAMPAIGN_FORM_URL || undefined}
+            method={process.env.NEXT_PUBLIC_ZOHO_CAMPAIGN_FORM_URL ? "POST" : undefined}
+            target={process.env.NEXT_PUBLIC_ZOHO_CAMPAIGN_FORM_URL ? "_blank" : undefined}
+          >
             <span style={{ color: "#9ca3af", fontSize: "0.9rem" }}>
               <MailIcon />
             </span>
             <input
               type="email"
+              name="CONTACT_EMAIL"
               placeholder="Enter your email"
+              required
               style={{
                 flex: 1,
                 border: "none",
@@ -36,7 +43,7 @@ export default function Footer() {
                 minWidth: 0,
               }}
             />
-            <button style={{
+            <button type="submit" style={{
               background: "#29B909",
               color: "#fff",
               border: "none",
@@ -53,7 +60,7 @@ export default function Footer() {
             }}>
               <Image src="/sent.png" alt="Subscribe" width={16} height={16} /> Subscribe
             </button>
-          </div>
+          </form>
         </div>
       </div>
 
@@ -148,8 +155,8 @@ export default function Footer() {
               <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                 <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
                   <MapPin size={20} color="#29B909" />
-                  <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Girei Community Bank 9G5X+Q24, Girei 652108
-                    Mubi Road, Adamawa State, Nigeria</span>
+                  <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Along Mubi Road, Girei Main Market,
+                    P.O. Box 1033, Girei, Adamawa State, Nigeria</span>
                 </div>
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <PhoneIcon size={12} color="#29B909" />
@@ -157,7 +164,7 @@ export default function Footer() {
                 </div>
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <MailIcon size={12} color="#29B909" />
-                  <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>info@gmfbank.com.ng</span>
+                  <a href="mailto:info@gmfb.ng" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>info@gmfb.ng</a>
                 </div>
               </div>
             </div>
