@@ -87,8 +87,8 @@ function CategoryCard({ cat, animIndex }: { cat: Category; animIndex: number }) 
           <li key={item}>
             <span className="svc-card-check" aria-hidden="true">
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
-                <circle cx="12" cy="12" r="10" stroke="#29B909" strokeWidth="1.7" />
-                <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#29B909" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                <circle cx="12" cy="12" r="10" stroke="#025236" strokeWidth="1.7" />
+                <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#025236" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </span>
             <span>{item}</span>

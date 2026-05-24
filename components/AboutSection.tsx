@@ -105,8 +105,8 @@ export default function AboutSection() {
               <li key={i}>
                 <span className="ab-check" aria-hidden="true">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
-                    <circle cx="12" cy="12" r="10" fill="#29B909" fillOpacity="0.18" />
-                    <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#29B909" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                    <circle cx="12" cy="12" r="10" fill="#025236" fillOpacity="0.18" />
+                    <path d="M8 12.5l2.5 2.5L16 9.5" stroke="#025236" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
                 <span>{b}</span>
@@ -136,11 +136,11 @@ export default function AboutSection() {
 
       <style>{`
         .ab-grid {
-          max-width: 1320px;
+          max-width: 1240px;
           margin: 0 auto;
           display: grid;
           grid-template-columns: 1fr 1.15fr 0.85fr;
-          gap: 2rem;
+          gap: 1.5rem;
           align-items: stretch;
         }
         .ab-col {
@@ -215,7 +215,7 @@ export default function AboutSection() {
           line-height: 1.25;
         }
         .ab-body {
-          font-size: 1.2rem;
+          font-size: 1.1  rem;
           color: #4b5563;
           line-height: 1.65;
           margin: 0 0 1.25rem;

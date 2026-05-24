@@ -12,7 +12,7 @@ const items: Item[] = [
   {
     label: "SMEs Loans",
     icon: (
-      <img src="./bank.png" alt="bank" />
+      <img src="./bank (1).png" alt="bank" />
     ),
   },
   {

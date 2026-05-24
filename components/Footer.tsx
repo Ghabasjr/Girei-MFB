@@ -138,7 +138,7 @@ export default function Footer() {
 
             {/* Col 3: Short Links */}
             <div>
-              <h4 style={{ color: "#fff", fontWeight: 700, fontSize: "0.88rem", marginBottom: "1.1rem" }}>Short Links</h4>
+              <h4 style={{ color: "#fff", fontWeight: 700, fontSize: "0.88rem", marginBottom: "1.1rem" }}>References</h4>
               <ul style={{ listStyle: "none", margin: 0, padding: 0, display: "flex", flexDirection: "column", gap: "0.7rem" }}>
                 {["Privacy", "Anti Money Laundering Policy", "Terms & Conditions", "Risk Management", "Downloadable Forms", "Help Center"].map((item, i) => (
                   <li key={i} style={{ display: "flex", alignItems: "center", gap: 6 }}>
@@ -158,10 +158,10 @@ export default function Footer() {
                   <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Along Mubi Road, Girei Main Market,
                     P.O. Box 1033, Girei, Adamawa State, Nigeria</span>
                 </div>
-                <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
+                {/* <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <PhoneIcon size={12} color="#29B909" />
                   <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)" }}>(+234) 000 000 000</span>
-                </div>
+                </div> */}
                 <div style={{ display: "flex", gap: 8, alignItems: "center" }}>
                   <MailIcon size={12} color="#29B909" />
                   <a href="mailto:info@gmfb.ng" style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", textDecoration: "none" }}>info@gmfb.ng</a>
@@ -194,7 +194,7 @@ export default function Footer() {
           margin: 0 auto;
           background: linear-gradient(to bottom, #025236 0%, #04B879 100%);
           border-radius: 20px;
-          padding: 2.5rem 3rem;
+          padding: 3rem 3rem;
           display: flex;
           align-items: center;
           justify-content: space-between;
@@ -219,8 +219,9 @@ export default function Footer() {
         .footer-grid {
           display: grid;
           grid-template-columns: 1.4fr 1fr 1.3fr 1.2fr;
-          gap: 2.5rem;
+          gap: 1rem;
           padding-bottom: 3rem;
+          padding:2rem;
         }
 
         @media (max-width: 900px) {

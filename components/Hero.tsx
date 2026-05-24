@@ -38,40 +38,12 @@ export default function Hero() {
             </a>
           </div>
 
-          {/* Trust badges */}
-          <div className="hero-badges">
-            <div className="hero-badge">
-              <img src="./Ellipse 390.png" alt="licence" height={25} width={25} />
-              <div className="hero-badge-text">
-                <div className="hero-badge-title">Licensed by CBN</div>
-                <div className="hero-badge-sub">Licensed Microfinance Bank</div>
-              </div>
-            </div>
-
-            <div className="hero-badge">
-              <img src="./Rectangle 21912.png" alt="ndic" height={30} width={45} />
-              <div className="hero-badge-text">
-                <div className="hero-badge-title">Deposit Insured by NDIC</div>
-                <div className="hero-badge-sub">Your deposits are protected</div>
-              </div>
-            </div>
-
-            <div className="hero-badge">
-
-              <img src="./Protect.png" alt="secure" height={25} width={25} />
-
-              <div className="hero-badge-text">
-                <div className="hero-badge-title">Safe &amp; Secure</div>
-                <div className="hero-badge-sub">Your security is our priority</div>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* ── RIGHT PANEL ── */}
         <div className="hero-right">
           <div className="hero-image-wrap">
-            <img src="/market.jpeg" alt="Community banking in Girei" className="hero-image" />
+            <img src="/hero-pic.png" alt="Community banking in Girei" className="hero-image" />
 
             {/* Promise overlay card */}
             <div className="hero-promise-card">
@@ -91,10 +63,41 @@ export default function Hero() {
         </div>
       </div>
 
+      {/* ── Trust badges: 2+1 layout matching the hero-grid columns ── */}
+      <div className="hero-badges-row">
+        <div className="hero-badges-left">
+          <div className="hero-badge">
+            <img src="./Ellipse 390.png" alt="licence" height={25} width={25} />
+            <div className="hero-badge-text">
+              <div className="hero-badge-title">Licensed by CBN</div>
+              <div className="hero-badge-sub">Licensed Microfinance Bank</div>
+            </div>
+          </div>
+
+          <div className="hero-badge">
+            <img src="./Rectangle 21912.png" alt="ndic" height={30} width={45} />
+            <div className="hero-badge-text">
+              <div className="hero-badge-title">Deposit Insured by NDIC</div>
+              <div className="hero-badge-sub">Your deposits are protected</div>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-badges-right">
+          <div className="hero-badge">
+            <img src="./Protect.png" alt="secure" height={25} width={25} />
+            <div className="hero-badge-text">
+              <div className="hero-badge-title">Safe &amp; Secure</div>
+              <div className="hero-badge-sub">Your security is our priority</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <style>{`
         .hero-section {
           background: #ffffff;
-          padding: 2.25rem 2rem 3rem;
+          padding: 3rem 3rem 3rem;
           font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
         .hero-grid {
@@ -187,11 +190,25 @@ export default function Hero() {
           background: #f0fdf4;
         }
 
-        /* ─── Trust badges ─── */
-        .hero-badges {
+        /* ─── Trust badges: 2 under left column, 1 under right column ─── */
+        .hero-badges-row {
+          max-width: 1320px;
+          margin: -3rem auto 0;
           display: flex;
           flex-wrap: wrap;
-          gap: 1.5rem 2rem;
+          gap: 3.2rem;
+          align-items: center;
+          position: relative;
+          z-index: 2;
+        }
+        .hero-badges-left {
+          display: flex;
+          align-items: center;
+          gap: 2.5rem;
+          flex-wrap: wrap;
+        }
+        .hero-badges-right {
+          display: flex;
           align-items: center;
         }
         .hero-badge {
@@ -210,7 +227,7 @@ export default function Hero() {
         }
         .hero-badge-title {
           font-size: 0.88rem;
-          font-weight: 800;
+          font-weight: 400;
           color: #0b0b0b;
           line-height: 1.25;
         }
@@ -298,7 +315,11 @@ export default function Hero() {
             gap: 2rem;
           }
           .hero-image-wrap { min-height: 420px; }
-          .hero-badges { gap: 1.25rem 1.5rem; }
+          .hero-badges-row {
+            grid-template-columns: 1fr;
+            gap: 1.25rem;
+          }
+          .hero-badges-left { gap: 1.5rem; }
         }
         @media (max-width: 600px) {
           .hero-section { padding: 1.5rem 1rem 2rem; }
@@ -317,9 +338,13 @@ export default function Hero() {
             max-width: none;
             padding: 1.1rem 1.2rem;
           }
-          .hero-badges {
-            display: grid;
+          .hero-badges-row {
             grid-template-columns: 1fr;
+            gap: 0.85rem;
+          }
+          .hero-badges-left {
+            flex-direction: column;
+            align-items: flex-start;
             gap: 0.85rem;
           }
         }
