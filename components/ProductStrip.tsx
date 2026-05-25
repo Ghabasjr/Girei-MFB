@@ -110,6 +110,25 @@ export default function ProductStrip() {
           .ps-divider { display: none; }
           .ps-item { flex: 0 0 auto; }
         }
+        @media (max-width: 768px) {
+          .ps-row {
+            flex-wrap: nowrap;
+            justify-content: flex-start;
+            gap: 1.5rem;
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+            padding-bottom: 0.25rem;
+            scrollbar-width: none;
+          }
+          .ps-row::-webkit-scrollbar { display: none; }
+          .ps-item {
+            flex: 0 0 auto;
+            scroll-snap-align: start;
+          }
+          .ps-divider { display: none; }
+        }
         @media (max-width: 600px) {
           .ps-item { font-size: 0.82rem; }
           .ps-icon { width: 28px; height: 28px; }

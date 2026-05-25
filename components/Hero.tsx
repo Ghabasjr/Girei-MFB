@@ -316,6 +316,7 @@ export default function Hero() {
           }
           .hero-image-wrap { min-height: 420px; }
           .hero-badges-row {
+            margin-top: 1.5rem;
             grid-template-columns: 1fr;
             gap: 1.25rem;
           }
@@ -328,8 +329,20 @@ export default function Hero() {
           .hero-cta-row .hero-btn {
             flex: 1;
             text-align: center;
-            padding: 0.85rem 1rem;
+            padding: 0.65rem 0.85rem;
+            font-size: 0.82rem;
+            border-radius: 10px;
           }
+          .hero-badges-row {
+            margin-top: 1rem;
+            gap: 0.85rem;
+            padding: 0;
+          }
+          .hero-badge {
+            gap: 0.55rem;
+          }
+          .hero-badge-title { font-size: 0.82rem; }
+          .hero-badge-sub { font-size: 0.68rem; }
           .hero-image-wrap { min-height: 360px; }
           .hero-promise-card {
             bottom: 1rem;

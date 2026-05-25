@@ -195,11 +195,16 @@ export default function AboutSection() {
           line-height: 1.4;
         }
 
-        /* ─── MIDDLE: content ─── */
+        /* ─── MIDDLE: content card ─── */
         .ab-content {
           display: flex;
           flex-direction: column;
           justify-content: center;
+          background: #ffffff;
+          border-radius: 16px;
+          padding: 1.75rem 1.5rem;
+          border: 1px solid #eef0ed;
+          box-shadow: 0 14px 36px rgba(2, 82, 54, 0.10), 0 2px 6px rgba(0, 0, 0, 0.04);
         }
         .ab-eyebrow {
           font-size: 0.85rem;
