@@ -42,6 +42,10 @@ const items: Item[] = [
 ];
 
 export default function ProductStrip() {
+  // Duplicate items for the mobile marquee — translateX(-50%) lines the second
+  // half exactly where the first half started, so the loop is seamless.
+  const loopItems = [...items, ...items];
+
   return (
     <section
       aria-label="Our products"
@@ -49,28 +53,40 @@ export default function ProductStrip() {
         width: "100%",
         background: "rgba(2, 82, 54, 0.9)",
         padding: "1.1rem 1.5rem",
+        overflow: "hidden",
       }}
     >
       <div className="ps-row">
-        {items.map((it, i) => (
-          <div className="ps-item" key={it.label}>
-            <span className="ps-icon" aria-hidden="true">{it.icon}</span>
-            <span className="ps-label">{it.label}</span>
-            {i < items.length - 1 && <span className="ps-divider" aria-hidden="true" />}
-          </div>
-        ))}
+        <div className="ps-track">
+          {loopItems.map((it, i) => (
+            <div
+              className="ps-item"
+              key={i}
+              aria-hidden={i >= items.length ? "true" : undefined}
+            >
+              <span className="ps-icon" aria-hidden="true">{it.icon}</span>
+              <span className="ps-label">{it.label}</span>
+              {i < items.length - 1 && <span className="ps-divider" aria-hidden="true" />}
+            </div>
+          ))}
+        </div>
       </div>
 
       <style>{`
         .ps-row {
           max-width: 1320px;
           margin: 0 auto;
+        }
+        .ps-track {
           display: flex;
           align-items: center;
           justify-content: space-between;
           gap: 0.5rem;
           flex-wrap: nowrap;
         }
+        /* On desktop the duplicated set is hidden so it looks like a single row */
+        .ps-item[aria-hidden="true"] { display: none; }
+
         .ps-item {
           display: flex;
           align-items: center;
@@ -102,7 +118,7 @@ export default function ProductStrip() {
           background: rgba(41, 185, 9, 0.45);
         }
         @media (max-width: 1024px) {
-          .ps-row {
+          .ps-track {
             flex-wrap: wrap;
             justify-content: center;
             gap: 0.75rem 1.5rem;
@@ -110,24 +126,47 @@ export default function ProductStrip() {
           .ps-divider { display: none; }
           .ps-item { flex: 0 0 auto; }
         }
+
+        /* ─── Mobile: seamless auto-scrolling marquee ─── */
         @media (max-width: 768px) {
           .ps-row {
+            overflow: hidden;
+            mask-image: linear-gradient(
+              to right,
+              transparent 0,
+              #000 24px,
+              #000 calc(100% - 24px),
+              transparent 100%
+            );
+            -webkit-mask-image: linear-gradient(
+              to right,
+              transparent 0,
+              #000 24px,
+              #000 calc(100% - 24px),
+              transparent 100%
+            );
+          }
+          .ps-track {
             flex-wrap: nowrap;
             justify-content: flex-start;
-            gap: 1.5rem;
-            overflow-x: auto;
-            overflow-y: hidden;
-            scroll-snap-type: x mandatory;
-            -webkit-overflow-scrolling: touch;
-            padding-bottom: 0.25rem;
-            scrollbar-width: none;
+            gap: 2rem;
+            width: max-content;
+            animation: ps-marquee 22s linear infinite;
           }
-          .ps-row::-webkit-scrollbar { display: none; }
-          .ps-item {
-            flex: 0 0 auto;
-            scroll-snap-align: start;
-          }
+          .ps-track:hover { animation-play-state: paused; }
+          /* Show the duplicate set on mobile so the loop is continuous */
+          .ps-item[aria-hidden="true"] { display: flex; }
           .ps-divider { display: none; }
+          .ps-item { flex: 0 0 auto; }
+
+          @keyframes ps-marquee {
+            from { transform: translateX(0); }
+            to   { transform: translateX(-50%); }
+          }
+
+          @media (prefers-reduced-motion: reduce) {
+            .ps-track { animation: none; }
+          }
         }
         @media (max-width: 600px) {
           .ps-item { font-size: 0.82rem; }
