@@ -15,7 +15,7 @@ const quotes: Quote[] = [
       "GMFB has been instrumental in helping my business grow. Their dedication to our community is unmatched.",
     name: "Hassan Abubakar",
     role: "Business Owner, Girei",
-    image: "/heroImage.jpeg",
+    image: "/heroimage.jpeg",
   },
   {
     quote:
