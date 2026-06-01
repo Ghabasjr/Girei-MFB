@@ -15,21 +15,21 @@ const quotes: Quote[] = [
       "GMFB has been instrumental in helping my business grow. Their dedication to our community is unmatched.",
     name: "Aisha Abubakar",
     role: "Business Owner, Girei",
-    image: "/arewa.png",
+    image: "/heroImage.jpeg",
   },
   {
     quote:
       "Girei MFB gave me the loan I needed to expand my farm and improve my family's livelihood.",
     name: "Amina Mohammed",
     role: "Farmer, Adamawa",
-    image: "/hausa6.png",
+    image: "/blogImage.jpg",
   },
   {
     quote:
       "The savings plan at Girei Microfinance Bank has helped me build a solid financial safety net.",
     name: "Ibrahim Yusuf",
     role: "Civil Servant, Girei",
-    image: "/hausa11.png",
+    image: "/blog2.jpg",
   },
 ];
 
