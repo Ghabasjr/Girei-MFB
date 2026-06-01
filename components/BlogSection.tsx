@@ -57,7 +57,7 @@ function TipCard({ tip, animIndex }: { tip: Tip; animIndex: number }) {
   return (
     <div ref={ref} className="tip-card">
       <div className="tip-img-wrap">
-        <img src={tip.image} alt={tip.title} className="tip-img object-cover" />
+        <img src={tip.image} alt={tip.title} className="tip-img object-contain" />
       </div>
       <div className="tip-body">
         <h3 className="tip-title">{tip.title}</h3>

@@ -13,14 +13,14 @@ const quotes: Quote[] = [
   {
     quote:
       "GMFB has been instrumental in helping my business grow. Their dedication to our community is unmatched.",
-    name: "Aisha Abubakar",
+    name: "Hassan Abubakar",
     role: "Business Owner, Girei",
     image: "/heroImage.jpeg",
   },
   {
     quote:
       "Girei MFB gave me the loan I needed to expand my farm and improve my family's livelihood.",
-    name: "Amina Mohammed",
+    name: "Aliyu Mohammed",
     role: "Farmer, Adamawa",
     image: "/blogImage.jpg",
   },
