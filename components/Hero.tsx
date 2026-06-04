@@ -1,6 +1,11 @@
 "use client";
 
+import { useState } from "react";
+import OpenAccountModal from "./OpenAccountModal";
+
 export default function Hero() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
     <section className="hero-section">
       <div className="hero-grid">
@@ -30,9 +35,13 @@ export default function Hero() {
 
           {/* CTAs */}
           <div className="hero-cta-row">
-            <a href="/join" className="hero-btn hero-btn-primary">
-              Start Your Startup
-            </a>
+            <button
+              type="button"
+              className="hero-btn hero-btn-primary"
+              onClick={() => setIsModalOpen(true)}
+            >
+              Open an account
+            </button>
             <a href="#services" className="hero-btn hero-btn-secondary">
               Explore Our Services
             </a>
@@ -93,6 +102,8 @@ export default function Hero() {
           </div>
         </div>
       </div>
+
+      <OpenAccountModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
       <style>{`
         .hero-section {

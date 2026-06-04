@@ -13,16 +13,16 @@ const quotes: Quote[] = [
   {
     quote:
       "GMFB has been instrumental in helping my business grow. Their dedication to our community is unmatched.",
-    name: "Hassan Abubakar",
+    name: "Aisha Abubakar",
     role: "Business Owner, Girei",
-    image: "/heroimage.jpeg",
+    image: "/Rectangle 21910.png",
   },
   {
     quote:
       "Girei MFB gave me the loan I needed to expand my farm and improve my family's livelihood.",
-    name: "Aliyu Mohammed",
+    name: "Hassana Mohammed",
     role: "Farmer, Adamawa",
-    image: "/blogImage.jpg",
+    image: "/Rectangle 21909.png",
   },
   {
     quote:
@@ -146,7 +146,7 @@ export default function Testimonials() {
         }
 
         .ts-col {
-          opacity: 0;
+          
           transform: translateY(28px);
           transition:
             opacity 0.55s ease var(--ts-delay, 0ms),

@@ -79,7 +79,7 @@ export default function AboutSection() {
       <div className="ab-grid">
         {/* LEFT: photo with 32+ overlay */}
         <div ref={leftRef} className="ab-col ab-photo-wrap">
-          <img src="/sectionImage.png" alt="Girei Microfinance Bank professional" className="ab-photo" />
+          <img src="/Rectangle5.png" alt="Girei Microfinance Bank professional" className="ab-photo" />
           <div className="ab-32-card">
             <div className="ab-32-value">32+</div>
             <div className="ab-32-label">

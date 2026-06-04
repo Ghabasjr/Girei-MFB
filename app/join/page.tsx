@@ -27,7 +27,7 @@ export default function Join() {
                 minHeight: 110,
                 display: "flex",
                 alignItems: "center",
-                background: "#29B909",
+                background: "#004C3F",
             }}>
                 {/* Small dark green stripe section — far right corner only */}
                 <div style={{
@@ -47,18 +47,18 @@ export default function Join() {
 
                 {/* Text on light green left side */}
                 <p style={{
-                    fontSize: "1.35rem",
+                    fontSize: "1.1rem",
                     fontWeight: 700,
                     color: "#fff",
                     margin: 0,
-                    padding: "2rem 3rem",
+                    padding: "2rem 2rem",
                     maxWidth: 480,
                     lineHeight: 1.45,
                     position: "relative",
                     zIndex: 1,
                 }}>
                     Join Girei Microfinance Bank and experience trusted
-                    <br />community banking built for you.
+                    community banking built for you.
                 </p>
             </div>
 
@@ -68,32 +68,6 @@ export default function Join() {
                 padding: "3rem 2rem 3.5rem",
             }}>
                 <div style={{ maxWidth: 900, margin: "0 auto" }}>
-
-                    {/* Pill tag */}
-                    <div style={{ textAlign: "center", marginBottom: "1.25rem" }}>
-                        <span style={{
-                            display: "inline-block",
-                            border: "1px solid #d1d5db",
-                            borderRadius: 999,
-                            padding: "0.4rem 1.4rem",
-                            fontSize: "0.78rem",
-                            color: "#374151",
-                            fontWeight: 500,
-                        }}>
-                            Why choose our Bank
-                        </span>
-                    </div>
-
-                    {/* Headline */}
-                    <h2 style={{
-                        textAlign: "center",
-                        fontSize: "1.45rem",
-                        fontWeight: 800,
-                        color: "#111827",
-                        marginBottom: "2rem",
-                    }}>
-                        Secure, simple, rewarding banking experience.
-                    </h2>
 
                     {/* 3 feature cards */}
                     <div className="join-why-choose-grid">
@@ -141,6 +115,28 @@ export default function Join() {
 
                 </div>
             </section>
+
+            {/* Pill tag */}
+            <div style={{ textAlign: "center", marginBottom: "1.25rem" }}>
+                <p style={{
+                    color: "#29B909",
+                    fontSize: '16px',
+                    fontWeight: 700,
+                }}>
+                    Why choose our Bank
+                </p>
+            </div>
+
+            {/* Headline */}
+            <h2 style={{
+                textAlign: "center",
+                fontSize: "1.45rem",
+                fontWeight: 800,
+                color: "#111827",
+                marginBottom: "2rem",
+            }}>
+                Secure, simple, rewarding banking experience.
+            </h2>
 
             <AccountsGrid />
 

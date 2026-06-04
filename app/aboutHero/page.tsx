@@ -1,7 +1,7 @@
 import Footer from "@/components/Footer";
 import VisionMission from "@/components/mission";
 import Navbar from "@/components/Navbar";
-import Testimony from "@/components/Testimony";
+import Testimonials from "@/components/Testimonials";
 import Vission from "@/components/Vission";
 import WhoWeServe from "@/components/WhoWeServe";
 
@@ -36,8 +36,9 @@ export default function AboutHero() {
 
                         {/* Right: small paragraph */}
                         <p style={{
-                            fontSize: "0.78rem",
-                            color: "#4b5563",
+                            fontSize: "12px",
+                            fontWeight: 600,
+                            color: "#00000",
                             lineHeight: 1.75,
                             maxWidth: 280,
                             margin: 0,
@@ -59,7 +60,7 @@ export default function AboutHero() {
                     }}>
                         {/* The photo */}
                         <img
-                            src="/Rectangle 3221.png"
+                            src="/Rectangle1.png"
                             alt="Our team"
                             style={{
                                 width: "100%",
@@ -88,7 +89,7 @@ export default function AboutHero() {
             <Vission />
             <VisionMission />
             <WhoWeServe />
-            <Testimony />
+            <Testimonials />
             <Footer />
         </div>
     );
