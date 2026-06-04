@@ -3,9 +3,11 @@
 import { useState } from "react";
 import Image from "next/image";
 import { navLinks } from "@/lib/data";
+import OpenAccountModal from "./OpenAccountModal";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <header
@@ -75,8 +77,8 @@ export default function Navbar() {
 
         {/* CTA */}
         <div className="desktop-nav" style={{ display: "flex", alignItems: "center", flexShrink: 0 }}>
-          <a
-            href="/join"
+          <button
+            type="button"
             style={{
               background: "#004C3F",
               color: "#fff",
@@ -84,10 +86,13 @@ export default function Navbar() {
               fontSize: "0.95rem",
               padding: "0.85rem 1.75rem",
               borderRadius: 12,
+              border: "none",
               textDecoration: "none",
               transition: "background 0.2s, transform 0.15s",
               display: "inline-block",
+              cursor: "pointer",
             }}
+            onClick={() => setIsModalOpen(true)}
             onMouseEnter={(e) => {
               e.currentTarget.style.background = "#006655";
             }}
@@ -96,7 +101,7 @@ export default function Navbar() {
             }}
           >
             Open Account
-          </a>
+          </button>
         </div>
 
         {/* Hamburger */}
@@ -136,6 +141,8 @@ export default function Navbar() {
         </button>
       </nav>
 
+      <OpenAccountModal open={isModalOpen} onClose={() => setIsModalOpen(false)} />
+
       {/* Mobile menu */}
       {menuOpen && (
         <div
@@ -158,20 +165,26 @@ export default function Navbar() {
               </li>
             ))}
             <li>
-              <a
-                href="/join"
+              <button
+                type="button"
                 style={{
                   background: "#004C3F",
                   color: "#fff",
                   fontWeight: 700,
                   padding: "0.75rem 1.5rem",
                   borderRadius: 12,
+                  border: "none",
                   textDecoration: "none",
                   display: "inline-block",
+                  cursor: "pointer",
+                }}
+                onClick={() => {
+                  setMenuOpen(false);
+                  setIsModalOpen(true);
                 }}
               >
                 Open Account
-              </a>
+              </button>
             </li>
           </ul>
         </div>

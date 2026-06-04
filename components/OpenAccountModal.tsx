@@ -3,75 +3,85 @@
 import { useEffect } from "react";
 
 interface OpenAccountModalProps {
-    open: boolean;
-    onClose: () => void;
+  open: boolean;
+  onClose: () => void;
 }
 
 export default function OpenAccountModal({ open, onClose }: OpenAccountModalProps) {
-    useEffect(() => {
-        if (!open) return;
+  useEffect(() => {
+    if (!open) return;
 
-        const handleKey = (event: KeyboardEvent) => {
-            if (event.key === "Escape") {
-                onClose();
-            }
-        };
+    const handleKey = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        onClose();
+      }
+    };
 
-        document.addEventListener("keydown", handleKey);
-        document.body.style.overflow = "hidden";
+    document.addEventListener("keydown", handleKey);
+    document.body.style.overflow = "hidden";
 
-        return () => {
-            document.removeEventListener("keydown", handleKey);
-            document.body.style.overflow = "";
-        };
-    }, [open, onClose]);
+    return () => {
+      document.removeEventListener("keydown", handleKey);
+      document.body.style.overflow = "";
+    };
+  }, [open, onClose]);
 
-    if (!open) return null;
+  if (!open) return null;
 
-    return (
-        <>
-            <div className="open-account-backdrop" onClick={onClose} />
+  return (
+    <>
+      <div className="open-account-backdrop" onClick={onClose} />
 
-            <div className="open-account-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
-                <div className="open-account-top">
-                    <div className="open-account-icon">
-                        <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                            <circle cx="12" cy="12" r="12" fill="#29B909" />
-                            <path d="M7.5 12.8l3.2 3.2 6.2-6.2" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                        </svg>
-                    </div>
-                    <h2>Thank You!</h2>
-                    <p className="open-account-message">
-                        Thank you for trusting Girei Microfinance Bank
-                    </p>
+      <div className="open-account-modal" role="dialog" aria-modal="true" onClick={(event) => event.stopPropagation()}>
+        <div className="open-account-top">
+          <div className="open-account-icon">
+            <svg width="30" height="30" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <circle cx="12" cy="12" r="12" fill="#29B909" />
+              <path d="M7.5 12.8l3.2 3.2 6.2-6.2" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <h2>Thank You!</h2>
+          <p className="open-account-message">
+            Thank you for trusting <span className="open-account-brand">Girei Microfinance Bank</span>
+          </p>
+        </div>
+
+        <p className="open-account-copy">
+          Please visit our physical branch for more information about our products and services. Our friendly team is ready to assist you at any convenient time.
+        </p>
+
+        <div className="open-account-grid">
+          <div className="open-account-card">
+            <div className="open-account-card-header">
+              <span className="open-account-card-icon" aria-hidden="true">🏛️</span>
+              <div>
+                <div className="open-account-card-label">Visit Our Branch</div>
+                <div className="open-account-card-body">
+                  Along Mubi Road, Girei Main Market, P.O Box 1033, Girei, Adamawa State, Nigeria
                 </div>
-
-                <p className="open-account-copy">
-                    Please visit our physical branch for more information about our products and services. Our friendly team is ready to assist you at any convenient time.
-                </p>
-
-                <div className="open-account-grid">
-                    <div className="open-account-card">
-                        <div className="open-account-card-label">Visit Our Branch</div>
-                        <div className="open-account-card-body">
-                            Along Mubi Road, Girei Main Market, P.O Box 1033, Girei, Adamawa State, Nigeria
-                        </div>
-                    </div>
-
-                    <div className="open-account-card">
-                        <div className="open-account-card-label">Our Contacts</div>
-                        <div className="open-account-card-body">
-                            <a href="mailto:info@gmfb.com">info@gmfb.com</a>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="button" className="open-account-close-btn" onClick={onClose}>
-                    Back
-                </button>
+              </div>
             </div>
+          </div>
 
-            <style>{`
+          <div className="open-account-card">
+            <div className="open-account-card-header">
+              <span className="open-account-card-icon" aria-hidden="true">📞</span>
+              <div>
+                <div className="open-account-card-label">Our Contacts</div>
+                <div className="open-account-card-body">
+                  <a href="mailto:info@gmfb.com">info@gmfb.com</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" className="open-account-close-btn" onClick={onClose}>
+          Back
+        </button>
+      </div>
+
+      <style>{`
         .open-account-backdrop {
           position: fixed;
           inset: 0;
@@ -88,7 +98,7 @@ export default function OpenAccountModal({ open, onClose }: OpenAccountModalProp
           transform: translate(-50%, -50%);
           z-index: 9999;
           width: min(560px, 92vw);
-          max-height: 92vh;
+          max-height: calc(100vh - 3rem);
           display: flex;
           flex-direction: column;
           gap: 1.4rem;
@@ -97,7 +107,7 @@ export default function OpenAccountModal({ open, onClose }: OpenAccountModalProp
           background: #ffffff;
           border: 1px solid #d1e8d4;
           box-shadow: 0 28px 70px rgba(0, 0, 0, 0.18);
-          overflow: hidden;
+          overflow-y: auto;
           animation: gmfbPopIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
@@ -134,6 +144,11 @@ export default function OpenAccountModal({ open, onClose }: OpenAccountModalProp
           line-height: 1.8;
         }
 
+        .open-account-brand {
+          color: #29B909;
+          font-weight: 700;
+        }
+
         .open-account-copy {
           margin: 0;
           font-size: 0.98rem;
@@ -153,25 +168,43 @@ export default function OpenAccountModal({ open, onClose }: OpenAccountModalProp
           background: #f8faf8;
           border: 1px solid #dfe7dc;
           border-radius: 20px;
-          padding: 1.2rem 1.4rem;
+          padding: 1.25rem 1.4rem;
           display: flex;
           flex-direction: column;
           gap: 0.85rem;
+        }
+
+        .open-account-card-header {
+          display: flex;
+          align-items: flex-start;
+          gap: 0.85rem;
+        }
+
+        .open-account-card-icon {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          background: rgba(41, 185, 9, 0.12);
+          border: 1px solid rgba(41, 185, 9, 0.24);
+          color: #047c34;
+          font-size: 1rem;
+          flex-shrink: 0;
         }
 
         .open-account-card-label {
           font-size: 0.95rem;
           font-weight: 700;
           color: #112f1c;
+          margin-bottom: 0.3rem;
         }
 
         .open-account-card-body {
           font-size: 0.95rem;
           color: #4b5563;
           line-height: 1.75;
-          display: flex;
-          flex-direction: column;
-          gap: 0.5rem;
         }
 
         .open-account-card-body a {
@@ -184,15 +217,17 @@ export default function OpenAccountModal({ open, onClose }: OpenAccountModalProp
           align-self: center;
           width: 100%;
           max-width: 260px;
-          padding: 0.95rem 1.4rem;
+          padding: 1rem 1.5rem;
           border: none;
-          border-radius: 14px;
+          border-radius: 16px;
           background: #004c3f;
           color: #fff;
-          font-size: 0.98rem;
+          font-size: 1rem;
           font-weight: 700;
           cursor: pointer;
-          transition: background 0.2s ease;
+          transition: background 0.2s ease, transform 0.2s ease;
+          box-shadow: 0 18px 30px rgba(0, 0, 0, 0.08);
+          flex-shrink: 0;
         }
 
         .open-account-close-btn:hover {
@@ -225,6 +260,6 @@ export default function OpenAccountModal({ open, onClose }: OpenAccountModalProp
           to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
         }
       `}</style>
-        </>
-    );
+    </>
+  );
 }
