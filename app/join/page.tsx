@@ -1,5 +1,4 @@
 import { Metadata } from "next";
-import AccountsGrid from "@/components/AccountGrid";
 
 export const metadata: Metadata = {
     title: "Join Us | GIREI Microfinance Bank",
@@ -63,14 +62,14 @@ export default function Join() {
             </div>
 
             {/* ── Why choose section ── */}
-            <section style={{
+            {/* <section style={{
                 background: "#fff",
                 padding: "3rem 2rem 3.5rem",
-            }}>
-                <div style={{ maxWidth: 900, margin: "0 auto" }}>
+            }}> */}
+            {/* <div style={{ maxWidth: 900, margin: "0 auto" }}> */}
 
-                    {/* 3 feature cards */}
-                    <div className="join-why-choose-grid">
+            {/* 3 feature cards */}
+            {/* <div className="join-why-choose-grid">
                         {[
                             {
                                 title: "CBN Licensed",
@@ -111,10 +110,10 @@ export default function Join() {
                                 </p>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
-                </div>
-            </section>
+            {/* </div> */}
+            {/* </section> */}
 
             {/* Pill tag */}
             <div style={{ textAlign: "center", marginBottom: "1.25rem" }}>
@@ -138,7 +137,48 @@ export default function Join() {
                 Secure, simple, rewarding banking experience.
             </h2>
 
-            <AccountsGrid />
+            {/* Four pixel-perfect cards (2x2) */}
+            <section style={{ background: "#fff", padding: "2rem 1rem 3rem" }}>
+                <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+                    <div className="join-four-grid">
+                        {[
+                            {
+                                title: "Savings Accounts",
+                                desc: "GMFB offers Savings Accounts that help customers save securely, earn interest, and access funds conveniently. The account features easy opening, flexible transactions, and supports individuals in achieving their financial goals.",
+                                btn: "Start a Savings Accounts",
+                            },
+                            {
+                                title: "Target Savings",
+                                desc: "GMFB offers Target Savings Accounts designed to help customers save towards specific goals. Enjoy disciplined savings, flexible deposits, and secure fund management while building a brighter financial future.",
+                                btn: "Start Savings",
+                            },
+                            {
+                                title: "Personal Loans",
+                                desc: "GMFB offers Personal Loans designed to meet your financial needs quickly and conveniently. Enjoy flexible repayment options, competitive rates, and fast access to funds for personal and business goals.",
+                                btn: "Request Personal Loans",
+                            },
+                            {
+                                title: "Children/Education Savings",
+                                desc: "GMFB offers Children/Education Savings Accounts to help parents and guardians plan for future educational expenses. Save consistently, earn interest, and build a secure financial foundation for your child's success.",
+                                btn: "Start Children Savings",
+                            },
+                        ].map((c, i) => (
+                            <div key={i} className="four-card">
+                                <div className="four-card-inner">
+                                    <div className="card-art" aria-hidden />
+                                    <div style={{ flex: 1 }}>
+                                        <h3 className="card-title">{c.title}</h3>
+                                        <p className="card-desc">{c.desc}</p>
+                                        <div style={{ marginTop: 12 }}>
+                                            <button className="card-cta">{c.btn}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
 
             {/* ── Footer ── */}
             <footer id="contact" style={{
@@ -289,6 +329,47 @@ export default function Join() {
                         grid-template-columns: 1fr;
                         gap: 1.75rem;
                     }
+                }
+                /* ── Four card grid (Join page) ── */
+                .join-four-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.25rem;
+                    align-items: stretch;
+                }
+                .four-card {
+                    background: #fff;
+                    border-radius: 12px;
+                    border: 1px solid #e6eef0;
+                    box-shadow: 0 4px 18px rgba(2,6,23,0.04);
+                    padding: 18px;
+                    display: flex;
+                    align-items: center;
+                }
+                .four-card-inner { display: flex; gap: 18px; align-items: flex-start; }
+                .card-art { width: 84px; height: 84px; background: #eef9ef; border-radius: 8px; flex-shrink: 0; }
+                .card-title {
+                    font-size: 1.05rem;
+                    font-weight: 800;
+                    color: #0f1724;
+                    margin: 0 0 0.45rem 0;
+                }
+                .card-desc { margin: 0; color: #4b5563; line-height: 1.6; font-size: 0.95rem; }
+                .card-cta {
+                    background: #004C3F;
+                    color: #fff;
+                    border: none;
+                    padding: 0.5rem 0.8rem;
+                    border-radius: 10px;
+                    font-weight: 700;
+                    cursor: pointer;
+                    margin-top: 6px;
+                }
+                .card-cta:hover { background: #0e6b4f; }
+                @media (max-width: 900px) {
+                    .join-four-grid { grid-template-columns: 1fr; }
+                    .four-card { padding: 14px; }
+                    .card-art { width: 72px; height: 72px; }
                 }
             `}</style>
         </>

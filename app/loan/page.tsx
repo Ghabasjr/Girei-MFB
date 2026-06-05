@@ -13,7 +13,7 @@ export const metadata: Metadata = {
 
 import { MapPin, PhoneIcon, MailIcon } from "lucide-react";
 import Image from "next/image";
-import LoanGrid from "@/components/LoanGrid";
+// LoanGrid replaced with image-based card layout below
 
 export default function Loan() {
     return (
@@ -25,7 +25,7 @@ export default function Loan() {
                 minHeight: 110,
                 display: "flex",
                 alignItems: "center",
-                background: "#29B909",
+                background: "#004C3F",
             }}>
                 {/* Small dark green stripe section — far right corner only */}
                 <div style={{
@@ -67,17 +67,13 @@ export default function Loan() {
 
                     {/* Pill tag */}
                     <div style={{ textAlign: "center", marginBottom: "1.25rem" }}>
-                        <span style={{
-                            display: "inline-block",
-                            border: "1px solid #d1d5db",
-                            borderRadius: 999,
-                            padding: "0.4rem 1.4rem",
-                            fontSize: "0.78rem",
-                            color: "#374151",
-                            fontWeight: 500,
+                        <p style={{
+                            color: "#29B909",
+                            fontSize: '16px',
+                            fontWeight: 700,
                         }}>
                             Why choose our Bank
-                        </span>
+                        </p>
                     </div>
 
                     {/* Headline */}
@@ -92,7 +88,7 @@ export default function Loan() {
                     </h2>
 
                     {/* 3 feature cards */}
-                    <div className="loan-why-choose-grid">
+                    {/* <div className="loan-why-choose-grid">
                         {[
                             {
                                 title: "CBN Licensed",
@@ -133,13 +129,57 @@ export default function Loan() {
                                 </p>
                             </div>
                         ))}
-                    </div>
+                    </div> */}
 
                 </div>
             </section>
-            {/* Loan Grid */}
-
-            <LoanGrid />
+            {/* Loan cards matching the provided design */}
+            <section style={{ background: "#fff", padding: "2rem 1rem 3rem" }}>
+                <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+                    <div className="loan-four-grid">
+                        {[
+                            {
+                                title: "Non-Interest Savings",
+                                desc: "GMFB offers non interest savings accounts designed for secure, ethical, and convenient banking. Save confidently while enjoying easy access, financial discipline, transparency, and services tailored to your needs.",
+                                btn: "Start a Savings Accounts",
+                            },
+                            {
+                                title: "Adashe",
+                                desc: "GMFB offers non interest Adashe accounts that promote disciplined group savings through ethical and transparent banking. Save collectively, achieve financial goals, and enjoy convenient, secure account management.",
+                                btn: "Start Savings",
+                            },
+                            {
+                                title: "Individual Saving Account",
+                                desc: "GMFB offers non interest Individual Savings Accounts designed to help customers save securely and responsibly. Enjoy convenient banking, financial discipline, easy account access, and a trusted path to achieving personal goals.",
+                                btn: "Request Personal Loans",
+                            },
+                            {
+                                title: "Corporate Savings Account",
+                                desc: "GMFB offers non interest Corporate Savings Accounts tailored for businesses and organizations. Manage funds securely, promote financial efficiency, enjoy convenient banking services, and support your organization's savings goals with confidence.",
+                                btn: "Start Children Savings",
+                            },
+                            {
+                                title: "Club Savings Account",
+                                desc: "GMFB offers non interest Club Savings Accounts designed for associations, groups, and cooperatives. Save collectively, manage funds securely, achieve shared financial goals, and enjoy convenient, transparent banking services.",
+                                btn: "Request Personal Loans",
+                            },
+                        ].map((c, i) => (
+                            <div key={i} className="loan-card">
+                                <div className="four-card-inner">
+                                    <div className="card-art" aria-hidden />
+                                    <div style={{ flex: 1 }}>
+                                        <h3 className="card-title">{c.title}</h3>
+                                        <p className="card-desc">{c.desc}</p>
+                                        <div style={{ marginTop: 12 }}>
+                                            <button className="card-cta">{c.btn}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </div>
+                </div>
+            </section>
             {/* ── Footer ── */}
             <footer id="contact" style={{
                 background: "#004C3F",
@@ -289,6 +329,32 @@ export default function Loan() {
                         grid-template-columns: 1fr;
                         gap: 1.75rem;
                     }
+                }
+                /* ── Loan cards layout (matches provided design) ── */
+                .loan-four-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1.25rem;
+                }
+                .loan-card {
+                    background: #fff;
+                    border-radius: 12px;
+                    border: 1px solid #e6eef0;
+                    box-shadow: 0 4px 18px rgba(2,6,23,0.04);
+                    padding: 18px;
+                    display: flex;
+                    align-items: center;
+                }
+                .four-card-inner { display: flex; gap: 18px; align-items: flex-start; }
+                .card-art { width: 84px; height: 84px; background: #eef9ef; border-radius: 8px; flex-shrink: 0; }
+                .card-title { font-size: 1.05rem; font-weight: 800; color: #0f1724; margin: 0 0 0.45rem 0; }
+                .card-desc { margin: 0; color: #4b5563; line-height: 1.6; font-size: 0.95rem; }
+                .card-cta { background: #004C3F; color: #fff; border: none; padding: 0.5rem 0.8rem; border-radius: 10px; font-weight: 700; cursor: pointer; margin-top: 6px; }
+                .card-cta:hover { background: #0e6b4f; }
+                @media (max-width: 900px) {
+                    .loan-four-grid { grid-template-columns: 1fr; }
+                    .loan-card { padding: 14px; }
+                    .card-art { width: 72px; height: 72px; }
                 }
             `}</style>
         </>
