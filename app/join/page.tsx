@@ -1,20 +1,13 @@
-import { Metadata } from "next";
+"use client";
 
-export const metadata: Metadata = {
-    title: "Join Us | GIREI Microfinance Bank",
-    description:
-        "Open an account with GIREI Microfinance Bank and experience secure, simple, and rewarding banking. Tailored personal and business accounts available.",
-    openGraph: {
-        title: "Join Us | GIREI Microfinance Bank",
-        description: "Open an account with GIREI Microfinance Bank and experience secure, simple, and rewarding banking.",
-    }
-};
-
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
-import { MapPin, PhoneIcon, MailIcon } from "lucide-react";
+import OpenAccountModal from "@/components/OpenAccountModal";
+import { Wallet, PiggyBank, User, BookOpen, Heart, Zap, MapPin, PhoneIcon, MailIcon } from "lucide-react";
 import Image from "next/image";
 
 export default function Join() {
+    const [modalOpen, setModalOpen] = useState(false);
     return (
         <>
             <Navbar />
@@ -146,36 +139,45 @@ export default function Join() {
                                 title: "Savings Accounts",
                                 desc: "GMFB offers Savings Accounts that help customers save securely, earn interest, and access funds conveniently. The account features easy opening, flexible transactions, and supports individuals in achieving their financial goals.",
                                 btn: "Start a Savings Accounts",
+                                icon: Wallet,
                             },
                             {
                                 title: "Target Savings",
                                 desc: "GMFB offers Target Savings Accounts designed to help customers save towards specific goals. Enjoy disciplined savings, flexible deposits, and secure fund management while building a brighter financial future.",
-                                btn: "Start Savings",
+                                btn: "Start a Savings Account",
+                                icon: PiggyBank,
                             },
                             {
                                 title: "Personal Loans",
                                 desc: "GMFB offers Personal Loans designed to meet your financial needs quickly and conveniently. Enjoy flexible repayment options, competitive rates, and fast access to funds for personal and business goals.",
                                 btn: "Request Personal Loans",
+                                icon: User,
                             },
                             {
                                 title: "Children/Education Savings",
                                 desc: "GMFB offers Children/Education Savings Accounts to help parents and guardians plan for future educational expenses. Save consistently, earn interest, and build a secure financial foundation for your child's success.",
                                 btn: "Start Children Savings",
+                                icon: BookOpen,
                             },
-                        ].map((c, i) => (
-                            <div key={i} className="four-card">
-                                <div className="four-card-inner">
-                                    <div className="card-art" aria-hidden />
-                                    <div style={{ flex: 1 }}>
-                                        <h3 className="card-title">{c.title}</h3>
-                                        <p className="card-desc">{c.desc}</p>
-                                        <div style={{ marginTop: 12 }}>
-                                            <button className="card-cta">{c.btn}</button>
+                        ].map((c, i) => {
+                            const IconComponent = c.icon;
+                            return (
+                                <div key={i} className="four-card">
+                                    <div className="four-card-inner">
+                                        <div className="card-art" aria-hidden style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 80 }}>
+                                            <IconComponent size={48} color="#29B909" strokeWidth={1.5} />
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <h3 className="card-title">{c.title}</h3>
+                                            <p className="card-desc">{c.desc}</p>
+                                            <div style={{ marginTop: 12 }}>
+                                                <button className="card-cta" onClick={() => setModalOpen(true)}>{c.btn}</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -372,6 +374,8 @@ export default function Join() {
                     .card-art { width: 72px; height: 72px; }
                 }
             `}</style>
+
+            <OpenAccountModal open={modalOpen} onClose={() => setModalOpen(false)} />
         </>
     )
 }

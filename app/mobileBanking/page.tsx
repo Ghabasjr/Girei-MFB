@@ -1,7 +1,13 @@
+"use client";
+
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import OpenAccountModal from "@/components/OpenAccountModal";
+import { Leaf, Briefcase, BookOpen, Heart, Zap, Home, Truck, Sun } from "lucide-react";
 
 export default function MobileBankingPage() {
+    const [modalOpen, setModalOpen] = useState(false);
     return (
         <div style={{ display: "flex", flexDirection: "column", minHeight: "100vh" }}>
             <Navbar />
@@ -73,33 +79,40 @@ export default function MobileBankingPage() {
                 <div style={{ maxWidth: 1100, margin: "0 auto" }}>
                     <div className="mobile-grid">
                         {[
-                            { title: "Agric Loan", desc: "GMFB offers Agric Loans to support farmers and agribusinesses with accessible financing. Grow your agricultural activities, improve productivity, expand operations, and achieve sustainable success through ethical financing." },
-                            { title: "Business Loan", desc: "GMFB offers Business Loans to help entrepreneurs and enterprises grow with confidence. Access flexible financing to expand operations, increase productivity, meet working capital needs, and achieve business goals successfully." },
-                            { title: "Education Loan", desc: "GMFB offers Education Loans to support students, parents, and educational institutions with accessible financing. Cover tuition and related expenses conveniently while pursuing academic goals and investing in a brighter future." },
-                            { title: "Medical Loan", desc: "GMFB offers Medical Loans to help individuals and families manage healthcare expenses with ease. Access timely financing for medical needs, treatments, and emergencies while maintaining financial stability and peace of mind." },
-                            { title: "Enterprise Loan", desc: "GMFB offers Enterprise Loans designed to support small and medium-sized businesses. Access flexible financing to expand operations, purchase equipment, increase productivity, and achieve sustainable growth with confidence." },
-                            { title: "Building Loan", desc: "GMFB offers Building Loans to support residential and commercial construction projects. Access flexible financing to build, renovate, or complete properties while achieving your development goals with confidence and ease." },
-                            { title: "Tricycle Loan", desc: "GMFB offers Tricycle Loans to help individuals and entrepreneurs acquire tricycles for transportation and income generation. Finance your transport business, grow your business, and improve your earning potential with ease." },
-                            { title: "Solar Energy Loan", desc: "GMFB offers Solar Energy Loans to help individuals and businesses access reliable renewable power solutions. Finance solar installations, reduce energy costs, and enjoy sustainable, efficient electricity for everyday needs." },
-                        ].map((c, i) => (
-                            <div key={i} className="mobile-card">
-                                <div className="mobile-card-inner">
-                                    <div className="card-art" aria-hidden />
-                                    <div style={{ flex: 1 }}>
-                                        <h3 className="card-title">{c.title}</h3>
-                                        <p className="card-desc">{c.desc}</p>
-                                        <div style={{ marginTop: 12 }}>
-                                            <button className="card-cta">Learn More</button>
+                            { title: "Agric Loan", desc: "GMFB offers Agric Loans to support farmers and agribusinesses with accessible financing. Grow your agricultural activities, improve productivity, expand operations, and achieve sustainable success through ethical financing.", icon: Leaf },
+                            { title: "Business Loan", desc: "GMFB offers Business Loans to help entrepreneurs and enterprises grow with confidence. Access flexible financing to expand operations, increase productivity, meet working capital needs, and achieve business goals successfully.", icon: Briefcase },
+                            { title: "Education Loan", desc: "GMFB offers Education Loans to support students, parents, and educational institutions with accessible financing. Cover tuition and related expenses conveniently while pursuing academic goals and investing in a brighter future.", icon: BookOpen },
+                            { title: "Medical Loan", desc: "GMFB offers Medical Loans to help individuals and families manage healthcare expenses with ease. Access timely financing for medical needs, treatments, and emergencies while maintaining financial stability and peace of mind.", icon: Heart },
+                            { title: "Enterprise Loan", desc: "GMFB offers Enterprise Loans designed to support small and medium-sized businesses. Access flexible financing to expand operations, purchase equipment, increase productivity, and achieve sustainable growth with confidence.", icon: Zap },
+                            { title: "Building Loan", desc: "GMFB offers Building Loans to support residential and commercial construction projects. Access flexible financing to build, renovate, or complete properties while achieving your development goals with confidence and ease.", icon: Home },
+                            { title: "Tricycle Loan", desc: "GMFB offers Tricycle Loans to help individuals and entrepreneurs acquire tricycles for transportation and income generation. Finance your transport business, grow your business, and improve your earning potential with ease.", icon: Truck },
+                            { title: "Solar Energy Loan", desc: "GMFB offers Solar Energy Loans to help individuals and businesses access reliable renewable power solutions. Finance solar installations, reduce energy costs, and enjoy sustainable, efficient electricity for everyday needs.", icon: Sun },
+                        ].map((c, i) => {
+                            const IconComponent = c.icon;
+                            return (
+                                <div key={i} className="mobile-card">
+                                    <div className="mobile-card-inner">
+                                        <div className="card-art" aria-hidden style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 80 }}>
+                                            <IconComponent size={48} color="#29B909" strokeWidth={1.5} />
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <h3 className="card-title">{c.title}</h3>
+                                            <p className="card-desc">{c.desc}</p>
+                                            <div style={{ marginTop: 12 }}>
+                                                <button className="card-cta" onClick={() => setModalOpen(true)}>Learn More</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>
 
             <Footer />
+
+            <OpenAccountModal open={modalOpen} onClose={() => setModalOpen(false)} />
 
             <style>{`
                 .mobile-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }

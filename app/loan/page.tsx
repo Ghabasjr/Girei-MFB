@@ -1,21 +1,13 @@
-import { Metadata } from "next";
+"use client";
+
+import { useState } from "react";
 import Navbar from "@/components/Navbar";
-
-export const metadata: Metadata = {
-    title: "Loans & Credit | GIREI Microfinance Bank",
-    description:
-        "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank. Apply for personal, business, or agricultural loans.",
-    openGraph: {
-        title: "Loans & Credit | GIREI Microfinance Bank",
-        description: "Access quick loans at competitive interest rates with flexible repayment options from GIREI Microfinance Bank.",
-    }
-};
-
-import { MapPin, PhoneIcon, MailIcon } from "lucide-react";
+import OpenAccountModal from "@/components/OpenAccountModal";
+import { Wallet, PiggyBank, User, BookOpen, Building, Users, Leaf, Briefcase, Heart, Home, Truck, Sun, MailIcon, MapPin, PhoneIcon } from "lucide-react";
 import Image from "next/image";
-// LoanGrid replaced with image-based card layout below
 
 export default function Loan() {
+    const [modalOpen, setModalOpen] = useState(false);
     return (
         <>
             <Navbar />
@@ -45,7 +37,7 @@ export default function Loan() {
 
                 {/* Text on light green left side */}
                 <p style={{
-                    fontSize: "1.35rem",
+                    fontSize: "1.3rem",
                     fontWeight: 700,
                     color: "#fff",
                     margin: 0,
@@ -56,7 +48,7 @@ export default function Loan() {
                     zIndex: 1,
                 }}>
                     Join Girei Microfinance Bank and experience trusted
-                    <br />community banking built for you.
+                    community banking built for you.
                 </p>
             </div>
             <section style={{
@@ -142,41 +134,51 @@ export default function Loan() {
                                 title: "Non-Interest Savings",
                                 desc: "GMFB offers non interest savings accounts designed for secure, ethical, and convenient banking. Save confidently while enjoying easy access, financial discipline, transparency, and services tailored to your needs.",
                                 btn: "Start a Savings Accounts",
+                                icon: PiggyBank,
                             },
                             {
                                 title: "Adashe",
                                 desc: "GMFB offers non interest Adashe accounts that promote disciplined group savings through ethical and transparent banking. Save collectively, achieve financial goals, and enjoy convenient, secure account management.",
                                 btn: "Start Savings",
+                                icon: Users,
                             },
                             {
                                 title: "Individual Saving Account",
                                 desc: "GMFB offers non interest Individual Savings Accounts designed to help customers save securely and responsibly. Enjoy convenient banking, financial discipline, easy account access, and a trusted path to achieving personal goals.",
-                                btn: "Request Personal Loans",
+                                btn: "Start savings",
+                                icon: User,
                             },
                             {
                                 title: "Corporate Savings Account",
                                 desc: "GMFB offers non interest Corporate Savings Accounts tailored for businesses and organizations. Manage funds securely, promote financial efficiency, enjoy convenient banking services, and support your organization's savings goals with confidence.",
-                                btn: "Start Children Savings",
+                                btn: "Start savings",
+                                icon: Building,
                             },
                             {
                                 title: "Club Savings Account",
                                 desc: "GMFB offers non interest Club Savings Accounts designed for associations, groups, and cooperatives. Save collectively, manage funds securely, achieve shared financial goals, and enjoy convenient, transparent banking services.",
-                                btn: "Request Personal Loans",
+                                btn: "Start savings",
+                                icon: Users,
                             },
-                        ].map((c, i) => (
-                            <div key={i} className="loan-card">
-                                <div className="four-card-inner">
-                                    <div className="card-art" aria-hidden />
-                                    <div style={{ flex: 1 }}>
-                                        <h3 className="card-title">{c.title}</h3>
-                                        <p className="card-desc">{c.desc}</p>
-                                        <div style={{ marginTop: 12 }}>
-                                            <button className="card-cta">{c.btn}</button>
+                        ].map((c, i) => {
+                            const IconComponent = c.icon;
+                            return (
+                                <div key={i} className="loan-card">
+                                    <div className="four-card-inner">
+                                        <div className="card-art" aria-hidden style={{ display: "flex", alignItems: "center", justifyContent: "center", minHeight: 80 }}>
+                                            <IconComponent size={48} color="#29B909" strokeWidth={1.5} />
+                                        </div>
+                                        <div style={{ flex: 1 }}>
+                                            <h3 className="card-title">{c.title}</h3>
+                                            <p className="card-desc">{c.desc}</p>
+                                            <div style={{ marginTop: 12 }}>
+                                                <button className="card-cta" onClick={() => setModalOpen(true)}>{c.btn}</button>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        ))}
+                            );
+                        })}
                     </div>
                 </div>
             </section>
@@ -270,7 +272,7 @@ export default function Loan() {
                             <div style={{ display: "flex", flexDirection: "column", gap: "0.85rem" }}>
                                 {/* Address */}
                                 <div style={{ display: "flex", gap: 8, alignItems: "flex-start" }}>
-                                    <MapPin size={12} color="#29B909" />
+                                    <MapPin size={35} color="#29B909" />
                                     <span style={{ fontSize: "0.78rem", color: "rgba(255,255,255,0.7)", lineHeight: 1.6 }}>Along Mubi Road, Girei Main Market, P.O. Box 1033, Girei, Adamawa State, Nigeria</span>
                                 </div>
                                 {/* Phone */}
@@ -357,6 +359,8 @@ export default function Loan() {
                     .card-art { width: 72px; height: 72px; }
                 }
             `}</style>
+
+            <OpenAccountModal open={modalOpen} onClose={() => setModalOpen(false)} />
         </>
     );
 }
